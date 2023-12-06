@@ -1,9 +1,9 @@
 {% macro render_atom(atom) -%}
-    {{ atom.symbol }}{% if atom.is_ghost %}:{% endif %}{% if atom.embedding_potential %} > {% endif %} {{ atom.x }} {{ atom.y }} {{ atom.z }}{% if atom.is_frozen %} ${% endif %}
+    {{- 'DA' if atom.is_dummy else atom.symbol }}{% if atom.point_charge %} Q {{ atom.point_charge }}{% elif atom.is_ghost %}:{% endif %}{% if atom.embedding_potential %} > {% endif %}{% if atom.isotope %} M = {{ atom.isotope }}{% endif %}{% if atom.nuclear_charge %} Z = {{ atom.nuclear_charge }}{% endif %} {{ atom.x }} {{ atom.y }} {{ atom.z }}{% if atom.fragment_number %} ({{ atom.fragment_number }}){% endif %}{% if atom.is_frozen %} ${% endif %}
 {%- endmacro %}
 
 {% macro render_int_atom(atom) -%}
-    {{ atom.symbol }}{% if atom.is_ghost %}:{% endif %}{% if atom.embedding_potential %} > {% endif %} {{ atom.bond_atom }} {{ atom.angle_atom }} {{ atom.dihedral_atom }} {{ atom.bond_length }} {{ atom.angle }} {{ atom.dihedral }}{% if atom.is_frozen %} ${% endif %}
+    {{- 'DA' if atom.is_dummy else atom.symbol }}{% if atom.point_charge %} Q {{ atom.point_charge }}{% elif atom.is_ghost %}:{% endif %}{% if atom.embedding_potential %} > {% endif %}{% if atom.isotope %} M = {{ atom.isotope }}{% endif %}{% if atom.nuclear_charge %} Z = {{ atom.nuclear_charge }}{% endif %} {{ atom.bond_atom }} {{ atom.angle_atom }} {{ atom.dihedral_atom }} {{ atom.bond_length }} {{ atom.angle }} {{ atom.dihedral }}{% if atom.fragment_number %} ({{ atom.fragment_number }}){% endif %}{% if atom.is_frozen %} ${% endif %}
 {%- endmacro %}
 
 {% if coords.type in ['xyz', 'int', 'gzmt'] %}
