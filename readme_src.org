@@ -11,9 +11,10 @@ computational chemistry workflows. This means:
   + From unified ~toml~ inputs
 
 This is a spin-off from ~wailord~ ([[https://wailord.xyz][here]]) which is meant to handle aggregated
-runs in a specific workflow. It is also a companion to ~chemparseplot~ ([[https://github.com/haoZeke/chemparseplot][here]])
-which is meant to provide uniform visualizations for the outputs of various
-computational chemistry programs.
+runs in a specific workflow, while ~pychum~ is meant to generate *single runs*.
+It is also a companion to ~chemparseplot~ ([[https://github.com/haoZeke/chemparseplot][here]]) which is meant to provide
+uniform visualizations for the outputs of various computational chemistry
+programs.
 ** Features
 - Jobflow support
   + Along with Fireworks

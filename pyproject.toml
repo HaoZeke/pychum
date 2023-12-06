@@ -68,8 +68,9 @@ dynamic = [
   "version",
 ]
 dependencies = [
-  "numpy>=1.26.2",
-  "pint>=0.22",
+    "numpy>=1.26.2",
+    "pint>=0.22",
+    "tomli>=2.0.1",
 ]
 [project.optional-dependencies]
 doc = [
