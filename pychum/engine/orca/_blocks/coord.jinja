@@ -2,7 +2,7 @@
 {# Macro for rendering a standard or special atom in xyz format #}
 {% macro render_atom(atom) %}
     {{- 'DA' if atom.is_dummy else atom.symbol -}} {# Handle dummy atoms #}
-    {{- ' Q ' ~ atom.point_charge if atom.point_charge -}} {# Handle point charges #}
+    {{- ' ' ~ atom.point_charge if atom.point_charge -}} {# Handle point charges #}
     {{- ':' if atom.is_ghost -}}  {# Handle ghost atoms #}
     {{- ' >' if atom.embedding_potential -}} {# Handle embedding potentials #}
     {{- ' M = ' ~ atom.isotope if atom.isotope -}} {# Handle isotopes #}
@@ -14,7 +14,7 @@
 
 {% macro render_int_atom(atom) %}
     {{- 'DA' if atom.is_dummy else atom.symbol -}} {# Handle dummy atoms #}
-    {{- ' Q ' ~ atom.point_charge if atom.point_charge -}} {# Handle point charges #}
+    {{- ' ' ~ atom.point_charge if atom.point_charge -}} {# Handle point charges #}
     {{- ':' if atom.is_ghost -}} {# Handle ghost atoms #}
     {{- ' >' if atom.embedding_potential -}} {# Handle embedding potentials #}
     {{- ' M = ' ~ atom.isotope if atom.isotope -}} {# Handle isotopes #}

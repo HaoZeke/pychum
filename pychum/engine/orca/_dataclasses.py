@@ -8,10 +8,10 @@ class UnitConversion:
 
 @dataclass
 class Atom:
-    symbol: str
     x: float
     y: float
     z: float
+    symbol: str = field(default=None)
     is_ghost: bool = False
     embedding_potential: bool = False
     is_frozen: bool = False
@@ -21,6 +21,11 @@ class Atom:
     is_dummy: bool = False  # Indicates if the atom is a dummy atom
     point_charge: Optional[float] = None  # Value of the point charge
 
+    def __post_init__(self):
+        if self.point_charge is not None:
+            self.symbol = 'Q'
+        elif self.symbol is None:
+            raise ValueError("Atom symbol is required unless it's a point charge.")
 
 @dataclass
 class FileData:
