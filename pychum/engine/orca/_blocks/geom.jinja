@@ -1,0 +1,14 @@
+%geom Scan
+# Bond scan
+{% for bond in orca_geom.bonds %}
+  B {{ bond.atoms[0] }} {{ bond.atoms[1] }} = {% if bond.range %}{{ bond.range[0] }}, {{ bond.range[1] }}, {% endif %}{{ bond.points }}
+{% endfor %}
+# Angle scan
+{% for angle in orca_geom.angles %}
+  A {{ angle.atoms[0] }} {{ angle.atoms[1] }} {{ angle.atoms[2] }} = {% if angle.range %}{{ angle.range[0] }}, {{ angle.range[1] }}, {% endif %}{{ angle.points }}
+{% endfor %}
+# Dihedral scan
+{% for dihedral in orca_geom.dihedrals %}
+  D {{ dihedral.atoms[0] }} {{ dihedral.atoms[1] }} {{ dihedral.atoms[2] }} {{ dihedral.atoms[3] }} = {% if dihedral.range %}{{ dihedral.range[0] }}, {{ dihedral.range[1] }}, {% endif %}{{ dihedral.points }}
+{% endfor %}
+end
