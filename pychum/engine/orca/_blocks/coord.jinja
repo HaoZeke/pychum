@@ -1,35 +1,55 @@
 {% set coords = config.coords %} {# Extract relevant variable #}
 {# Macro for rendering a standard or special atom in xyz format #}
 {% macro render_atom(atom) %}
-    {{- 'DA' if atom.is_dummy else atom.symbol -}} {# Handle dummy atoms #}
-    {{- ' ' ~ atom.point_charge if atom.point_charge -}} {# Handle point charges #}
-    {{- ':' if atom.is_ghost -}}  {# Handle ghost atoms #}
-    {{- ' >' if atom.embedding_potential -}} {# Handle embedding potentials #}
-    {{- ' M = ' ~ atom.isotope if atom.isotope -}} {# Handle isotopes #}
-    {{- ' Z = ' ~ atom.nuclear_charge if atom.nuclear_charge -}} {# Handle nuclear charges #}
-    {{- ' ' ~ atom.x ~ ' ' ~ atom.y ~ ' ' ~ atom.z -}} {# XYZ coordinates #}
-    {{- ' (' ~ atom.fragment_number ~ ')' if atom.fragment_number -}} {# Handle fragment numbers #}
-    {{- ' $' if atom.is_frozen -}} {# Handle frozen coordinates #}
+    {{- 'DA' if atom.is_dummy else atom.symbol -}}
+    {{- render_post_symbol(atom) -}} {# Render post symbol properties #}
+    {{- ' ' ~ atom.x ~
+    ('$' if atom.is_frozen or atom.is_frozen_x else '') ~
+    ' ' ~ atom.y ~ ('$' if atom.is_frozen or atom.is_frozen_y else '') ~
+    ' ' ~ atom.z ~ ('$' if atom.is_frozen or atom.is_frozen_z else '') -}}
+    {{- render_additional_atom_properties(atom) -}} {# Render additional properties #}
 {% endmacro %}
 
 {% macro render_int_atom(atom) %}
-    {{- 'DA' if atom.is_dummy else atom.symbol -}} {# Handle dummy atoms #}
-    {{- ' ' ~ atom.point_charge if atom.point_charge -}} {# Handle point charges #}
-    {{- ':' if atom.is_ghost -}} {# Handle ghost atoms #}
-    {{- ' >' if atom.embedding_potential -}} {# Handle embedding potentials #}
-    {{- ' M = ' ~ atom.isotope if atom.isotope -}} {# Handle isotopes #}
-    {{- ' Z = ' ~ atom.nuclear_charge if atom.nuclear_charge -}} {# Handle nuclear charges #}
+    {{- 'DA' if atom.is_dummy else atom.symbol -}}
+    {{- render_post_symbol(atom) -}} {# Render post symbol properties #}
     {{- ' ' ~ atom.bond_atom ~ ' ' ~ atom.angle_atom ~ ' ' ~ atom.dihedral_atom -}} {# Bonding details #}
     {{- ' ' ~ atom.bond_length ~ ' ' ~ atom.angle ~ ' ' ~ atom.dihedral -}} {# Internal coordinates #}
-    {{- ' (' ~ atom.fragment_number ~ ')' if atom.fragment_number -}} {# Handle fragment numbers #}
-    {{- ' $' if atom.is_frozen -}} {# Handle frozen coordinates #}
+    {{- render_additional_atom_properties(atom) -}} {# Render additional properties #}
+{% endmacro %}
+
+{% macro render_gzmt_atom(atom) %}
+    {{- 'DA' if atom.is_dummy else atom.symbol -}}
+    {{- render_post_symbol(atom) -}} {# Render post symbol properties #}
+    {{- ' ' ~ atom.bond_atom ~ ' ' ~ atom.bond_length if atom.bond_atom is not none -}} {# Bonding details #}
+    {{- ' ' ~ atom.angle_atom ~ ' ' ~ atom.angle if atom.angle_atom is not none -}}
+    {{- ' ' ~ atom.dihedral_atom ~ ' ' ~ atom.dihedral if atom.dihedral_atom is not none -}}
+    {{- render_additional_atom_properties(atom) -}} {# Render additional properties #}
+{% endmacro %}
+
+{% macro render_post_symbol(atom) %}
+    {{- ' ' ~ atom.point_charge if atom.point_charge is not none -}} {# Point charge #}
+    {{- ':' if atom.is_ghost -}} {# Ghost atom #}
+    {{- ' >' if atom.embedding_potential -}} {# Embedding potential #}
+    {{- ' (' ~ atom.fragment_number ~ ')' if atom.fragment_number is not none -}} {# Fragment #}
+{% endmacro %}
+
+{% macro render_additional_atom_properties(atom) %}
+    {{- ' M = ' ~ atom.isotope if atom.isotope is not none -}} {# Isotope #}
+    {{- ' Z = ' ~ atom.nuclear_charge if atom.nuclear_charge is not none -}} {# Nuclear charge #}
 {% endmacro %}
 
 {# Actual rendering logic #}
 {% if coords.fmt in ['xyz', 'int', 'gzmt'] %}
 * {{ coords.fmt }} {{ coords.charge }} {{ coords.multiplicity }}
 {% for atom in coords.atoms %}
-{{ render_atom(atom) if coords.fmt == 'xyz' else render_int_atom(atom) }}
+    {% if coords.fmt == 'xyz' %}
+        {{- render_atom(atom) }}
+    {% elif coords.fmt == 'int' %}
+        {{- render_int_atom(atom) }}
+    {% elif coords.fmt == 'gzmt' %}
+        {{- render_gzmt_atom(atom) }}
+    {% endif %}
 {% endfor %}
 *
 {% elif coords.fmt in ['xyzfile', 'gzmtfile'] %}

@@ -8,18 +8,27 @@ class UnitConversion:
 
 @dataclass
 class Atom:
-    x: float
-    y: float
-    z: float
+    x: float = 0.0
+    y: float = 0.0
+    z: float = 0.0
     symbol: str = field(default=None)
     is_ghost: bool = False
     embedding_potential: bool = False
-    is_frozen: bool = False
-    isotope: Optional[float] = None  # Isotope mass number
-    nuclear_charge: Optional[float] = None  # Non-standard nuclear charge
-    fragment_number: Optional[int] = None  # Fragment number
-    is_dummy: bool = False  # Indicates if the atom is a dummy atom
-    point_charge: Optional[float] = None  # Value of the point charge
+    is_frozen: bool = False # Not applied to anything but cartesian
+    isotope: Optional[float] = None
+    nuclear_charge: Optional[float] = None
+    fragment_number: Optional[int] = None
+    is_dummy: bool = False
+    point_charge: Optional[float] = None
+    bond_atom: Optional[int] = None  # Index of bonded atom (for internal coordinates)
+    bond_length: Optional[float] = None  # Bond length (for internal coordinates)
+    angle_atom: Optional[int] = None  # Index of angle atom (for internal coordinates)
+    angle: Optional[float] = None  # Bond angle (for internal coordinates)
+    dihedral_atom: Optional[int] = None  # Index of dihedral atom (for internal coordinates)
+    dihedral: Optional[float] = None  # Dihedral angle (for internal coordinates)
+    is_frozen_x: bool = False # Cartesian only
+    is_frozen_y: bool = False # Cartesian only
+    is_frozen_z: bool = False # Cartesian only
 
     def __post_init__(self):
         if self.point_charge is not None:
