@@ -1,17 +1,17 @@
 {% macro render_atom(atom) -%}
-    {{- atom.symbol }} {{ atom.x if atom.x != None }} {{ atom.y if atom.y != None }} {{ atom.z if atom.z != None }}
+    {{ atom.symbol }}{% if atom.is_ghost %}:{% endif %}{% if atom.embedding_potential %} > {% endif %} {{ atom.x }} {{ atom.y }} {{ atom.z }}{% if atom.is_frozen %} ${% endif %}
 {%- endmacro %}
 
 {% macro render_int_atom(atom) -%}
-    {{- atom.symbol }} {{ atom.bond_atom }} {{ atom.angle_atom }} {{ atom.dihedral_atom }} {{ atom.bond_length }} {{ atom.angle }} {{ atom.dihedral }}
+    {{ atom.symbol }}{% if atom.is_ghost %}:{% endif %}{% if atom.embedding_potential %} > {% endif %} {{ atom.bond_atom }} {{ atom.angle_atom }} {{ atom.dihedral_atom }} {{ atom.bond_length }} {{ atom.angle }} {{ atom.dihedral }}{% if atom.is_frozen %} ${% endif %}
 {%- endmacro %}
 
-{% if coords.type == 'xyz' or coords.type == 'int' or coords.type == 'gzmt' %}
+{% if coords.type in ['xyz', 'int', 'gzmt'] %}
 * {{ coords.type }} {{ coords.charge }} {{ coords.multiplicity }}
 {% for atom in coords.atoms %}
-    {{- render_atom(atom) if coords.type == 'xyz' else render_int_atom(atom) }}
+    {{ render_atom(atom) if coords.type == 'xyz' else render_int_atom(atom) }}
 {% endfor %}
 *
-{% elif coords.type == 'xyzfile' or coords.type == 'gzmtfile' %}
+{% elif coords.type in ['xyzfile', 'gzmtfile'] %}
 * {{ coords.type }} {{ coords.charge }} {{ coords.multiplicity }} {{ coords.filename }}
 {% endif %}
