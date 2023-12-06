@@ -1,11 +1,31 @@
-{% macro render_atom(atom) -%}
-    {{- 'DA' if atom.is_dummy else atom.symbol }}{% if atom.point_charge %} Q {{ atom.point_charge }}{% elif atom.is_ghost %}:{% endif %}{% if atom.embedding_potential %} > {% endif %}{% if atom.isotope %} M = {{ atom.isotope }}{% endif %}{% if atom.nuclear_charge %} Z = {{ atom.nuclear_charge }}{% endif %} {{ atom.x }} {{ atom.y }} {{ atom.z }}{% if atom.fragment_number %} ({{ atom.fragment_number }}){% endif %}{% if atom.is_frozen %} ${% endif %}
-{%- endmacro %}
+{# Macro for rendering a standard or special atom in xyz format #}
+{% macro render_atom(atom) %}
+    {{ 'DA' if atom.is_dummy else atom.symbol }}  {# Handle dummy atoms #}
+    {% if atom.point_charge %} Q {{ atom.point_charge }}{% endif %}  {# Handle point charges #}
+    {% if atom.is_ghost %}:{% endif %}  {# Handle ghost atoms #}
+    {% if atom.embedding_potential %} > {% endif %}  {# Handle embedding potentials #}
+    {% if atom.isotope %} M = {{ atom.isotope }}{% endif %}  {# Handle isotopes #}
+    {% if atom.nuclear_charge %} Z = {{ atom.nuclear_charge }}{% endif %}  {# Handle nuclear charges #}
+    {{ atom.x }} {{ atom.y }} {{ atom.z }}  {# XYZ coordinates #}
+    {% if atom.fragment_number %} ({{ atom.fragment_number }}){% endif %}  {# Handle fragment numbers #}
+    {% if atom.is_frozen %} $ {% endif %}  {# Handle frozen coordinates #}
+{% endmacro %}
 
-{% macro render_int_atom(atom) -%}
-    {{- 'DA' if atom.is_dummy else atom.symbol }}{% if atom.point_charge %} Q {{ atom.point_charge }}{% elif atom.is_ghost %}:{% endif %}{% if atom.embedding_potential %} > {% endif %}{% if atom.isotope %} M = {{ atom.isotope }}{% endif %}{% if atom.nuclear_charge %} Z = {{ atom.nuclear_charge }}{% endif %} {{ atom.bond_atom }} {{ atom.angle_atom }} {{ atom.dihedral_atom }} {{ atom.bond_length }} {{ atom.angle }} {{ atom.dihedral }}{% if atom.fragment_number %} ({{ atom.fragment_number }}){% endif %}{% if atom.is_frozen %} ${% endif %}
-{%- endmacro %}
+{# Macro for rendering a standard or special atom in internal format #}
+{% macro render_int_atom(atom) %}
+    {{ 'DA' if atom.is_dummy else atom.symbol }}  {# Handle dummy atoms #}
+    {% if atom.point_charge %} Q {{ atom.point_charge }}{% endif %}  {# Handle point charges #}
+    {% if atom.is_ghost %}:{% endif %}  {# Handle ghost atoms #}
+    {% if atom.embedding_potential %} > {% endif %}  {# Handle embedding potentials #}
+    {% if atom.isotope %} M = {{ atom.isotope }}{% endif %}  {# Handle isotopes #}
+    {% if atom.nuclear_charge %} Z = {{ atom.nuclear_charge }}{% endif %}  {# Handle nuclear charges #}
+    {{ atom.bond_atom }} {{ atom.angle_atom }} {{ atom.dihedral_atom }}  {# Bonding details #}
+    {{ atom.bond_length }} {{ atom.angle }} {{ atom.dihedral }}  {# Internal coordinates #}
+    {% if atom.fragment_number %} ({{ atom.fragment_number }}){% endif %}  {# Handle fragment numbers #}
+    {% if atom.is_frozen %} $ {% endif %}  {# Handle frozen coordinates #}
+{% endmacro %}
 
+{# Actual rendering logic #}
 {% if coords.type in ['xyz', 'int', 'gzmt'] %}
 * {{ coords.type }} {{ coords.charge }} {{ coords.multiplicity }}
 {% for atom in coords.atoms %}
