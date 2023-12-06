@@ -1,0 +1,17 @@
+{% macro render_atom(atom) -%}
+    {{- atom.symbol }} {{ atom.x if atom.x != None }} {{ atom.y if atom.y != None }} {{ atom.z if atom.z != None }}
+{%- endmacro %}
+
+{% macro render_int_atom(atom) -%}
+    {{- atom.symbol }} {{ atom.bond_atom }} {{ atom.angle_atom }} {{ atom.dihedral_atom }} {{ atom.bond_length }} {{ atom.angle }} {{ atom.dihedral }}
+{%- endmacro %}
+
+{% if coords.type == 'xyz' or coords.type == 'int' or coords.type == 'gzmt' %}
+* {{ coords.type }} {{ coords.charge }} {{ coords.multiplicity }}
+{% for atom in coords.atoms %}
+    {{- render_atom(atom) if coords.type == 'xyz' else render_int_atom(atom) }}
+{% endfor %}
+*
+{% elif coords.type == 'xyzfile' or coords.type == 'gzmtfile' %}
+* {{ coords.type }} {{ coords.charge }} {{ coords.multiplicity }} {{ coords.filename }}
+{% endif %}
