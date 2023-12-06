@@ -1,37 +1,37 @@
+{% set coords = config.coords %} {# Extract relevant variable #}
 {# Macro for rendering a standard or special atom in xyz format #}
 {% macro render_atom(atom) %}
-    {{ 'DA' if atom.is_dummy else atom.symbol }}  {# Handle dummy atoms #}
-    {% if atom.point_charge %} Q {{ atom.point_charge }}{% endif %}  {# Handle point charges #}
-    {% if atom.is_ghost %}:{% endif %}  {# Handle ghost atoms #}
-    {% if atom.embedding_potential %} > {% endif %}  {# Handle embedding potentials #}
-    {% if atom.isotope %} M = {{ atom.isotope }}{% endif %}  {# Handle isotopes #}
-    {% if atom.nuclear_charge %} Z = {{ atom.nuclear_charge }}{% endif %}  {# Handle nuclear charges #}
-    {{ atom.x }} {{ atom.y }} {{ atom.z }}  {# XYZ coordinates #}
-    {% if atom.fragment_number %} ({{ atom.fragment_number }}){% endif %}  {# Handle fragment numbers #}
-    {% if atom.is_frozen %} $ {% endif %}  {# Handle frozen coordinates #}
+    {{- 'DA' if atom.is_dummy else atom.symbol -}} {# Handle dummy atoms #}
+    {{- ' Q ' ~ atom.point_charge if atom.point_charge -}} {# Handle point charges #}
+    {{- ':' if atom.is_ghost -}}  {# Handle ghost atoms #}
+    {{- ' >' if atom.embedding_potential -}} {# Handle embedding potentials #}
+    {{- ' M = ' ~ atom.isotope if atom.isotope -}} {# Handle isotopes #}
+    {{- ' Z = ' ~ atom.nuclear_charge if atom.nuclear_charge -}} {# Handle nuclear charges #}
+    {{- ' ' ~ atom.x ~ ' ' ~ atom.y ~ ' ' ~ atom.z -}} {# XYZ coordinates #}
+    {{- ' (' ~ atom.fragment_number ~ ')' if atom.fragment_number -}} {# Handle fragment numbers #}
+    {{- ' $' if atom.is_frozen -}} {# Handle frozen coordinates #}
 {% endmacro %}
 
-{# Macro for rendering a standard or special atom in internal format #}
 {% macro render_int_atom(atom) %}
-    {{ 'DA' if atom.is_dummy else atom.symbol }}  {# Handle dummy atoms #}
-    {% if atom.point_charge %} Q {{ atom.point_charge }}{% endif %}  {# Handle point charges #}
-    {% if atom.is_ghost %}:{% endif %}  {# Handle ghost atoms #}
-    {% if atom.embedding_potential %} > {% endif %}  {# Handle embedding potentials #}
-    {% if atom.isotope %} M = {{ atom.isotope }}{% endif %}  {# Handle isotopes #}
-    {% if atom.nuclear_charge %} Z = {{ atom.nuclear_charge }}{% endif %}  {# Handle nuclear charges #}
-    {{ atom.bond_atom }} {{ atom.angle_atom }} {{ atom.dihedral_atom }}  {# Bonding details #}
-    {{ atom.bond_length }} {{ atom.angle }} {{ atom.dihedral }}  {# Internal coordinates #}
-    {% if atom.fragment_number %} ({{ atom.fragment_number }}){% endif %}  {# Handle fragment numbers #}
-    {% if atom.is_frozen %} $ {% endif %}  {# Handle frozen coordinates #}
+    {{- 'DA' if atom.is_dummy else atom.symbol -}} {# Handle dummy atoms #}
+    {{- ' Q ' ~ atom.point_charge if atom.point_charge -}} {# Handle point charges #}
+    {{- ':' if atom.is_ghost -}} {# Handle ghost atoms #}
+    {{- ' >' if atom.embedding_potential -}} {# Handle embedding potentials #}
+    {{- ' M = ' ~ atom.isotope if atom.isotope -}} {# Handle isotopes #}
+    {{- ' Z = ' ~ atom.nuclear_charge if atom.nuclear_charge -}} {# Handle nuclear charges #}
+    {{- ' ' ~ atom.bond_atom ~ ' ' ~ atom.angle_atom ~ ' ' ~ atom.dihedral_atom -}} {# Bonding details #}
+    {{- ' ' ~ atom.bond_length ~ ' ' ~ atom.angle ~ ' ' ~ atom.dihedral -}} {# Internal coordinates #}
+    {{- ' (' ~ atom.fragment_number ~ ')' if atom.fragment_number -}} {# Handle fragment numbers #}
+    {{- ' $' if atom.is_frozen -}} {# Handle frozen coordinates #}
 {% endmacro %}
 
 {# Actual rendering logic #}
-{% if coords.type in ['xyz', 'int', 'gzmt'] %}
-* {{ coords.type }} {{ coords.charge }} {{ coords.multiplicity }}
+{% if coords.fmt in ['xyz', 'int', 'gzmt'] %}
+* {{ coords.fmt }} {{ coords.charge }} {{ coords.multiplicity }}
 {% for atom in coords.atoms %}
-    {{ render_atom(atom) if coords.type == 'xyz' else render_int_atom(atom) }}
+{{ render_atom(atom) if coords.fmt == 'xyz' else render_int_atom(atom) }}
 {% endfor %}
 *
-{% elif coords.type in ['xyzfile', 'gzmtfile'] %}
-* {{ coords.type }} {{ coords.charge }} {{ coords.multiplicity }} {{ coords.filename }}
+{% elif coords.fmt in ['xyzfile', 'gzmtfile'] %}
+* {{ coords.fmt }} {{ coords.charge }} {{ coords.multiplicity }} {{ coords.filename }}
 {% endif %}
