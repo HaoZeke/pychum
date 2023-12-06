@@ -1,19 +1,24 @@
+{% set orca_geom = config.orca_geom %} {# Extract relevant variable #}
 {% set total_scans = orca_geom.bonds | length + orca_geom.angles | length + orca_geom.dihedrals | length %}
-{% if total_scans <= 3 %}
-%geom Scan
-  # B <atmid1> <atmid2> = init, final, npoints
-  {% for bond in orca_geom.bonds %}
+{%+ if total_scans <= 3 +%}
+%geom{# Start geom #}
+
+ Scan{# Start scan #}
+ {# B <atmid1> <atmid2> = init, final, npoints #}
+ {% for bond in orca_geom.bonds +%}
     B {{ bond.atoms[0] }} {{ bond.atoms[1] }} = {% if bond.range %}{{ bond.range[0] }}, {{ bond.range[1] }}, {% endif %}{{ bond.points }}
   {% endfor %}
-  # A <atmid1> <atmid2> <atmid3> = init, final, npoints
-  {% for angle in orca_geom.angles %}
+  {# A <atmid1> <atmid2> <atmid3> = init, final, npoints #}
+  {% for angle in orca_geom.angles +%}
     A {{ angle.atoms[0] }} {{ angle.atoms[1] }} {{ angle.atoms[2] }} = {% if angle.range %}{{ angle.range[0] }}, {{ angle.range[1] }}, {% endif %}{{ angle.points }}
   {% endfor %}
-  # D <atmid1> <atmid2> <atmid3> <atmid4> = init, final, npoints
-  {% for dihedral in orca_geom.dihedrals %}
+  {# D <atmid1> <atmid2> <atmid3> <atmid4> = init, final, npoints #}
+  {% for dihedral in orca_geom.dihedrals +%}
     D {{ dihedral.atoms[0] }} {{ dihedral.atoms[1] }} {{ dihedral.atoms[2] }} {{ dihedral.atoms[3] }} = {% if dihedral.range %}{{ dihedral.range[0] }}, {{ dihedral.range[1] }}, {% endif %}{{ dihedral.points }}
   {% endfor %}
-end
+ end{# End scan #}
+
+end{# End geom #}
 {% else %}
 # Error: More than three scan coordinates are defined.
 {% endif %}

@@ -67,4 +67,4 @@ class OrcaConfig:
     # units_distance: Optional[List[UnitConversion]]
     # units_energy: List[UnitConversion]
     coords: Coords
-    # orca_geom: OrcaGeom
+    orca_geom: Optional[OrcaGeom] = None
