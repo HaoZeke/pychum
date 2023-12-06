@@ -1,8 +1,8 @@
+{% extends "geom.jinja" %}
 {% set orca_geom = config.orca_geom %} {# Extract relevant variable #}
 {% set total_scans = orca_geom.bonds | length + orca_geom.angles | length + orca_geom.dihedrals | length %}
+{% block scan %}
 {%+ if total_scans <= 3 +%}
-%geom{# Start geom #}
-
  Scan{# Start scan #}
  {# B <atmid1> <atmid2> = init, final, npoints #}
  {% for bond in orca_geom.bonds +%}
@@ -18,7 +18,7 @@
   {% endfor %}
  end{# End scan #}
 
-end{# End geom #}
 {% else %}
-# Error: More than three scan coordinates are defined.
+Error: More than three scan coordinates are defined.
 {% endif %}
+{% endblock scan %}

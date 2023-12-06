@@ -51,6 +51,5 @@ def test_exceeding_scan_limit():
         bonds=[GeomScan(atoms=[0, 1], range=[1.0, 2.0], points=10)] * 4
     )
     result = render_geom_scan(geom)
-    expected = "# Error: More than three scan coordinates are defined."
-    assert result.strip() == expected
-
+    expected = "Error: More than three scan coordinates are defined."
+    assert expected in result.strip()
