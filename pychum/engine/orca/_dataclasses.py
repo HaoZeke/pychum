@@ -63,7 +63,6 @@ class OrcaGeom:
 
 @dataclass
 class OrcaConfig:
-    engine: str
     # units_distance: Optional[List[UnitConversion]]
     # units_energy: List[UnitConversion]
     coords: Coords

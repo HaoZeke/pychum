@@ -4,7 +4,7 @@ from pychum.engine.orca._renderer import OrcaInputRenderer
 
 def render_config(atoms, coord_type='xyz', charge=0, multiplicity=1):
     coords = Coords(charge=charge, multiplicity=multiplicity, atoms=atoms, fmt = coord_type)
-    config = OrcaConfig(engine='orca', coords=coords)
+    config = OrcaConfig(coords=coords)
     renderer = OrcaInputRenderer(config)
     return renderer.render('coord.jinja')
 
