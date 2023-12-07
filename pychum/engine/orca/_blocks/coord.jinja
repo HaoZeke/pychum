@@ -9,7 +9,6 @@
     ' ' ~ atom.z ~ ('$' if atom.is_frozen or atom.is_frozen_z else '') -}}
     {{- render_additional_atom_properties(atom) -}} {# Render additional properties #}
 {% endmacro %}
-
 {% macro render_int_atom(atom) %}
     {{- 'DA' if atom.is_dummy else atom.symbol -}}
     {{- render_post_symbol(atom) -}} {# Render post symbol properties #}
@@ -17,7 +16,6 @@
     {{- ' ' ~ atom.bond_length ~ ' ' ~ atom.angle ~ ' ' ~ atom.dihedral -}} {# Internal coordinates #}
     {{- render_additional_atom_properties(atom) -}} {# Render additional properties #}
 {% endmacro %}
-
 {% macro render_gzmt_atom(atom) %}
     {{- 'DA' if atom.is_dummy else atom.symbol -}}
     {{- render_post_symbol(atom) -}} {# Render post symbol properties #}
@@ -26,19 +24,16 @@
     {{- ' ' ~ atom.dihedral_atom ~ ' ' ~ atom.dihedral if atom.dihedral_atom is not none -}}
     {{- render_additional_atom_properties(atom) -}} {# Render additional properties #}
 {% endmacro %}
-
 {% macro render_post_symbol(atom) %}
     {{- ' ' ~ atom.point_charge if atom.point_charge is not none -}} {# Point charge #}
     {{- ':' if atom.is_ghost -}} {# Ghost atom #}
     {{- ' >' if atom.embedding_potential -}} {# Embedding potential #}
     {{- ' (' ~ atom.fragment_number ~ ')' if atom.fragment_number is not none -}} {# Fragment #}
 {% endmacro %}
-
 {% macro render_additional_atom_properties(atom) %}
     {{- ' M = ' ~ atom.isotope if atom.isotope is not none -}} {# Isotope #}
     {{- ' Z = ' ~ atom.nuclear_charge if atom.nuclear_charge is not none -}} {# Nuclear charge #}
 {% endmacro %}
-
 {# Actual rendering logic #}
 {% if coords.fmt in ['xyz', 'int', 'gzmt'] %}
 * {{ coords.fmt }} {{ coords.charge }} {{ coords.multiplicity }}
