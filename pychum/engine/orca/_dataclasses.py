@@ -37,16 +37,11 @@ class Atom:
             raise ValueError("Atom symbol is required unless it's a point charge.")
 
 @dataclass
-class FileData:
-    source: str
-    fname: str
-
-@dataclass
 class Coords:
     charge: int
     multiplicity: int
     fmt: str
-    filedat: List[FileData] = field(default_factory=list)
+    filedat: str
     atoms: List[Atom] = field(default_factory=list)
 
 @dataclass
