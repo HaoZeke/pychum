@@ -41,7 +41,7 @@ class Coords:
     charge: int
     multiplicity: int
     fmt: str
-    filedat: str
+    filedat: str = ""
     atoms: List[Atom] = field(default_factory=list)
 
 @dataclass

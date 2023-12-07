@@ -110,3 +110,19 @@ def test_gaussian_z_matrix():
     *
     """
     assert result.strip() == textwrap.dedent(expected).strip()
+
+def test_standard_xyzfile():
+    coords = Coords(charge=0, multiplicity=1, fmt="xyzfile", filedat="h2.xyz")
+    config = OrcaConfig(coords=coords)
+    renderer = OrcaInputRenderer(config)
+    result = renderer.render('coord.jinja')
+    expected = "* xyzfile 0 1 h2.xyz"
+    assert result.strip() == expected.strip()
+
+def test_standard_gzmtfile():
+    coords = Coords(charge=0, multiplicity=1, fmt="gzmtfile", filedat="h2.gzmt")
+    config = OrcaConfig(coords=coords)
+    renderer = OrcaInputRenderer(config)
+    result = renderer.render('coord.jinja')
+    expected = "* gzmtfile 0 1 h2.gzmt"
+    assert result.strip() == expected.strip()
