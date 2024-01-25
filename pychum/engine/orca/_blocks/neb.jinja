@@ -36,6 +36,17 @@
     fix_center  {{ neb.fix_center | lower }}
 
 
+{% if neb.convtol_settings %}
+    {# Convergence tolerances sub-block #}
+    tol_maxfp_i  {{ neb.convtol_settings.maxfp_i }}
+    tol_rmsfp_i  {{ neb.convtol_settings.rmsfp_i }}
+    tol_maxf_ci  {{ neb.convtol_settings.maxf_ci }}
+    tol_rmsf_ci  {{ neb.convtol_settings.rmsf_ci }}
+    tol_turn_on_ci  {{ neb.convtol_settings.turn_on_ci }}
+    tol_scale  {{ neb.convtol_settings.scale }}
+{% endif %}
+
+
 {% if neb.reparam %}
     {# Reparam sub-block #}
     reparam_type  {{ neb.reparam_settings.interp | lower  }}

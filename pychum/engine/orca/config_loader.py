@@ -51,38 +51,24 @@ class ConfigLoader:
 
         if "orca" in self.data and "neb" in self.data["orca"]:
             neb_data = self.data["orca"]["neb"]
-            optim_settings = None
+            neb_block_args = {}
             if "optim" in neb_data:
-                optim_settings = OptimSettings(**neb_data.pop("optim"))
-            lbfgs_settings = None
+                neb_block_args["optim_settings"] = OptimSettings(**neb_data.pop("optim"))
             if "lbfgs" in neb_data:
-                lbfgs_settings = LBFGSSettings(**neb_data.pop("lbfgs"))
-            fire_settings = None
+                neb_block_args["lbfgs_settings"] = LBFGSSettings(**neb_data.pop("lbfgs"))
             if "fire" in neb_data:
-                fire_settings = FIRESettings(**neb_data.pop("fire"))
-            idpp_settings = None
+                neb_block_args["fire_settings"] = FIRESettings(**neb_data.pop("fire"))
             if "idpp" in neb_data:
-                idpp_settings = IDPPSettings(**neb_data.pop("idpp"))
-            zoom_settings = None
+                neb_block_args["idpp_settings"] = IDPPSettings(**neb_data.pop("idpp"))
             if "zoom" in neb_data:
-                zoom_settings = ZoomSettings(**neb_data.pop("zoom"))
-            reparam_settings = None
+                neb_block_args["zoom_settings"] = ZoomSettings(**neb_data.pop("zoom"))
             if "reparam" in neb_data:
-                reparam_settings = ReparamSettings(**neb_data.pop("reparam"))
-            convtol_settings = None
+                neb_block_args["reparam_settings"] = ReparamSettings(**neb_data.pop("reparam"))
             if "convtol" in neb_data:
-                convtol_settings = ConvTolSettings(**neb_data.pop("convtol"))
+                neb_block_args["convtol_settings"] = ConvTolSettings(**neb_data.pop("convtol"))
+            neb_block_args = {**neb_data, **neb_block_args}
 
-            blocks["neb"] = NebBlock(
-                fire_settings=fire_settings,
-                lbfgs_settings=lbfgs_settings,
-                idpp_settings=idpp_settings,
-                zoom_settings=zoom_settings,
-                reparam_settings=reparam_settings,
-                optim_settings=optim_settings,
-                convtol_settings=convtol_settings,
-                **neb_data,
-            )
+            blocks["neb"] = NebBlock(**neb_block_args)
 
         return OrcaConfig(coords=coords, blocks=blocks)
 
