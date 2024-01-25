@@ -1041,6 +1041,25 @@ package:
   size: 14568
   timestamp: 1698144516278
 - platform: linux-64
+  name: taplo
+  version: 0.8.1
+  category: main
+  manager: conda
+  dependencies:
+  - libgcc-ng >=12
+  url: https://conda.anaconda.org/conda-forge/linux-64/taplo-0.8.1-he8a937b_0.conda
+  hash:
+    md5: 3d83fa9962fc353485bab815c9df9fe4
+    sha256: 901e0ba452bd249db45cbea25e7d865e43eb5322078e4724f43d83641b73335b
+  build: he8a937b_0
+  arch: x86_64
+  subdir: linux-64
+  build_number: 0
+  license: MIT
+  license_family: MIT
+  size: 3586993
+  timestamp: 1689047789269
+- platform: linux-64
   name: tk
   version: 8.6.13
   category: main
