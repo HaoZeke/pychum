@@ -34,12 +34,11 @@ def test_combined_scans():
         dihedrals=[GeomScan(atoms=[0, 1, 2, 3], range=[0, 360], points=20)]
     )
     result = render_geom_scan(geom)
-    # TODO(rg): Maybe fix the spacing here?
     expected = (
         "%geom \n"
         " Scan\n"
-        "    B 0 1 = 1.0, 2.0, 10\n\n"
-        "    A 0 1 2 = 90, 180, 5\n\n"
+        "    B 0 1 = 1.0, 2.0, 10\n"
+        "    A 0 1 2 = 90, 180, 5\n"
         "    D 0 1 2 3 = 0, 360, 20\n"
         " end\n"
         "end"

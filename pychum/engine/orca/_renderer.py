@@ -18,4 +18,4 @@ class OrcaInputRenderer:
         context = {
             'config': self.config,
         }
-        return template.render(context)
+        return template.render(context).replace('\n\n', '\n')
