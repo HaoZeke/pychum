@@ -1,15 +1,18 @@
 
 # Table of Contents
 
--   [About](#org82157d6)
-    -   [Features](#org1fbffca)
-        -   [Supported Engines](#org766b50a)
-    -   [Rationale](#org15ffdd1)
--   [License](#org9b3f6a1)
+-   [About](#org7c77871)
+    -   [Features](#org37bf279)
+        -   [Supported Engines](#orge25642d)
+    -   [Rationale](#orgb4f705c)
+-   [Development](#orgaabb253)
+    -   [Documentation](#orge72c445)
+        -   [Readme](#org23ffec5)
+-   [License](#org94f529f)
 
 
 
-<a id="org82157d6"></a>
+<a id="org7c77871"></a>
 
 # About
 
@@ -30,7 +33,7 @@ uniform visualizations for the outputs of various computational chemistry
 programs.
 
 
-<a id="org1fbffca"></a>
+<a id="org37bf279"></a>
 
 ## Features
 
@@ -40,7 +43,7 @@ programs.
     -   Via `pint`
 
 
-<a id="org766b50a"></a>
+<a id="orge25642d"></a>
 
 ### Supported Engines
 
@@ -52,7 +55,7 @@ programs.
     -   EON
 
 
-<a id="org15ffdd1"></a>
+<a id="orgb4f705c"></a>
 
 ## Rationale
 
@@ -60,7 +63,37 @@ I needed to run a bunch of systems. `jobflow` / Fireworks / AiiDA were ideal,
 until I realized only VASP is really well supported by them.
 
 
-<a id="org9b3f6a1"></a>
+<a id="orgaabb253"></a>
+
+# Development
+
+Before writing tests and incorporating the functions into the CLI it is helpful
+to often visualize the intermediate steps. For this we can setup a complete
+development environment including the notebook server.
+
+    pixi shell
+    pdm sync
+    pdm run jupyter lab --ServerApp.allow_remote_access=1 \
+        --ServerApp.open_browser=False --port=8889
+
+Then go through the `nb` folder notebooks.
+
+
+<a id="orge72c445"></a>
+
+## Documentation
+
+
+<a id="org23ffec5"></a>
+
+### Readme
+
+The `readme` can be constructed via:
+
+    ./scripts/org_to_md.sh readme_src.org readme.md
+
+
+<a id="org94f529f"></a>
 
 # License
 

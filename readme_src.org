@@ -30,6 +30,23 @@ programs.
 ** Rationale
 I needed to run a bunch of systems. ~jobflow~ / Fireworks / AiiDA were ideal,
 until I realized only VASP is really well supported by them.
+* Development
+Before writing tests and incorporating the functions into the CLI it is helpful
+to often visualize the intermediate steps. For this we can setup a complete
+development environment including the notebook server.
+#+begin_src bash
+pixi shell
+pdm sync
+pdm run jupyter lab --ServerApp.allow_remote_access=1 \
+    --ServerApp.open_browser=False --port=8889
+#+end_src
+Then go through the ~nb~ folder notebooks.
+** Documentation
+*** Readme
+The ~readme~ can be constructed via:
+#+begin_src bash
+./scripts/org_to_md.sh readme_src.org readme.md
+#+end_src
 * License
 MIT. However, this is an academic resource, so *please cite* as much as possible
 via:
