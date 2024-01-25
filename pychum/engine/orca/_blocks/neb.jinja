@@ -1,0 +1,100 @@
+{% block neb %}
+
+%neb
+{% set neb = config.blocks.neb %} {# Access NebBlock instance #}
+{# TODO(rg): There are more kinds of product specification, e.g. pdb #}
+   neb_end_xyzfile  "{{ neb.end_xyz }}"
+    nimages  {{ neb.nimgs }}
+    free_end_kappa  {{ neb.free_end_kappa }}
+    free_end  {{ neb.free_end | lower }}
+    springtype  {{ neb.springtype }}
+    springconst  {{ neb.springconst }}
+    free_end_type  {{ neb.free_end_type }}
+    reparam  {{ neb.reparam }}
+    tol_turn_on_ci  {{ neb.tol_turn_on_ci }}
+    tol_rmsfp_i  {{ neb.tol_rmsfp_i }}
+    free_end_ec  {{ neb.free_end_ec }}
+    springconst2  {{ neb.springconst2 }}
+    convtype  {{ neb.convtype }}
+    reparam_type  {{ neb.reparam_type }}
+    tol_scale  {{ neb.tol_scale }}
+    tangent  {{ neb.tangent }}
+    printlevel  {{ neb.printlevel }}
+    tol_maxf_ci  {{ neb.tol_maxf_ci }}
+    neb_ts  {{ neb.neb_ts | lower }}
+    quatern  {{ neb.quatern }}
+    tol_reparam  {{ neb.tol_reparam }}
+    interpolation  {{ neb.interpolation }}
+    climbingimage  {{ neb.climbingimage | lower }}
+    restart_opt_on_reparam  {{ neb.restart_opt_on_reparam | lower }}
+    free_end_ec_end  {{ neb.free_end_ec_end }}
+    tol_maxfp_i  {{ neb.tol_maxfp_i }}
+    energy_weighted  {{ neb.energy_weighted | lower }}
+    perpspring  {{ neb.perpspring }}
+    tol_rmsf_ci  {{ neb.tol_rmsf_ci }}
+    remove_extern_force  {{ neb.remove_extern_force | lower }}
+    fix_center  {{ neb.fix_center | lower }}
+
+
+{% if neb.reparam %}
+    {# Reparam sub-block #}
+    reparam_type  {{ neb.reparam_settings.interp | lower  }}
+    reparam {{ neb.reparam_settings.every }}
+    tol_reparam {{ neb.reparam_settings.tol }}
+{% endif %}
+
+
+{% if neb.optim %}
+    {# Optimizer sub-block #}
+    opt_method  {{ neb.optim_settings.method }}
+    maxmove  {{ neb.optim_settings.maxmove }}
+    stepsize  {{ neb.optim_settings.stepsize }}
+    maxiter  {{ neb.optim_settings.maxiter }}
+    local  {{ neb.optim_settings.local | lower }}
+{% endif %}
+
+
+{% if neb.lbfgs_settings %}
+    {# LBFGS sub-block #}
+    lbfgs_mem  {{ neb.lbfgs_settings.memory }}
+    lbfgs_dr  {{ neb.lbfgs_settings.dr }}
+    lbfgs_restart_on_maxmove  {{ neb.lbfgs_settings.restart_on_maxmove | lower }}
+    lbfgs_reparam_on_restart  {{ neb.lbfgs_settings.reparam_on_restart | lower }}
+    lbfgs_precondition  {{ neb.lbfgs_settings.precondition | lower }}
+{% endif %}
+
+
+{% if neb.fire_settings %}
+    {# FIRE sub-block #}
+    fire_initial_damp  {{ neb.fire_settings.init_damp }}
+    fire_damp_decr  {{ neb.fire_settings.damp_decr }}
+    fire_step_incr  {{ neb.fire_settings.step_incr }}
+    fire_step_decr  {{ neb.fire_settings.step_decr }}
+    fire_max_step  {{ neb.fire_settings.max_step }}
+    fire_retention  {{ neb.fire_settings.retention }}
+{% endif %}
+
+
+{% if neb.zoom_settings %}
+    {# Zoom sub-block #}
+    tol_turn_on_zoom  {{ neb.zoom_settings.tol_turn_on }}
+    zoom_offset  {{ neb.zoom_settings.offset }}
+    zoom_auto  {{ neb.zoom_settings.auto | lower }}
+    zoom_alpha  {{ neb.zoom_settings.alpha }}
+    zoom_interpolation  {{ neb.zoom_settings.interpolation }}
+    zoom_printfulltrj  {{ neb.zoom_settings.printfulltrj | lower }}
+{% endif %}
+
+
+{% if neb.idpp_settings %}
+    {# IDPP sub-block #}
+    idpp_nmax  {{ neb.idpp_settings.nmax }}
+    idpp_tol_maxf  {{ neb.idpp_settings.tol_maxf }}
+    idpp_ksp  {{ neb.idpp_settings.ksp }}
+    idpp_alpha  {{ neb.idpp_settings.alpha }}
+    idpp_maxmove  {{ neb.idpp_settings.maxmove }}
+    idpp_debug  {{ neb.idpp_settings.debug | lower }}
+    idpp_quatern  {{ neb.idpp_settings.quatern | lower }}
+{% endif %}
+end
+{% endblock neb %}

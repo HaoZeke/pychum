@@ -1,0 +1,12 @@
+{# Keyword lines, "simple input" #}
+{% block kwlines -%}
+    !ENGRAD UHF NOSOSCF def2-SVP
+{% endblock kwlines -%}
+{# Dynamically include block templates #}
+{% for block_name, block_data in config.blocks.items() %}
+    {% with block=block_data %}
+        {%- include block_name + ".jinja" with context -%}
+    {% endwith %}
+{% endfor %}
+{# Include coordinates #}
+{%- include "coord.jinja" with context -%}
