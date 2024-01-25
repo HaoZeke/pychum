@@ -1,4 +1,6 @@
 {% set coords = config.coords %} {# Extract relevant variable #}
+
+
 {# Macro for rendering a standard or special atom in xyz format #}
 {% macro render_atom(atom) %}
     {{- 'DA' if atom.is_dummy else atom.symbol -}}
