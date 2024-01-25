@@ -1,45 +1,25 @@
 [build-system]
 build-backend = "hatchling.build"
-requires = [
-  "hatch-vcs",
-  "hatchling",
-]
+requires      = [ "hatch-vcs", "hatchling" ]
 
 [tool.hatch.build.hooks.vcs]
 version-file = "_version.py"
 
 [tool.hatch.build]
-include = [
-  "pychum/**/*.py",
-  "pychum/*.py",
-  "/tests",
-]
+include = [ "pychum/**/*.py", "pychum/*.py", "/tests" ]
 
 [tool.pdm.dev-dependencies]
-lint = [
-    "ruff>=0.1.6",
-]
-test = [
-    "pytest>=7.4.3",
-    "pytest-cov>=4.1.0",
-    "coverage[toml]>=7.3.2",
-]
-nbdoc = [
-    "jupyterlab>=4.0.9",
-    "jupytext>=1.15.2",
-    "ase>=3.22.1",
-]
-release_aid = [
-    "tbump>=6.11.0",
-    "towncrier>=23.11.0",
-]
+lint        = [ "ruff>=0.1.6" ]
+test        = [ "pytest>=7.4.3", "pytest-cov>=4.1.0", "coverage[toml]>=7.3.2" ]
+nbdoc       = [ "jupyterlab>=4.0.9", "jupytext>=1.15.2", "ase>=3.22.1" ]
+release_aid = [ "tbump>=6.11.0", "towncrier>=23.11.0" ]
 
 [tool.pdm.scripts]
-check_ruff = "ruff ."
-ruff_fix = "ruff --fix ."
+check_ruff  = "ruff ."
+ruff_fix    = "ruff --fix ."
 ruff_format = "ruff format ."
-lint = {composite = ["ruff_fix", "ruff_format"]}
-test = "pytest --cov=pychum tests"
+lint        = { composite = [ "ruff_fix", "ruff_format" ] }
+test        = "pytest --cov=pychum tests"
 
 [project]
 name = "pychum"
@@ -59,9 +39,7 @@ classifiers = [
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: Implementation :: CPython",
 ]
-dynamic = [
-  "version",
-]
+dynamic = [ "version" ]
 dependencies = [
   "numpy>=1.26.2",
   "pint>=0.22",
@@ -83,8 +61,8 @@ doc = [
 ]
 [project.urls]
 Documentation = "https://github.com/HaoZeke/pychum#readme"
-Issues = "https://github.com/HaoZeke/pychum/issues"
-Source = "https://github.com/HaoZeke/pychum"
+Issues        = "https://github.com/HaoZeke/pychum/issues"
+Source        = "https://github.com/HaoZeke/pychum"
 
 [tool.hatch.version]
 source = "vcs"
@@ -127,9 +105,15 @@ ignore = [
   # Allow boolean positional values in function calls, like `dict.get(... True)`
   "FBT003",
   # Ignore checks for possible passwords
-  "S105", "S106", "S107",
+  "S105",
+  "S106",
+  "S107",
   # Ignore complexity
-  "C901", "PLR0911", "PLR0912", "PLR0913", "PLR0915",
+  "C901",
+  "PLR0911",
+  "PLR0912",
+  "PLR0913",
+  "PLR0915",
 ]
 unfixable = [
   # Don't touch unused imports
@@ -137,72 +121,66 @@ unfixable = [
 ]
 
 [tool.ruff.isort]
-known-first-party = ["pychum"]
+known-first-party = [ "pychum" ]
 
 [tool.ruff.flake8-tidy-imports]
 ban-relative-imports = "all"
 
 [tool.ruff.per-file-ignores]
 # Tests can use magic values, assertions, and relative imports
-"tests/**/*" = ["PLR2004", "S101", "TID252"]
+"tests/**/*" = [ "PLR2004", "S101", "TID252" ]
 # __init__.py can import without use
-"__init__.py" = ["F401"]
+"__init__.py" = [ "F401" ]
 
 [tool.coverage.run]
-source_pkgs = ["pychum"]
-branch = true
-parallel = true
-omit = [
-  "_version.py",
-]
+source_pkgs = [ "pychum" ]
+branch      = true
+parallel    = true
+omit        = [ "_version.py" ]
 
 [tool.coverage.paths]
-pychum = ["src/pychum", "*/pychum/src/pychum"]
-tests = ["tests"]
+pychum = [ "src/pychum", "*/pychum/src/pychum" ]
+tests  = [ "tests" ]
 
 [tool.coverage.report]
-exclude_lines = [
-  "no cov",
-  "if __name__ == .__main__.:",
-  "if TYPE_CHECKING:",
-]
+exclude_lines = [ "no cov", "if __name__ == .__main__.:", "if TYPE_CHECKING:" ]
 
 [tool.towncrier]
 start_string = "<!-- towncrier release notes start -->\n"
-underlines = ["", "", ""]
-single_file = true
-filename = "CHANGELOG.md"
-directory = "doc/release/upcoming_changes/"
+underlines   = [ "", "", "" ]
+single_file  = true
+filename     = "CHANGELOG.md"
+directory    = "doc/release/upcoming_changes/"
 issue_format = "[#{issue}](https://github.com/HaoZeke/pychum/issues/{issue})"
 title_format = "## [{version}](https://github.com/HaoZeke/pychum/tree/{version}) - {project_date}"
-all_bullets = false
+all_bullets  = false
 
 [[tool.towncrier.type]]
-directory = "removed"
-name = "Removed"
+directory   = "removed"
+name        = "Removed"
 showcontent = true
 
 [[tool.towncrier.type]]
-directory = "deprecated"
-name = "Deprecated"
+directory   = "deprecated"
+name        = "Deprecated"
 showcontent = true
 
 [[tool.towncrier.type]]
-directory = "added"
-name = "Added"
+directory   = "added"
+name        = "Added"
 showcontent = true
 
 [[tool.towncrier.type]]
-directory = "changed"
-name = "Changed"
+directory   = "changed"
+name        = "Changed"
 showcontent = true
 
 [[tool.towncrier.type]]
-directory = "fixed"
-name = "Fixed"
+directory   = "fixed"
+name        = "Fixed"
 showcontent = true
 
 [[tool.towncrier.type]]
-directory = "misc"
-name = "Miscellaneous"
+directory   = "misc"
+name        = "Miscellaneous"
 showcontent = true
