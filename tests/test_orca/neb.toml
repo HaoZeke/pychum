@@ -18,15 +18,30 @@ filedat = "h2_base.xyz"
 [orca.neb]
 end_xyz = "prod.xyz"
 nimgs = 8
-interpolation = "LINEAR"
 convtype = "CIONLY"
-tangent = "IMPROVED"
 printlevel = 4
 neb_ts = false
 quatern = "ALWAYS"
 remove_extern_force = true
 fix_center = true
+check_scf_conv = true
+preopt = false
+nsteps_foundintermediate = 30
+abortif_foundintermediate = false
+npts_interpol = 10
+interpolation = "LINEAR"
+tangent = "IMPROVED"
 # TODO ci
+
+# These blocks are special and are only added to the output file if present
+# TODO(rg): Test these well
+# [orca.neb.restart]
+# gbw_basename = "AA"
+# allxyz = ""
+#
+# [orca.neb.tsguess]
+# xyz_struct = "TSGuess.xyz"
+# ts_img = -1
 
 [orca.neb.spring]
 spring_kind = "IMAGE"

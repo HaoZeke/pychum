@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
 from typing import List, Optional, Dict
+from pathlib import Path
 from abc import ABC, abstractmethod
 from enum import Enum
 
@@ -201,23 +202,33 @@ class SpringSettings:
 
 
 @dataclass
+class RestartSettings:
+    gbw_basename: str = None
+    allxyz: str = None
+
+    def __post_init__(self):
+        if self.gbw_basename and self.allxyz:
+            raise ValueError("Only one of gbw_basename or allxyz should be provided.")
+
+
+@dataclass
 class NebBlock(OrcaBlock):
     end_xyz: str
     nimgs: int
     convtype: str = "CIONLY"
-    tangent: str = "IMPROVED"
     printlevel: int = 4
     neb_ts: bool = False
     quatern: str = "ALWAYS"
-    interpolation: str = "IDPP"
     climbingimage: bool = True
-    restart_opt_on_reparam: bool = False
-    energy_weighted: bool = True
-    perpspring: str = "NO"
-    maxiter: int = 500
     remove_extern_force: bool = True
-    local: bool = False
     fix_center: bool = True
+    check_scf_conv: bool = True
+    preopt: bool = False
+    nsteps_foundintermediate: int = 30
+    abortif_foundintermediate: bool = False
+    npts_interpol: int = 10
+    interpolation: str = "IDPP"
+    tangent: str = "IMPROVED"
 
     lbfgs_settings: LBFGSSettings = field(default_factory=LBFGSSettings)
     fire_settings: FIRESettings = field(default_factory=FIRESettings)
@@ -228,10 +239,13 @@ class NebBlock(OrcaBlock):
     convtol_settings: ConvTolSettings = field(default_factory=ConvTolSettings)
     free_end_settings: FreeEndSettings = field(default_factory=FreeEndSettings)
     spring_settings: SpringSettings = field(default_factory=SpringSettings)
+    restart_settings: RestartSettings = field(default_factory=RestartSettings)
 
     def __post_init__(self):
         valid_convtypes = {"all", "cionly"}
         valid_quaterns = {"no", "startonly", "always"}
+        valid_tangents = {"improved", "original"}
+        valid_interpolations = {"IDPP", "LINEAR", "XTB1TS", "XTB1", "XTB2TS", "XTB2"}
         if self.convtype.lower() not in valid_convtypes:
             raise ValueError(
                 f"Convergence type must be one of {valid_convtypes}, got '{self.convtype}'"
@@ -239,6 +253,14 @@ class NebBlock(OrcaBlock):
         if self.quatern.lower() not in valid_quaterns:
             raise ValueError(
                 f"quatern must be one of {valid_quaterns}, got '{self.quatern}'"
+            )
+        if self.tangent.lower() not in valid_tangents:
+            raise ValueError(
+                f"tangent must be one of {valid_tangents}, got '{self.tangent}'"
+            )
+        if self.interpolation.upper() not in valid_interpolations:
+            raise ValueError(
+                f"interpolation must be one of {valid_interpolations}, got '{self.interpolation}'"
             )
 
     def block_type(self) -> BlockType:

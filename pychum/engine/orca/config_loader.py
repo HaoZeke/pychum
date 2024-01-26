@@ -52,6 +52,7 @@ class ConfigLoader:
         if "orca" in self.data and "neb" in self.data["orca"]:
             neb_data = self.data["orca"]["neb"]
             neb_block_args = {}
+            # Unconditionally added, via defaults if not in TOML
             if "optim" in neb_data:
                 neb_block_args["optim_settings"] = OptimSettings(**neb_data.pop("optim"))
             if "lbfgs" in neb_data:
@@ -70,6 +71,13 @@ class ConfigLoader:
                 neb_block_args["free_end_settings"] = FreeEndSettings(**neb_data.pop("free_end"))
             if "spring" in neb_data:
                 neb_block_args["spring_settings"] = SpringSettings(**neb_data.pop("spring"))
+            # Not added if not present in the TOML
+            restart_settings = None
+            if "restart" in neb_data:
+                neb_block_args["restart_settings"] = RestartSettings(**neb_data.pop("restart"))
+            tsguess_settings = None
+            # if "tsguess" in neb_data:
+            #     tsguess_settings = TSGuessSettings(**neb_data.pop("tsguess"))
             neb_block_args = {**neb_data, **neb_block_args}
 
             blocks["neb"] = NebBlock(**neb_block_args)
