@@ -66,6 +66,8 @@ class ConfigLoader:
                 neb_block_args["reparam_settings"] = ReparamSettings(**neb_data.pop("reparam"))
             if "convtol" in neb_data:
                 neb_block_args["convtol_settings"] = ConvTolSettings(**neb_data.pop("convtol"))
+            if "free_end" in neb_data:
+                neb_block_args["free_end_settings"] = FreeEndSettings(**neb_data.pop("free_end"))
             neb_block_args = {**neb_data, **neb_block_args}
 
             blocks["neb"] = NebBlock(**neb_block_args)

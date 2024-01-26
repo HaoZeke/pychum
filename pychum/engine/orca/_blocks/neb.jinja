@@ -5,15 +5,11 @@
 {# TODO(rg): There are more kinds of product specification, e.g. pdb #}
    neb_end_xyzfile  "{{ neb.end_xyz }}"
     nimages  {{ neb.nimgs }}
-    free_end_kappa  {{ neb.free_end_kappa }}
-    free_end  {{ neb.free_end | lower }}
     springtype  {{ neb.springtype }}
     springconst  {{ neb.springconst }}
-    free_end_type  {{ neb.free_end_type }}
     reparam  {{ neb.reparam }}
     tol_turn_on_ci  {{ neb.tol_turn_on_ci }}
     tol_rmsfp_i  {{ neb.tol_rmsfp_i }}
-    free_end_ec  {{ neb.free_end_ec }}
     springconst2  {{ neb.springconst2 }}
     convtype  {{ neb.convtype }}
     reparam_type  {{ neb.reparam_type }}
@@ -27,13 +23,22 @@
     interpolation  {{ neb.interpolation }}
     climbingimage  {{ neb.climbingimage | lower }}
     restart_opt_on_reparam  {{ neb.restart_opt_on_reparam | lower }}
-    free_end_ec_end  {{ neb.free_end_ec_end }}
     tol_maxfp_i  {{ neb.tol_maxfp_i }}
     energy_weighted  {{ neb.energy_weighted | lower }}
     perpspring  {{ neb.perpspring }}
     tol_rmsf_ci  {{ neb.tol_rmsf_ci }}
     remove_extern_force  {{ neb.remove_extern_force | lower }}
     fix_center  {{ neb.fix_center | lower }}
+
+
+{% if neb.free_end_settings %}
+    {# Free end sub-block #}
+    free_end {{ neb.free_end_settings.use }}
+    free_end_type  {{ neb.free_end_settings.opt_type }}
+    free_end_ec {{ neb.free_end_settings.ec }}
+    free_end_ec_end {{ neb.free_end_settings.ec_end }}
+    free_end_kappa {{ neb.free_end_settings.kappa }}
+{% endif %}
 
 
 {% if neb.convtol_settings %}

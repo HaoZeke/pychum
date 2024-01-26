@@ -153,6 +153,22 @@ class OptimSettings:
 
 
 @dataclass
+class FreeEndSettings:
+    use: bool = False
+    opt_type: str = "PERP"
+    ec: float = 0.0
+    ec_end: float = 0.0
+    kappa: float = 1.0
+
+    def __post_init__(self):
+        valid_opt_types = {"PERP", "CONTOUR", "FULL"}
+        if self.opt_type.upper() not in valid_opt_types:
+            raise ValueError(
+                f"opt_type must be one of {valid_opt_types}, got '{self.opt_type}'"
+            )
+
+
+@dataclass
 class ZoomSettings:
     tol_turn_on: float = 0.0
     offset: int = 2
@@ -166,13 +182,9 @@ class ZoomSettings:
 class NebBlock(OrcaBlock):
     end_xyz: str
     nimgs: int
-    free_end_kappa: float = 1.0
-    free_end: bool = False
     springtype: str = "IMAGE"
     springconst: float = 0.01
-    free_end_type: str = "PERP"
     reparam: int = 0
-    free_end_ec: float = 0.0
     springconst2: float = 0.1
     convtype: str = "CIONLY"
     tangent: str = "IMPROVED"
@@ -182,7 +194,6 @@ class NebBlock(OrcaBlock):
     interpolation: str = "IDPP"
     climbingimage: bool = True
     restart_opt_on_reparam: bool = False
-    free_end_ec_end: float = 0.0
     energy_weighted: bool = True
     perpspring: str = "NO"
     maxiter: int = 500
@@ -197,6 +208,7 @@ class NebBlock(OrcaBlock):
     zoom_settings: ZoomSettings = field(default_factory=ZoomSettings)
     optim_settings: OptimSettings = field(default_factory=OptimSettings)
     convtol_settings: ConvTolSettings = field(default_factory=ConvTolSettings)
+    free_end_settings: FreeEndSettings = field(default_factory=FreeEndSettings)
 
     def __post_init__(self):
         valid_convtypes = {"all", "cionly"}
