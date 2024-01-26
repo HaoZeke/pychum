@@ -179,6 +179,28 @@ class ZoomSettings:
 
 
 @dataclass
+class SpringSettings:
+    spring_kind: str = "image"
+    const1: float = 0.01
+    const2: float = 0.1
+    energy_weighted: bool = True
+    perpspring: str = "no"
+    llt_cos: bool = True
+
+    def __post_init__(self):
+        valid_springkinds = {"image", "dof", "ideal"}
+        valid_perpsprings = {"no", "cos", "tan", "cosTan", "DNEB"}
+        if self.spring_kind.lower() not in valid_springkinds:
+            raise ValueError(
+                f"spring_kind must be one of {valid_springkinds}, got '{self.spring_kind}'"
+            )
+        if self.perpspring.lower() not in valid_perpsprings:
+            raise ValueError(
+                f"perpstring must be one of {valid_perpsprings}, got '{self.perpspring}'"
+            )
+
+
+@dataclass
 class NebBlock(OrcaBlock):
     end_xyz: str
     nimgs: int
@@ -209,12 +231,18 @@ class NebBlock(OrcaBlock):
     optim_settings: OptimSettings = field(default_factory=OptimSettings)
     convtol_settings: ConvTolSettings = field(default_factory=ConvTolSettings)
     free_end_settings: FreeEndSettings = field(default_factory=FreeEndSettings)
+    spring_settings: SpringSettings = field(default_factory=SpringSettings)
 
     def __post_init__(self):
         valid_convtypes = {"all", "cionly"}
+        valid_quaterns = {"no", "startonly", "always"}
         if self.convtype.lower() not in valid_convtypes:
             raise ValueError(
                 f"Convergence type must be one of {valid_convtypes}, got '{self.convtype}'"
+            )
+        if self.quatern.lower() not in valid_quaterns:
+            raise ValueError(
+                f"quatern must be one of {valid_quaterns}, got '{self.quatern}'"
             )
 
     def block_type(self) -> BlockType:

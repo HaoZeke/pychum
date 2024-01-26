@@ -5,12 +5,9 @@
 {# TODO(rg): There are more kinds of product specification, e.g. pdb #}
    neb_end_xyzfile  "{{ neb.end_xyz }}"
     nimages  {{ neb.nimgs }}
-    springtype  {{ neb.springtype }}
-    springconst  {{ neb.springconst }}
     reparam  {{ neb.reparam }}
     tol_turn_on_ci  {{ neb.tol_turn_on_ci }}
     tol_rmsfp_i  {{ neb.tol_rmsfp_i }}
-    springconst2  {{ neb.springconst2 }}
     convtype  {{ neb.convtype }}
     reparam_type  {{ neb.reparam_type }}
     tol_scale  {{ neb.tol_scale }}
@@ -25,10 +22,20 @@
     restart_opt_on_reparam  {{ neb.restart_opt_on_reparam | lower }}
     tol_maxfp_i  {{ neb.tol_maxfp_i }}
     energy_weighted  {{ neb.energy_weighted | lower }}
-    perpspring  {{ neb.perpspring }}
     tol_rmsf_ci  {{ neb.tol_rmsf_ci }}
     remove_extern_force  {{ neb.remove_extern_force | lower }}
     fix_center  {{ neb.fix_center | lower }}
+
+
+{% if neb.spring_settings %}
+    {# Spring sub-block #}
+    springtype {{ neb.spring_settings.spring_kind }}
+    springconst  {{ neb.spring_settings.const1 }}
+    springconst2  {{ neb.spring_settings.const2 }}
+    energy_weighted {{ neb.spring_settings.energy_weighted }}
+    perpspring {{ neb.spring_settings.perpspring }}
+    llt_cos {{ neb.spring_settings.llt_cos }}
+{% endif %}
 
 
 {% if neb.free_end_settings %}
