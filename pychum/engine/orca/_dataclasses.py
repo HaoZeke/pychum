@@ -212,16 +212,32 @@ class RestartSettings:
 
 
 @dataclass
+class TSGuessSettings:
+    xyz_struct: str = None
+    pdb_struct: str = None
+    ts_img: int = -1
+
+    def __post_init__(self):
+        if self.xyz_struct and self.pdb_struct:
+            raise ValueError("Only one of xyz_struct or pdb_struct should be provided.")
+
+
+@dataclass
+class FixCenterSettings:
+    active: bool = True
+    remove_extern_force: bool = True
+
+
+@dataclass
 class NebBlock(OrcaBlock):
     end_xyz: str
     nimgs: int
     convtype: str = "CIONLY"
     printlevel: int = 4
     neb_ts: bool = False
+    neb_ci: bool = False
     quatern: str = "ALWAYS"
     climbingimage: bool = True
-    remove_extern_force: bool = True
-    fix_center: bool = True
     check_scf_conv: bool = True
     preopt: bool = False
     nsteps_foundintermediate: int = 30
@@ -240,6 +256,8 @@ class NebBlock(OrcaBlock):
     free_end_settings: FreeEndSettings = field(default_factory=FreeEndSettings)
     spring_settings: SpringSettings = field(default_factory=SpringSettings)
     restart_settings: RestartSettings = field(default_factory=RestartSettings)
+    tsguess_settings: TSGuessSettings = field(default_factory=TSGuessSettings)
+    fix_center_settings: FixCenterSettings = field(default_factory=FixCenterSettings)
 
     def __post_init__(self):
         valid_convtypes = {"all", "cionly"}

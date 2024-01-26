@@ -16,14 +16,14 @@ multiplicity = 1
 filedat = "h2_base.xyz"
 
 [orca.neb]
+# TODO(rg): Handle aliases in python
 end_xyz = "prod.xyz"
 nimgs = 8
 convtype = "CIONLY"
 printlevel = 4
 neb_ts = false
+neb_ci = true
 quatern = "ALWAYS"
-remove_extern_force = true
-fix_center = true
 check_scf_conv = true
 preopt = false
 nsteps_foundintermediate = 30
@@ -31,7 +31,6 @@ abortif_foundintermediate = false
 npts_interpol = 10
 interpolation = "LINEAR"
 tangent = "IMPROVED"
-# TODO ci
 
 # These blocks are special and are only added to the output file if present
 # TODO(rg): Test these well
@@ -39,9 +38,10 @@ tangent = "IMPROVED"
 # gbw_basename = "AA"
 # allxyz = ""
 #
-# [orca.neb.tsguess]
+[orca.neb.tsguess]
 # xyz_struct = "TSGuess.xyz"
-# ts_img = -1
+pdb_struct = "TSGUESS.pdb"
+ts_img = -1
 
 [orca.neb.spring]
 spring_kind = "IMAGE"
@@ -51,6 +51,10 @@ energy_weighted = true
 # Spring interactions perpendicular to path
 perpspring = "NO"
 llt_cos = true
+
+[orca.neb.fix_center]
+active = true
+remove_extern_force = true
 
 [orca.neb.convtol]
 units = "Eh/Bohr" # TODO(rg): Make this do something

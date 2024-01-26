@@ -71,13 +71,15 @@ class ConfigLoader:
                 neb_block_args["free_end_settings"] = FreeEndSettings(**neb_data.pop("free_end"))
             if "spring" in neb_data:
                 neb_block_args["spring_settings"] = SpringSettings(**neb_data.pop("spring"))
+            if "fix_center" in neb_data:
+                neb_block_args["fix_center_settings"] = FixCenterSettings(**neb_data.pop("fix_center"))
             # Not added if not present in the TOML
             restart_settings = None
             if "restart" in neb_data:
                 neb_block_args["restart_settings"] = RestartSettings(**neb_data.pop("restart"))
             tsguess_settings = None
-            # if "tsguess" in neb_data:
-            #     tsguess_settings = TSGuessSettings(**neb_data.pop("tsguess"))
+            if "tsguess" in neb_data:
+                neb_block_args["tsguess_settings"] = TSGuessSettings(**neb_data.pop("tsguess"))
             neb_block_args = {**neb_data, **neb_block_args}
 
             blocks["neb"] = NebBlock(**neb_block_args)

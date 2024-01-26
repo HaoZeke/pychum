@@ -8,10 +8,9 @@
     convtype  {{ neb.convtype }}
     printlevel  {{ neb.printlevel }}
     neb_ts  {{ neb.neb_ts | lower }}
+    neb_ci  {{ neb.neb_ci | lower }}
     quatern  {{ neb.quatern }}
     climbingimage  {{ neb.climbingimage | lower }}
-    remove_extern_force  {{ neb.remove_extern_force | lower }}
-    fix_center  {{ neb.fix_center | lower }}
     CheckSCFConv {{ neb.check_scf_conv }}
     {# TODO(rg): Add the pdbfile variants #}
     PreOpt {{ neb.preopt }}
@@ -20,6 +19,25 @@
     npts_interpol {{ neb.npts_interpol }}
     interpolation  {{ neb.interpolation }}
     tangent  {{ neb.tangent }}
+
+
+{% if neb.tsguess_settings %}
+    {# TS Guess sub-block #}
+    {% if neb.tsguess_settings.xyz_struct %}
+    TS "{{ neb.tsguess_settings.xyz_struct }}"
+    {% endif %}
+    {% if neb.tsguess_settings.pdb_struct %}
+    TS_PDBFile "{{ neb.tsguess_settings.pdb_struct }}"
+    {% endif %}
+    NEB_TS_Image {{ neb.tsguess_settings.ts_img }}
+{% endif %}
+
+
+{% if neb.fix_center_settings %}
+    {# Fixed center sub-block #}
+    Fix_center  {{ neb.fix_center_settings.active | lower }}
+    Remove_extern_force  {{ neb.fix_center_settings.remove_extern_force | lower }}
+{% endif %}
 
 
 {% if neb.restart_settings %}
