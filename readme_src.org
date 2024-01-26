@@ -37,10 +37,19 @@ development environment including the notebook server.
 #+begin_src bash
 pixi shell
 pdm sync
-pdm run jupyter lab --ServerApp.allow_remote_access=1 \
+pdm run $SHELL
+jupyter lab --ServerApp.allow_remote_access=1 \
     --ServerApp.open_browser=False --port=8889
 #+end_src
 Then go through the ~nb~ folder notebooks.
+** Adding ORCA blocks
+Changes are to be made in the following files under the ~pychum/engine/orca/~ folder:
+- The relevant ~.jinja~ file in the ~_blocks~ directory
+- The configuration loading mechanism in ~config_loader.py~
+- The ~dataclasses~ folder
+- A sample test ~.toml~ file under ~tests/test_orca~
+While working on this, it may be instructive to use the ~nb~ folder notebooks.
+Also all PRs must include a full test suite for the new blocks.
 ** Documentation
 *** Readme
 The ~readme~ can be constructed via:
