@@ -48,7 +48,7 @@
 {% endif %}
 
 
-{% if neb.reparam %}
+{% if neb.reparam_settings %}
     {# Reparam sub-block #}
     reparam_type  {{ neb.reparam_settings.interp | lower  }}
     reparam {{ neb.reparam_settings.every }}
@@ -56,7 +56,7 @@
 {% endif %}
 
 
-{% if neb.optim %}
+{% if neb.optim_settings %}
     {# Optimizer sub-block #}
     opt_method  {{ neb.optim_settings.method }}
     maxmove  {{ neb.optim_settings.maxmove }}
