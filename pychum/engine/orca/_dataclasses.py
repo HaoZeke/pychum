@@ -204,10 +204,6 @@ class SpringSettings:
 class NebBlock(OrcaBlock):
     end_xyz: str
     nimgs: int
-    springtype: str = "IMAGE"
-    springconst: float = 0.01
-    reparam: int = 0
-    springconst2: float = 0.1
     convtype: str = "CIONLY"
     tangent: str = "IMPROVED"
     printlevel: int = 4
