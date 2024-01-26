@@ -1,0 +1,90 @@
+[engine]
+name = "orca"
+
+[units.distance]
+inp = "angstrom"
+out = "bohr"
+
+[units.energy]
+inp = "electron-volt"
+out = "hartree"
+
+[coords]
+fmt = "xyzfile"  # Options: xyz, int, gzmt, xyzfile, gzmtfile
+charge = 0
+multiplicity = 1
+filedat = "h2_base.xyz"
+
+[orca.neb]
+end_xyz = "prod.xyz"
+nimgs = 8
+interpolation = "LINEAR"
+convtype = "CIONLY"
+tangent = "IMPROVED"
+printlevel = 4
+neb_ts = false
+quatern = "ALWAYS"
+remove_extern_force = true
+fix_center = true
+# TODO ci
+
+[orca.neb.spring]
+spring_kind = "IMAGE"
+const1 = 0.01
+const2 = 0.1
+energy_weighted = true
+# Spring interactions perpendicular to path
+perpspring = "NO"
+llt_cos = true
+
+[orca.neb.convtol]
+units = "Eh/Bohr" # TODO(rg): Make this do something
+maxfp_i = 0.005
+rmsfp_i = 0.003
+maxf_ci = 0.0005
+rmsf_ci = 0.0003
+turn_on_ci = 0.02
+scale = 10
+
+[orca.neb.free_end]
+use = false
+opt_type = "PERP"
+ec = 0.0
+ec_end = 0.0
+kappa = 1.0
+
+[orca.neb.reparam]
+interp = "linear"
+every = 0
+tol = 0.0
+
+[orca.neb.optim]
+method = "LBFGS"
+maxmove = 0.2
+stepsize = 1.0
+maxiter = 500
+local = false
+
+[orca.neb.lbfgs]
+reparam_on_restart = false
+memory = 20
+precondition = true
+dr = 0.002
+restart_on_maxmove = true
+
+[orca.neb.idpp]
+nmax = 3000
+tol_maxf = 0.01
+ksp = 1.0
+alpha = 0.01
+maxmove = 0.05
+debug = false
+quatern = true
+
+[orca.neb.zoom]
+tol_turn_on = 0.0
+offset = 2
+auto = true
+tol_scale = 10
+alpha = 0.5
+printfulltrj = true
