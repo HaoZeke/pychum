@@ -1,0 +1,48 @@
+# !OPT UHF def2-SVP
+# %geom Scan
+#  # B <atmid1> <atmid2> = init, final, npoints
+#  # Angstrom always
+#  B 0 1 = 4, 0.1120114243, 33
+#  end
+# end
+# *xyzfile 0 1 h2_base.xyz
+[engine]
+name = "orca"
+
+[units.distance]
+inp = "angstrom"
+out = "bohr"
+
+[units.energy]
+inp = "electron-volt"
+out = "hartree"
+
+[coords]
+fmt = "xyzfile"  # Options: xyz, int, gzmt, xyzfile, gzmtfile
+charge = 0
+multiplicity = 1
+filedat = "h2_base.xyz"
+# atoms = [
+#     { symbol = "C", x = 0.0, y = 0.0, z = 0.0 },
+#     { symbol = "O", x = 0.0, y = 0.0, z = 1.13 }
+# ]
+
+[[orca.geom.bonds]]
+atoms = [0, 1]
+range = [0.40, 2.00]
+points = 17
+
+# [[orca.geom.bonds]]
+# atoms = [0, 2]
+# range = [0.30, 1.00]
+# points = 13
+
+[[orca.geom.dihedrals]]
+atoms = [0, 1]
+range = [60, 80]
+points = 39
+
+[[orca.geom.angles]]
+atoms = [0, 1, 2]
+range = [30, 80]
+points = 62
