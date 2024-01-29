@@ -176,8 +176,15 @@ class ZoomSettings:
     auto: bool = True
     tol_scale: int = 10
     alpha: float = 0.5
+    interpolation: str = "linear"
     printfulltrj: bool = True
 
+    def __post_init__(self):
+        valid_interpolations = {"linear", "cubic"}
+        if self.interpolation.lower() not in valid_interpolations:
+            raise ValueError(
+                f"interpolation must be one of {valid_interpolations}, got '{self.interpolation}'"
+            )
 
 @dataclass
 class SpringSettings:
