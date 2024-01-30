@@ -30,6 +30,11 @@ programs.
 ** Rationale
 I needed to run a bunch of systems. ~jobflow~ / Fireworks / AiiDA were ideal,
 until I realized only VASP is really well supported by them.
+* Usage
+The simplest usage is via the CLI:
+#+begin_src bash
+python -m pychum.cli
+#+end_src
 * Development
 Before writing tests and incorporating the functions into the CLI it is helpful
 to often visualize the intermediate steps. For this we can setup a complete
