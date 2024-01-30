@@ -8,7 +8,7 @@
     convtype  {{ neb.convtype }}
     printlevel  {{ neb.printlevel }}
     neb_ts  {{ neb.neb_ts | lower }}
-    neb_ci  {{ neb.neb_ci | lower }}
+    ci  {{ neb.neb_ci | lower }}
     quatern  {{ neb.quatern }}
     climbingimage  {{ neb.climbingimage | lower }}
     CheckSCFConv {{ neb.check_scf_conv }}
@@ -103,7 +103,7 @@
 
 {% if neb.lbfgs_settings %}
     {# LBFGS sub-block #}
-    lbfgs_mem  {{ neb.lbfgs_settings.memory }}
+    lbfgs_memory  {{ neb.lbfgs_settings.memory }}
     lbfgs_dr  {{ neb.lbfgs_settings.dr }}
     lbfgs_restart_on_maxmove  {{ neb.lbfgs_settings.restart_on_maxmove | lower }}
     lbfgs_reparam_on_restart  {{ neb.lbfgs_settings.reparam_on_restart | lower }}
