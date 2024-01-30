@@ -1,0 +1,27 @@
+[engine]
+name = "orca"
+
+[units.distance]
+inp = "angstrom"
+out = "bohr"
+
+[units.energy]
+inp = "electron-volt"
+out = "hartree"
+
+[orca]
+kwlines = """
+!NEB
+!UHF NOSOSCF ForceConv
+"""
+
+[orca.extra_blocks]
+scf = """
+maxiter 300
+"""
+
+[coords]
+fmt = "xyzfile"  # Options: xyz, int, gzmt, xyzfile, gzmtfile
+charge = 0
+multiplicity = 1
+filedat = "h2_base.xyz"
