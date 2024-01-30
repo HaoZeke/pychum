@@ -3,8 +3,11 @@ name = "orca"
 
 [orca]
 kwlines = """
-!NEB
-!UHF NOSOSCF
+!NEB-CI
+# !B3LYP D3BJ RIJCOSX def2-SVP def2/J SOSCF KDIIS
+! BLYP 3-21G
+!UHF NOSOSCF DefGrid2
+!PAL8
 """
 
 [orca.extra_blocks]
@@ -24,11 +27,11 @@ out = "hartree"
 fmt = "xyzfile"  # Options: xyz, int, gzmt, xyzfile, gzmtfile
 charge = 0
 multiplicity = 1
-filedat = "h2_base.xyz"
+filedat = "system121-react.xyz"
 
 [orca.neb]
 # TODO(rg): Handle aliases in python
-end_xyz = "prod.xyz"
+end_xyz = "system121-prod.xyz"
 nimgs = 8
 convtype = "CIONLY"
 printlevel = 4
