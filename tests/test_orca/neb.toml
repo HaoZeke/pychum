@@ -44,10 +44,10 @@ tangent = "IMPROVED"
 # gbw_basename = "AA"
 # allxyz = ""
 #
-[orca.neb.tsguess]
-# xyz_struct = "TSGuess.xyz"
-pdb_struct = "TSGUESS.pdb"
-ts_img = -1
+# [orca.neb.tsguess]
+# # xyz_struct = "TSGuess.xyz"
+# pdb_struct = "TSGUESS.pdb"
+# ts_img = -1
 
 [orca.neb.spring]
 spring_kind = "IMAGE"
