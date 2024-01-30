@@ -297,6 +297,7 @@ class OrcaConfig:
     kwlines: str
     coords: Coords
     blocks: Dict[BlockType, OrcaBlock] = field(default_factory=dict)
+    extra_blocks: Dict[str, str] = field(default_factory=dict)
 
     def add_block(self, block: OrcaBlock):
         self.blocks[block.block_type()] = block

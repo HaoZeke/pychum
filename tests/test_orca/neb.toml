@@ -7,6 +7,11 @@ kwlines = """
 !UHF NOSOSCF ForceConv
 """
 
+[orca.extra_blocks]
+scf = """
+maxiter 300
+"""
+
 [units.distance]
 inp = "angstrom"
 out = "bohr"

@@ -33,6 +33,8 @@ class ConfigLoader:
             atoms=atoms,
         )
 
+        # Load extra blocks if they exist
+        extra_blocks = self.data.get("orca", {}).get("extra_blocks", {})
         # Dictionary to store loaded blocks
         blocks = {}
 
@@ -85,7 +87,7 @@ class ConfigLoader:
 
             blocks["neb"] = NebBlock(**neb_block_args)
 
-        return OrcaConfig(kwlines=kwlines, coords=coords, blocks=blocks)
+        return OrcaConfig(kwlines=kwlines, coords=coords, blocks=blocks, extra_blocks=extra_blocks)
 
         # # Create the final OrcaConfig instance
         # if engine == 'orca':

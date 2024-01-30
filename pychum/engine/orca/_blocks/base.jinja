@@ -2,6 +2,16 @@
 {% block kwlines -%}
     {{ config.kwlines }}
 {% endblock kwlines -%}
+
+{# Include extra blocks #}
+{% for block_name, block_content in config.extra_blocks.items() %}
+
+
+%{{ block_name }}
+{{ block_content }}
+end
+{% endfor %}
+
 {# Dynamically include block templates #}
 {% for block_name, block_data in config.blocks.items() %}
     {% with block=block_data %}
