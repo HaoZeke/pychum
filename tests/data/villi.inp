@@ -1,0 +1,65 @@
+!B3LYP D3BJ RIJCOSX def2-SVP def2/J Grid4 GridX4 SOSCF KDIIS
+!NEB-CI
+!PAL8
+
+%scf
+maxiter 300
+end
+
+%neb
+NEB_END_XYZFILE = "prod.xyz"
+free_end_kappa = 1.0
+free_end = False
+idpp_tol_maxf = 0.01
+nimages = 8
+springtype = IMAGE
+idpp_maxmove = 0.05
+springconst = 0.01
+lbfgs_dr = 0.002
+free_end_type = PERP
+reparam = 0
+tol_turn_on_ci = 0.02
+tol_rmsfp_i = 0.003
+free_end_ec = 0.0
+springconst2 = 0.1
+tol_turn_on_zoom = 0.0
+idpp_alpha = 0.01
+convtype = CIONLY
+zoom_offset = 2
+stepsize = 1.0
+reparam_type = LINEAR
+tol_scale = 10
+tangent = IMPROVED
+printlevel = 4
+zoom_interpolation = LINEAR
+idpp_nmax = 3000
+idpp_quatern = True
+tol_maxf_ci = 0.0005
+neb_ts = False
+quatern = ALWAYS
+tol_reparam = 0.0
+zoom_alpha = 0.5
+interpolation = IDPP
+zoom_auto = True
+zoom_printfulltrj = True
+lbfgs_restart_on_maxmove = True
+climbingimage = True
+restart_opt_on_reparam = False
+opt_method = LBFGS
+maxmove = 0.2
+free_end_ec_end = 0.0
+lbfgs_reparam_on_restart = False
+tol_maxfp_i = 0.005
+energy_weighted = True
+perpspring = NO
+maxiter = 500
+tol_rmsf_ci = 0.0003
+remove_extern_force = True
+local = False
+lbfgs_memory = 20
+lbfgs_precondition = True
+idpp_ksp = 1.0
+fix_center = True
+idpp_debug = False
+end
+*xyzfile 0 1 react.xyz
