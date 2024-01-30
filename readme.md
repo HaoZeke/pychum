@@ -1,18 +1,20 @@
 
 # Table of Contents
 
--   [About](#org7c77871)
-    -   [Features](#org37bf279)
-        -   [Supported Engines](#orge25642d)
-    -   [Rationale](#orgb4f705c)
--   [Development](#orgaabb253)
-    -   [Documentation](#orge72c445)
-        -   [Readme](#org23ffec5)
--   [License](#org94f529f)
+-   [About](#org476f174)
+    -   [Features](#org0168ce7)
+        -   [Supported Engines](#org24b6ad5)
+    -   [Rationale](#org49cd152)
+-   [Usage](#org4a4d3d9)
+-   [Development](#org7fadd95)
+    -   [Adding ORCA blocks](#org70cb903)
+    -   [Documentation](#org86de685)
+        -   [Readme](#org9468810)
+-   [License](#orgc959d45)
 
 
 
-<a id="org7c77871"></a>
+<a id="org476f174"></a>
 
 # About
 
@@ -33,7 +35,7 @@ uniform visualizations for the outputs of various computational chemistry
 programs.
 
 
-<a id="org37bf279"></a>
+<a id="org0168ce7"></a>
 
 ## Features
 
@@ -43,7 +45,7 @@ programs.
     -   Via `pint`
 
 
-<a id="orge25642d"></a>
+<a id="org24b6ad5"></a>
 
 ### Supported Engines
 
@@ -55,7 +57,7 @@ programs.
     -   EON
 
 
-<a id="orgb4f705c"></a>
+<a id="org49cd152"></a>
 
 ## Rationale
 
@@ -63,7 +65,16 @@ I needed to run a bunch of systems. `jobflow` / Fireworks / AiiDA were ideal,
 until I realized only VASP is really well supported by them.
 
 
-<a id="orgaabb253"></a>
+<a id="org4a4d3d9"></a>
+
+# Usage
+
+The simplest usage is via the CLI:
+
+    python -m pychum.cli
+
+
+<a id="org7fadd95"></a>
 
 # Development
 
@@ -73,18 +84,34 @@ development environment including the notebook server.
 
     pixi shell
     pdm sync
-    pdm run jupyter lab --ServerApp.allow_remote_access=1 \
+    pdm run $SHELL
+    jupyter lab --ServerApp.allow_remote_access=1 \
         --ServerApp.open_browser=False --port=8889
 
 Then go through the `nb` folder notebooks.
 
 
-<a id="orge72c445"></a>
+<a id="org70cb903"></a>
+
+## Adding ORCA blocks
+
+Changes are to be made in the following files under the `pychum/engine/orca/` folder:
+
+-   The relevant `.jinja` file in the `_blocks` directory
+-   The configuration loading mechanism in `config_loader.py`
+-   The `dataclasses` folder
+-   A sample test `.toml` file under `tests/test_orca`
+
+While working on this, it may be instructive to use the `nb` folder notebooks.
+Also all PRs must include a full test suite for the new blocks.
+
+
+<a id="org86de685"></a>
 
 ## Documentation
 
 
-<a id="org23ffec5"></a>
+<a id="org9468810"></a>
 
 ### Readme
 
@@ -93,7 +120,7 @@ The `readme` can be constructed via:
     ./scripts/org_to_md.sh readme_src.org readme.md
 
 
-<a id="org94f529f"></a>
+<a id="orgc959d45"></a>
 
 # License
 
