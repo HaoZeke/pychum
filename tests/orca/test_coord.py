@@ -2,9 +2,11 @@ import textwrap
 from pychum.engine.orca._dataclasses import Atom, OrcaConfig, Coords
 from pychum.engine.orca._renderer import OrcaInputRenderer
 
+default_kwline = "!ENGRAD UHF NOSOSCF def2-SVP"
+
 def render_config(atoms, coord_type='xyz', charge=0, multiplicity=1):
     coords = Coords(charge=charge, multiplicity=multiplicity, atoms=atoms, fmt = coord_type)
-    config = OrcaConfig(coords=coords)
+    config = OrcaConfig(coords=coords, kwlines=default_kwline)
     renderer = OrcaInputRenderer(config)
     return renderer.render('coord.jinja')
 
@@ -113,7 +115,7 @@ def test_gaussian_z_matrix():
 
 def test_standard_xyzfile():
     coords = Coords(charge=0, multiplicity=1, fmt="xyzfile", filedat="h2.xyz")
-    config = OrcaConfig(coords=coords)
+    config = OrcaConfig(coords=coords, kwlines=default_kwline)
     renderer = OrcaInputRenderer(config)
     result = renderer.render('coord.jinja')
     expected = "* xyzfile 0 1 h2.xyz"
@@ -121,7 +123,7 @@ def test_standard_xyzfile():
 
 def test_standard_gzmtfile():
     coords = Coords(charge=0, multiplicity=1, fmt="gzmtfile", filedat="h2.gzmt")
-    config = OrcaConfig(coords=coords)
+    config = OrcaConfig(coords=coords, kwlines=default_kwline)
     renderer = OrcaInputRenderer(config)
     result = renderer.render('coord.jinja')
     expected = "* gzmtfile 0 1 h2.gzmt"
