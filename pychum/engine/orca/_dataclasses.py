@@ -293,16 +293,9 @@ class NebBlock(OrcaBlock):
 
 
 @dataclass
-class KWLine:
-    runtype: str = "!ENERGY"
-    safeopts: str = "!UHF NOSOSCF ForceConv"
-    extra: str = None
-
-
-@dataclass
 class OrcaConfig:
+    kwlines: str
     coords: Coords
-    kwlines: List[KWLine] = field(default_factory=list)
     blocks: Dict[BlockType, OrcaBlock] = field(default_factory=dict)
 
     def add_block(self, block: OrcaBlock):

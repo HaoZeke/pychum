@@ -9,6 +9,12 @@
 [engine]
 name = "orca"
 
+[orca]
+kwlines = """
+!ENERGY
+!UHF NOSOSCF ForceConv
+"""
+
 [units.distance]
 inp = "angstrom"
 out = "bohr"

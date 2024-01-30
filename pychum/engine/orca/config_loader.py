@@ -22,6 +22,7 @@ class ConfigLoader:
             ),
             "energy": UnitConversion(**self.data.get("units", {}).get("energy", {})),
         }
+        kwlines = self.data.get("orca").get("kwlines")
         filedat = self.data.get("coords", {}).get("filedat", None)
         atoms = [Atom(**atom) for atom in self.data.get("coords", {}).get("atoms", [])]
         coords = Coords(
@@ -84,7 +85,7 @@ class ConfigLoader:
 
             blocks["neb"] = NebBlock(**neb_block_args)
 
-        return OrcaConfig(coords=coords, blocks=blocks)
+        return OrcaConfig(kwlines=kwlines, coords=coords, blocks=blocks)
 
         # # Create the final OrcaConfig instance
         # if engine == 'orca':

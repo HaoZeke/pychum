@@ -1,6 +1,6 @@
 {# Keyword lines, "simple input" #}
 {% block kwlines -%}
-    !ENGRAD UHF NOSOSCF def2-SVP
+    {{ config.kwlines }}
 {% endblock kwlines -%}
 {# Dynamically include block templates #}
 {% for block_name, block_data in config.blocks.items() %}
