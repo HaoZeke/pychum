@@ -2,5 +2,4 @@
 #
 # SPDX-License-Identifier: MIT
 
-from pychum import units
-from pychum import engine
+from pychum import engine, units

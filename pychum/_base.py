@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: MIT
 from abc import ABC, abstractmethod
 from pathlib import Path
-import toml
+
 
 class InpGeneratorBase(ABC):
     def __init__(self, filename):

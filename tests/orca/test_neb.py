@@ -1,14 +1,17 @@
 import pytest
-from pychum.engine.orca._dataclasses import NebBlock, IDPPSettings, RestartSettings
+
+from pychum.engine.orca._dataclasses import IDPPSettings, NebBlock, RestartSettings
 from pychum.engine.orca._renderer import OrcaInputRenderer
 
 # TODO(rg): Test this somewhere
 default_kwline = "!NEB-CI\n!ENGRAD UHF NOSOSCF def2-SVP"
+
+
 # Helper function to render the NebBlock
 def render_neb_block(neb_block):
-    config = {'blocks': {'neb': neb_block}}
+    config = {"blocks": {"neb": neb_block}}
     renderer = OrcaInputRenderer(config)
-    return renderer.render('neb.jinja')
+    return renderer.render("neb.jinja")
 
 
 default_expectation = """%neb
@@ -93,61 +96,82 @@ default_expectation = """%neb
     idpp_quatern  true
 end"""
 
+
 def test_default_idpp_settings_render():
     neb_block = NebBlock(end_xyz="prod.xyz", nimgs=8)
     result = render_neb_block(neb_block)
     assert result.strip() == default_expectation.replace("nimages  5", "nimages  8")
 
+
 def test_custom_idpp_settings_render():
-    custom_settings = IDPPSettings(nmax=4000, tol_maxf=0.02, ksp=1.5, alpha=0.02, maxmove=0.1, debug=True, quatern=False)
+    custom_settings = IDPPSettings(
+        nmax=4000,
+        tol_maxf=0.02,
+        ksp=1.5,
+        alpha=0.02,
+        maxmove=0.1,
+        debug=True,
+        quatern=False,
+    )
     neb_block = NebBlock(end_xyz="prod.xyz", nimgs=8, idpp_settings=custom_settings)
     result = render_neb_block(neb_block)
 
-    expected = default_expectation.replace("idpp_nmax  3000", "idpp_nmax  4000") \
-                                  .replace("idpp_tol_maxf  0.01", "idpp_tol_maxf  0.02") \
-                                  .replace("idpp_ksp  1.0", "idpp_ksp  1.5") \
-                                  .replace("idpp_alpha  0.01", "idpp_alpha  0.02") \
-                                  .replace("idpp_maxmove  0.05", "idpp_maxmove  0.1") \
-                                  .replace("idpp_debug  false", "idpp_debug  true") \
-                                  .replace("idpp_quatern  true", "idpp_quatern  false")
+    expected = (
+        default_expectation.replace("idpp_nmax  3000", "idpp_nmax  4000")
+        .replace("idpp_tol_maxf  0.01", "idpp_tol_maxf  0.02")
+        .replace("idpp_ksp  1.0", "idpp_ksp  1.5")
+        .replace("idpp_alpha  0.01", "idpp_alpha  0.02")
+        .replace("idpp_maxmove  0.05", "idpp_maxmove  0.1")
+        .replace("idpp_debug  false", "idpp_debug  true")
+        .replace("idpp_quatern  true", "idpp_quatern  false")
+    )
 
     assert result.strip() == expected
+
 
 def test_restart_settings_render():
     # Test with gbw_basename setting
     restart_settings_gbw = RestartSettings(gbw_basename="restart_file.gbw")
-    neb_block_gbw = NebBlock(end_xyz="prod.xyz", nimgs=8, restart_settings=restart_settings_gbw)
+    neb_block_gbw = NebBlock(
+        end_xyz="prod.xyz", nimgs=8, restart_settings=restart_settings_gbw
+    )
     result_gbw = render_neb_block(neb_block_gbw)
     expected_gbw = default_expectation.replace(
         "\n\n    springtype image",
-        "\n    Restart_GBW_BaseName \"restart_file.gbw\"\n\n    springtype image"
+        '\n    Restart_GBW_BaseName "restart_file.gbw"\n\n    springtype image',
     )
     assert result_gbw.strip() == expected_gbw.strip()
 
     # Test with allxyz setting
     restart_settings_xyz = RestartSettings(allxyz="restart_file.xyz")
-    neb_block_xyz = NebBlock(end_xyz="prod.xyz", nimgs=8, restart_settings=restart_settings_xyz)
+    neb_block_xyz = NebBlock(
+        end_xyz="prod.xyz", nimgs=8, restart_settings=restart_settings_xyz
+    )
     result_xyz = render_neb_block(neb_block_xyz)
     expected_xyz = default_expectation.replace(
         "\n\n    springtype image",
-        "\n    Restart_ALLXYZFile \"restart_file.xyz\"\n\n    springtype image"
+        '\n    Restart_ALLXYZFile "restart_file.xyz"\n\n    springtype image',
     )
     assert result_xyz.strip() == expected_xyz.strip()
+
 
 def test_restart_settings_both_gbw_and_allxyz():
     with pytest.raises(ValueError) as excinfo:
         RestartSettings(gbw_basename="restart_file.gbw", allxyz="restart_file.xyz")
     assert "Only one of gbw_basename or allxyz should be provided" in str(excinfo.value)
 
+
 def test_restart_settings_neither_gbw_nor_allxyz():
     restart_settings = RestartSettings()
     assert restart_settings.gbw_basename is None
     assert restart_settings.allxyz is None
 
+
 def test_restart_settings_only_gbw():
     restart_settings = RestartSettings(gbw_basename="restart_file.gbw")
     assert restart_settings.gbw_basename == "restart_file.gbw"
     assert restart_settings.allxyz is None
+
 
 def test_restart_settings_only_allxyz():
     restart_settings = RestartSettings(allxyz="restart_file.xyz")

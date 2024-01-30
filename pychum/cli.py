@@ -1,5 +1,7 @@
-import click
 from pathlib import Path
+
+import click
+
 from pychum.engine.orca._renderer import OrcaInputRenderer
 from pychum.engine.orca.config_loader import ConfigLoader
 
@@ -12,7 +14,7 @@ from pychum.engine.orca.config_loader import ConfigLoader
     default=None,
     type=click.Path(),
     is_flag=False,
-    flag_value = "orca.inp",
+    flag_value="orca.inp",
     help='Output file name (default is "orca.inp").',
 )
 def render_orca_input(toml_path, output):

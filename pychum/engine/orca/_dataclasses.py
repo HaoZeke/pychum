@@ -1,13 +1,10 @@
-from dataclasses import dataclass, field
-from typing import List, Optional, Dict
-from pathlib import Path
 from abc import ABC, abstractmethod
+from dataclasses import dataclass, field
 from enum import Enum
 
 
 class BlockType(Enum):
     NEB = "neb"
-    SCF = "scf"
     GEOM = "geom"
 
 
@@ -32,19 +29,17 @@ class Atom:
     is_ghost: bool = False
     embedding_potential: bool = False
     is_frozen: bool = False  # Not applied to anything but cartesian
-    isotope: Optional[float] = None
-    nuclear_charge: Optional[float] = None
-    fragment_number: Optional[int] = None
+    isotope: float | None = None
+    nuclear_charge: float | None = None
+    fragment_number: int | None = None
     is_dummy: bool = False
-    point_charge: Optional[float] = None
-    bond_atom: Optional[int] = None  # Index of bonded atom (for internal coordinates)
-    bond_length: Optional[float] = None  # Bond length (for internal coordinates)
-    angle_atom: Optional[int] = None  # Index of angle atom (for internal coordinates)
-    angle: Optional[float] = None  # Bond angle (for internal coordinates)
-    dihedral_atom: Optional[
-        int
-    ] = None  # Index of dihedral atom (for internal coordinates)
-    dihedral: Optional[float] = None  # Dihedral angle (for internal coordinates)
+    point_charge: float | None = None
+    bond_atom: int | None = None  # Index of bonded atom (for internal coordinates)
+    bond_length: float | None = None  # Bond length (for internal coordinates)
+    angle_atom: int | None = None  # Index of angle atom (for internal coordinates)
+    angle: float | None = None  # Bond angle (for internal coordinates)
+    dihedral_atom: int | None = None  # Index of dihedral atom (for internal coordinates)
+    dihedral: float | None = None  # Dihedral angle (for internal coordinates)
     is_frozen_x: bool = False  # Cartesian only
     is_frozen_y: bool = False  # Cartesian only
     is_frozen_z: bool = False  # Cartesian only
@@ -53,7 +48,8 @@ class Atom:
         if self.point_charge is not None:
             self.symbol = "Q"
         elif self.symbol is None:
-            raise ValueError("Atom symbol is required unless it's a point charge.")
+            msg = "Atom symbol is required unless it's a point charge."
+            raise ValueError(msg)
 
 
 @dataclass
@@ -62,21 +58,21 @@ class Coords:
     multiplicity: int
     fmt: str
     filedat: str = ""
-    atoms: List[Atom] = field(default_factory=list)
+    atoms: list[Atom] = field(default_factory=list)
 
 
 @dataclass
 class GeomScan:
-    atoms: List[int]
-    range: List[float]
+    atoms: list[int]
+    range: list[float]
     points: int
 
 
 @dataclass
 class GeomBlock(OrcaBlock):
-    bonds: List[GeomScan] = field(default_factory=list)
-    dihedrals: List[GeomScan] = field(default_factory=list)
-    angles: List[GeomScan] = field(default_factory=list)
+    bonds: list[GeomScan] = field(default_factory=list)
+    dihedrals: list[GeomScan] = field(default_factory=list)
+    angles: list[GeomScan] = field(default_factory=list)
 
     def block_type(self) -> BlockType:
         return BlockType.GEOM
@@ -110,9 +106,8 @@ class ReparamSettings:
     def __post_init__(self):
         valid_interps = {"linear", "cubic"}
         if self.interp.lower() not in valid_interps:
-            raise ValueError(
-                f"Interp must be one of {valid_interps}, got '{self.interp}'"
-            )
+            msg = f"Interp must be one of {valid_interps}, got '{self.interp}'"
+            raise ValueError(msg)
 
 
 @dataclass
@@ -148,9 +143,8 @@ class OptimSettings:
     def __post_init__(self):
         valid_methods = {"LBFGS", "VPO", "FIRE"}
         if self.method.upper() not in valid_methods:
-            raise ValueError(
-                f"Method must be one of {valid_methods}, got '{self.method}'"
-            )
+            msg = f"Method must be one of {valid_methods}, got '{self.method}'"
+            raise ValueError(msg)
 
 
 @dataclass
@@ -164,9 +158,8 @@ class FreeEndSettings:
     def __post_init__(self):
         valid_opt_types = {"PERP", "CONTOUR", "FULL"}
         if self.opt_type.upper() not in valid_opt_types:
-            raise ValueError(
-                f"opt_type must be one of {valid_opt_types}, got '{self.opt_type}'"
-            )
+            msg = f"opt_type must be one of {valid_opt_types}, got '{self.opt_type}'"
+            raise ValueError(msg)
 
 
 @dataclass
@@ -182,9 +175,12 @@ class ZoomSettings:
     def __post_init__(self):
         valid_interpolations = {"linear", "cubic"}
         if self.interpolation.lower() not in valid_interpolations:
-            raise ValueError(
-                f"interpolation must be one of {valid_interpolations}, got '{self.interpolation}'"
+            msg = (
+                f"interpolation must be one of {valid_interpolations},"
+                " got '{self.interpolation}'"
             )
+            raise ValueError(msg)
+
 
 @dataclass
 class SpringSettings:
@@ -199,13 +195,17 @@ class SpringSettings:
         valid_springkinds = {"image", "dof", "ideal"}
         valid_perpsprings = {"no", "cos", "tan", "cosTan", "DNEB"}
         if self.spring_kind.lower() not in valid_springkinds:
-            raise ValueError(
-                f"spring_kind must be one of {valid_springkinds}, got '{self.spring_kind}'"
+            msg = (
+                f"spring_kind must be one of {valid_springkinds},"
+                " got '{self.spring_kind}'"
             )
+            raise ValueError(msg)
         if self.perpspring.lower() not in valid_perpsprings:
-            raise ValueError(
-                f"perpstring must be one of {valid_perpsprings}, got '{self.perpspring}'"
+            msg = (
+                f"perpstring must be one of {valid_perpsprings},"
+                " got '{self.perpspring}'"
             )
+            raise ValueError(msg)
 
 
 @dataclass
@@ -215,7 +215,8 @@ class RestartSettings:
 
     def __post_init__(self):
         if self.gbw_basename and self.allxyz:
-            raise ValueError("Only one of gbw_basename or allxyz should be provided.")
+            msg = "Only one of gbw_basename or allxyz should be provided."
+            raise ValueError(msg)
 
 
 @dataclass
@@ -226,7 +227,8 @@ class TSGuessSettings:
 
     def __post_init__(self):
         if self.xyz_struct and self.pdb_struct:
-            raise ValueError("Only one of xyz_struct or pdb_struct should be provided.")
+            msg = "Only one of xyz_struct or pdb_struct should be provided."
+            raise ValueError(msg)
 
 
 @dataclass
@@ -272,21 +274,23 @@ class NebBlock(OrcaBlock):
         valid_tangents = {"improved", "original"}
         valid_interpolations = {"IDPP", "LINEAR", "XTB1TS", "XTB1", "XTB2TS", "XTB2"}
         if self.convtype.lower() not in valid_convtypes:
-            raise ValueError(
-                f"Convergence type must be one of {valid_convtypes}, got '{self.convtype}'"
+            msg = (
+                f"Convergence type must be one of {valid_convtypes},"
+                " got '{self.convtype}'"
             )
+            raise ValueError(msg)
         if self.quatern.lower() not in valid_quaterns:
-            raise ValueError(
-                f"quatern must be one of {valid_quaterns}, got '{self.quatern}'"
-            )
+            msg = f"quatern must be one of {valid_quaterns}," " got '{self.quatern}'"
+            raise ValueError(msg)
         if self.tangent.lower() not in valid_tangents:
-            raise ValueError(
-                f"tangent must be one of {valid_tangents}, got '{self.tangent}'"
-            )
+            msg = f"tangent must be one of {valid_tangents}," " got '{self.tangent}'"
+            raise ValueError(msg)
         if self.interpolation.upper() not in valid_interpolations:
-            raise ValueError(
-                f"interpolation must be one of {valid_interpolations}, got '{self.interpolation}'"
+            msg = (
+                f"interpolation must be one of {valid_interpolations},"
+                " got '{self.interpolation}'"
             )
+            raise ValueError(msg)
 
     def block_type(self) -> BlockType:
         return BlockType.NEB
@@ -296,8 +300,8 @@ class NebBlock(OrcaBlock):
 class OrcaConfig:
     kwlines: str
     coords: Coords
-    blocks: Dict[BlockType, OrcaBlock] = field(default_factory=dict)
-    extra_blocks: Dict[str, str] = field(default_factory=dict)
+    blocks: dict[BlockType, OrcaBlock] = field(default_factory=dict)
+    extra_blocks: dict[str, str] = field(default_factory=dict)
 
     def add_block(self, block: OrcaBlock):
         self.blocks[block.block_type()] = block

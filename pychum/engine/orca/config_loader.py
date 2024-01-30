@@ -1,6 +1,29 @@
-import tomli as toml
 from pathlib import Path
-from pychum.engine.orca._dataclasses import *
+
+import tomli as toml
+
+from pychum.engine.orca._dataclasses import (
+    Atom,
+    ConvTolSettings,
+    Coords,
+    FIRESettings,
+    FixCenterSettings,
+    FreeEndSettings,
+    GeomBlock,
+    GeomScan,
+    IDPPSettings,
+    LBFGSSettings,
+    NebBlock,
+    OptimSettings,
+    OrcaConfig,
+    ReparamSettings,
+    RestartSettings,
+    SpringSettings,
+    TSGuessSettings,
+    UnitConversion,
+    ZoomSettings,
+)
+
 
 class ConfigLoader:
     def __init__(self, file_path):
@@ -10,16 +33,11 @@ class ConfigLoader:
     def load_neb_block(self, data):
         return NebBlock(**data)
 
-    def load_scf_block(self, data):
-        return ScfBlock(**data)
-
     def load_config(self):
         # Create instances of data classes based on the TOML data
-        engine = self.data.get("engine", {}).get("name", "")
-        units = {
-            "distance": UnitConversion(
-                **self.data.get("units", {}).get("distance", {})
-            ),
+        self.data.get("engine", {}).get("name", "")
+        {
+            "distance": UnitConversion(**self.data.get("units", {}).get("distance", {})),
             "energy": UnitConversion(**self.data.get("units", {}).get("energy", {})),
         }
         kwlines = self.data.get("orca").get("kwlines")
@@ -67,27 +85,41 @@ class ConfigLoader:
             if "zoom" in neb_data:
                 neb_block_args["zoom_settings"] = ZoomSettings(**neb_data.pop("zoom"))
             if "reparam" in neb_data:
-                neb_block_args["reparam_settings"] = ReparamSettings(**neb_data.pop("reparam"))
+                neb_block_args["reparam_settings"] = ReparamSettings(
+                    **neb_data.pop("reparam")
+                )
             if "convtol" in neb_data:
-                neb_block_args["convtol_settings"] = ConvTolSettings(**neb_data.pop("convtol"))
+                neb_block_args["convtol_settings"] = ConvTolSettings(
+                    **neb_data.pop("convtol")
+                )
             if "free_end" in neb_data:
-                neb_block_args["free_end_settings"] = FreeEndSettings(**neb_data.pop("free_end"))
+                neb_block_args["free_end_settings"] = FreeEndSettings(
+                    **neb_data.pop("free_end")
+                )
             if "spring" in neb_data:
-                neb_block_args["spring_settings"] = SpringSettings(**neb_data.pop("spring"))
+                neb_block_args["spring_settings"] = SpringSettings(
+                    **neb_data.pop("spring")
+                )
             if "fix_center" in neb_data:
-                neb_block_args["fix_center_settings"] = FixCenterSettings(**neb_data.pop("fix_center"))
+                neb_block_args["fix_center_settings"] = FixCenterSettings(
+                    **neb_data.pop("fix_center")
+                )
             # Not added if not present in the TOML
-            restart_settings = None
             if "restart" in neb_data:
-                neb_block_args["restart_settings"] = RestartSettings(**neb_data.pop("restart"))
-            tsguess_settings = None
+                neb_block_args["restart_settings"] = RestartSettings(
+                    **neb_data.pop("restart")
+                )
             if "tsguess" in neb_data:
-                neb_block_args["tsguess_settings"] = TSGuessSettings(**neb_data.pop("tsguess"))
+                neb_block_args["tsguess_settings"] = TSGuessSettings(
+                    **neb_data.pop("tsguess")
+                )
             neb_block_args = {**neb_data, **neb_block_args}
 
             blocks["neb"] = NebBlock(**neb_block_args)
 
-        return OrcaConfig(kwlines=kwlines, coords=coords, blocks=blocks, extra_blocks=extra_blocks)
+        return OrcaConfig(
+            kwlines=kwlines, coords=coords, blocks=blocks, extra_blocks=extra_blocks
+        )
 
         # # Create the final OrcaConfig instance
         # if engine == 'orca':
