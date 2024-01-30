@@ -59,6 +59,9 @@ doc = [
   "sphinx-togglebutton>=0.3.2",
   "sphinxcontrib-apidoc>=0.4",
 ]
+"cli" = [
+    "click>=8.1.7",
+]
 [project.urls]
 Documentation = "https://github.com/HaoZeke/pychum#readme"
 Issues        = "https://github.com/HaoZeke/pychum/issues"

@@ -2,10 +2,10 @@
 # It is not intended for manual editing.
 
 [metadata]
-groups = ["default", "doc", "lint", "nbdoc", "release_aid", "test"]
+groups = ["default", "doc", "lint", "nbdoc", "release_aid", "test", "cli"]
 strategy = ["cross_platform", "inherit_metadata"]
 lock_version = "4.4.1"
-content_hash = "sha256:9b9fabc33c46ee71a92109f9271c03c196e1e5ac5a61846815d65eb3bde275dc"
+content_hash = "sha256:ea03ee7c9943b4650b4eb0157de6f707e817ba4a76932adddf83d3352245c652"
 
 [[package]]
 name = "alabaster"
@@ -349,7 +349,7 @@ name = "click"
 version = "8.1.7"
 requires_python = ">=3.7"
 summary = "Composable command line interface toolkit"
-groups = ["doc", "release_aid"]
+groups = ["cli", "doc", "release_aid"]
 dependencies = [
     "colorama; platform_system == \"Windows\"",
 ]
@@ -363,7 +363,7 @@ name = "colorama"
 version = "0.4.6"
 requires_python = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,!=3.5.*,!=3.6.*,>=2.7"
 summary = "Cross-platform colored terminal text."
-groups = ["doc", "nbdoc", "release_aid", "test"]
+groups = ["cli", "doc", "nbdoc", "release_aid", "test"]
 files = [
     {file = "colorama-0.4.6-py2.py3-none-any.whl", hash = "sha256:4f1d9991f5acc0ca119f9d443620b77f9d6b33703e51011c16baf57afb285fc6"},
     {file = "colorama-0.4.6.tar.gz", hash = "sha256:08695f5cb7ed6e0531a20572697297273c47b8cae5a63ffc6d6ed5c201be6e44"},
