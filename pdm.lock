@@ -5,7 +5,7 @@
 groups = ["default", "doc", "lint", "nbdoc", "release_aid", "test", "cli"]
 strategy = ["cross_platform", "inherit_metadata"]
 lock_version = "4.4.1"
-content_hash = "sha256:ea03ee7c9943b4650b4eb0157de6f707e817ba4a76932adddf83d3352245c652"
+content_hash = "sha256:bd7c9b3cfe69a18845b88a63643d8a592493b4004518011dfb3e1d68fe889a57"
 
 [[package]]
 name = "alabaster"
@@ -1820,6 +1820,20 @@ dependencies = [
 files = [
     {file = "pytest-cov-4.1.0.tar.gz", hash = "sha256:3904b13dfbfec47f003b8e77fd5b589cd11904a21ddf1ab38a64f204d6a10ef6"},
     {file = "pytest_cov-4.1.0-py3-none-any.whl", hash = "sha256:6ba70b9e97e69fcc3fb45bfeab2d0a138fb65c4d0d6a41ef33983ad114be8c3a"},
+]
+
+[[package]]
+name = "pytest-datadir"
+version = "1.5.0"
+requires_python = ">=3.8"
+summary = "pytest plugin for test data directories and files"
+groups = ["test"]
+dependencies = [
+    "pytest>=5.0",
+]
+files = [
+    {file = "pytest-datadir-1.5.0.tar.gz", hash = "sha256:1617ed92f9afda0c877e4eac91904b5f779d24ba8f5e438752e3ae39d8d2ee3f"},
+    {file = "pytest_datadir-1.5.0-py3-none-any.whl", hash = "sha256:34adf361bcc7b37961bbc1dfa8d25a4829e778bab461703c38a5c50ca9c36dc8"},
 ]
 
 [[package]]
