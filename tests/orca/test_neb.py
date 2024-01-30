@@ -2,6 +2,8 @@ import pytest
 from pychum.engine.orca._dataclasses import NebBlock, IDPPSettings, RestartSettings
 from pychum.engine.orca._renderer import OrcaInputRenderer
 
+# TODO(rg): Test this somewhere
+default_kwline = "!NEB-CI\n!ENGRAD UHF NOSOSCF def2-SVP"
 # Helper function to render the NebBlock
 def render_neb_block(neb_block):
     config = {'blocks': {'neb': neb_block}}
