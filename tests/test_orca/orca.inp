@@ -1,0 +1,9 @@
+!NEB-CI
+!B3LYP D3BJ RIJCOSX def2-SVP def2/J SOSCF KDIIS
+!UHF NOSOSCF DefGrid2
+!PAL8
+
+%scf
+maxiter 300
+end
+* xyzfile 0 1 system121-react.xyz
