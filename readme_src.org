@@ -30,6 +30,14 @@ programs.
 ** Rationale
 I needed to run a bunch of systems. ~jobflow~ / Fireworks / AiiDA were ideal,
 until I realized only VASP is really well supported by them.
+
+Also there were some minor problems with the ORCA input parser...
+- It chokes on multiple ~#~ symbols, so ~# MaxIter 50 # something~ will error
+  out on ~SOMETHING~
+- No real ordering or syntax highlighting in major IDEs
+
+Along with other minor inconveniences which make for enough friction over time
+to necessiate this library.
 * Usage
 The simplest usage is via the CLI:
 #+begin_src bash
