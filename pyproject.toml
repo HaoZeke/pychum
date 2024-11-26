@@ -6,7 +6,7 @@ requires      = [ "hatch-vcs", "hatchling" ]
 version-file = "_version.py"
 
 [tool.hatch.build]
-include = [ "pychum/**/*.py", "pychum/*.py", "/tests" ]
+include = [ "pychumpchem/**/*.py", "pychumpchem/*.py", "/tests" ]
 
 
 [tool.pdm.dev-dependencies]
@@ -25,10 +25,10 @@ check_ruff  = "ruff ."
 ruff_fix    = "ruff --fix ."
 ruff_format = "ruff format ."
 lint        = { composite = [ "ruff_fix", "ruff_format" ] }
-test        = "pytest --cov=pychum tests"
+test        = "pytest --cov=pychumpchem tests"
 
 [project]
-name = "pychum"
+name = "pychumpchem"
 description = "Input file generators for computational chemistry"
 readme = "readme.md"
 keywords = [ "compchem", "config" ]
@@ -69,9 +69,9 @@ doc = [
     "click>=8.1.7",
 ]
 [project.urls]
-Documentation = "https://github.com/HaoZeke/pychum#readme"
-Issues        = "https://github.com/HaoZeke/pychum/issues"
-Source        = "https://github.com/HaoZeke/pychum"
+Documentation = "https://github.com/HaoZeke/pychumpchem#readme"
+Issues        = "https://github.com/HaoZeke/pychumpchem/issues"
+Source        = "https://github.com/HaoZeke/pychumpchem"
 
 [tool.hatch.version]
 source = "vcs"
@@ -130,7 +130,7 @@ unfixable = [
 ]
 
 [tool.ruff.isort]
-known-first-party = [ "pychum" ]
+known-first-party = [ "pychumpchem" ]
 
 [tool.ruff.flake8-tidy-imports]
 ban-relative-imports = "all"
@@ -142,13 +142,13 @@ ban-relative-imports = "all"
 "__init__.py" = [ "F401" ]
 
 [tool.coverage.run]
-source_pkgs = [ "pychum" ]
+source_pkgs = [ "pychumpchem" ]
 branch      = true
 parallel    = true
 omit        = [ "_version.py" ]
 
 [tool.coverage.paths]
-pychum = [ "src/pychum", "*/pychum/src/pychum" ]
+pychumpchem = [ "src/pychumpchem", "*/pychumpchem/src/pychumpchem" ]
 tests  = [ "tests" ]
 
 [tool.coverage.report]
@@ -160,8 +160,8 @@ underlines   = [ "", "", "" ]
 single_file  = true
 filename     = "CHANGELOG.md"
 directory    = "doc/release/upcoming_changes/"
-issue_format = "[#{issue}](https://github.com/HaoZeke/pychum/issues/{issue})"
-title_format = "## [{version}](https://github.com/HaoZeke/pychum/tree/{version}) - {project_date}"
+issue_format = "[#{issue}](https://github.com/HaoZeke/pychumpchem/issues/{issue})"
+title_format = "## [{version}](https://github.com/HaoZeke/pychumpchem/tree/{version}) - {project_date}"
 all_bullets  = false
 
 [[tool.towncrier.type]]
