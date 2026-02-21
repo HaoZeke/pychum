@@ -21,13 +21,23 @@ def render_nwchem(
     socket_address: str,
     unix_mode: bool,  # noqa: FBT001
     mem_in_gb: int,
+    real_atoms: bool = False,  # noqa: FBT001, FBT002
 ) -> str:
     """Library function to render NWChem input."""
     atoms = ase_read(pos_file)
-    nw_atoms = [
-        NWChemAtom(symbol=atom.symbol, x=0.0, y=0.0, z=float(i))
-        for i, atom in enumerate(atoms)
-    ]
+    if real_atoms:
+        nw_atoms = [
+            NWChemAtom(symbol=atom.symbol, x=atom.x, y=atom.y, z=atom.z)
+            for i, atom in atoms
+        ]
+    else:
+        nw_atoms = [
+            # This is intentionally broken, in that the positions are
+            # overwritten by eOn on first run anyway, so we just need them to
+            # not overlap
+            NWChemAtom(symbol=atom.symbol, x=0.0, y=0.0, z=float(i))
+            for i, atom in enumerate(atoms)
+        ]
 
     nw_config = NWChemSocketConfig(
         atoms=nw_atoms,
