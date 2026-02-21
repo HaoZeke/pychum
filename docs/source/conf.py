@@ -6,7 +6,7 @@ sys.path.insert(0, os.path.abspath("../../pychum"))
 
 # -- Project information -----------------------------------------------------
 project = "pychum"
-copyright = "2026, Rohit Goswami"
+project_copyright = "2026, Rohit Goswami"
 author = "Rohit Goswami"
 # html_logo = "../../branding/logo/pychum_logo.png"
 
@@ -54,4 +54,4 @@ html_theme_options = {
 }
 
 autoapi_dirs = ["../../pychum"]
-html_baseurl = "pychum.rgoswami.me"
+html_baseurl = "https://pychum.rgoswami.me"

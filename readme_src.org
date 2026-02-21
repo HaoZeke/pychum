@@ -43,7 +43,7 @@ Also there were some minor problems with the ORCA input parser...
 - No real ordering or syntax highlighting in major IDEs
 
 Along with other minor inconveniences which make for enough friction over time
-to necessiate this library.
+to necessitate this library.
 * Usage
 The simplest usage is via the CLI:
 #+begin_src bash

@@ -81,7 +81,7 @@ Also there were some minor problems with the ORCA input parser&#x2026;
 -   No real ordering or syntax highlighting in major IDEs
 
 Along with other minor inconveniences which make for enough friction over time
-to necessiate this library.
+to necessitate this library.
 
 
 <a id="orgde48b7e"></a>
@@ -148,4 +148,3 @@ via:
 
 -   The Zenodo DOI for general use.
 -   The `wailord` paper for ORCA usage
-

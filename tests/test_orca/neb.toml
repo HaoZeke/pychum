@@ -24,27 +24,27 @@ inp = "electron-volt"
 out = "hartree"
 
 [coords]
-fmt = "xyzfile"  # Options: xyz, int, gzmt, xyzfile, gzmtfile
-charge = 0
+fmt          = "xyzfile"             # Options: xyz, int, gzmt, xyzfile, gzmtfile
+charge       = 0
 multiplicity = 1
-filedat = "system121-react.xyz"
+filedat      = "system121-react.xyz"
 
 [orca.neb]
 # TODO(rg): Handle aliases in python
-end_xyz = "system121-prod.xyz"
-nimgs = 8
-convtype = "CIONLY"
-printlevel = 4
-neb_ts = false
-neb_ci = true
-quatern = "ALWAYS"
-check_scf_conv = true
-preopt = false
-nsteps_foundintermediate = 30
+end_xyz                   = "system121-prod.xyz"
+nimgs                     = 8
+convtype                  = "CIONLY"
+printlevel                = 4
+neb_ts                    = false
+neb_ci                    = true
+quatern                   = "ALWAYS"
+check_scf_conv            = true
+preopt                    = false
+nsteps_foundintermediate  = 30
 abortif_foundintermediate = false
-npts_interpol = 10
-interpolation = "LINEAR"
-tangent = "IMPROVED"
+npts_interpol             = 10
+interpolation             = "LINEAR"
+tangent                   = "IMPROVED"
 
 # These blocks are special and are only added to the output file if present
 # TODO(rg): Test these well
@@ -58,66 +58,66 @@ tangent = "IMPROVED"
 # ts_img = -1
 
 [orca.neb.spring]
-spring_kind = "IMAGE"
-const1 = 0.01
-const2 = 0.1
+spring_kind     = "IMAGE"
+const1          = 0.01
+const2          = 0.1
 energy_weighted = true
 # Spring interactions perpendicular to path
 perpspring = "NO"
-llt_cos = true
+llt_cos    = true
 
 [orca.neb.fix_center]
-active = true
+active              = true
 remove_extern_force = true
 
 [orca.neb.convtol]
-units = "Eh/Bohr" # TODO(rg): Make this do something
-maxfp_i = 0.005
-rmsfp_i = 0.003
-maxf_ci = 0.0005
-rmsf_ci = 0.0003
+units      = "Eh/Bohr" # TODO(rg): Make this do something
+maxfp_i    = 0.005
+rmsfp_i    = 0.003
+maxf_ci    = 0.0005
+rmsf_ci    = 0.0003
 turn_on_ci = 0.02
-scale = 10
+scale      = 10
 
 [orca.neb.free_end]
-use = false
+use      = false
 opt_type = "PERP"
-ec = 0.0
-ec_end = 0.0
-kappa = 1.0
+ec       = 0.0
+ec_end   = 0.0
+kappa    = 1.0
 
 [orca.neb.reparam]
 interp = "linear"
-every = 0
-tol = 0.0
+every  = 0
+tol    = 0.0
 
 [orca.neb.optim]
-method = "LBFGS"
-maxmove = 0.2
+method   = "LBFGS"
+maxmove  = 0.2
 stepsize = 1.0
-maxiter = 500
-local = false
+maxiter  = 500
+local    = false
 
 [orca.neb.lbfgs]
 reparam_on_restart = false
-memory = 20
-precondition = true
-dr = 0.002
+memory             = 20
+precondition       = true
+dr                 = 0.002
 restart_on_maxmove = true
 
 [orca.neb.idpp]
-nmax = 3000
+nmax     = 3000
 tol_maxf = 0.01
-ksp = 1.0
-alpha = 0.01
-maxmove = 0.05
-debug = false
-quatern = true
+ksp      = 1.0
+alpha    = 0.01
+maxmove  = 0.05
+debug    = false
+quatern  = true
 
 [orca.neb.zoom]
-tol_turn_on = 0.0
-offset = 2
-auto = true
-tol_scale = 10
-alpha = 0.5
+tol_turn_on  = 0.0
+offset       = 2
+auto         = true
+tol_scale    = 10
+alpha        = 0.5
 printfulltrj = true

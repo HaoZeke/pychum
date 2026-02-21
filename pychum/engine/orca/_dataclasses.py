@@ -280,10 +280,10 @@ class NebBlock(OrcaBlock):
             )
             raise ValueError(msg)
         if self.quatern.lower() not in valid_quaterns:
-            msg = f"quatern must be one of {valid_quaterns}," " got '{self.quatern}'"
+            msg = f"quatern must be one of {valid_quaterns}, got '{{self.quatern}}'"
             raise ValueError(msg)
         if self.tangent.lower() not in valid_tangents:
-            msg = f"tangent must be one of {valid_tangents}," " got '{self.tangent}'"
+            msg = f"tangent must be one of {valid_tangents}, got '{{self.tangent}}'"
             raise ValueError(msg)
         if self.interpolation.upper() not in valid_interpolations:
             msg = (

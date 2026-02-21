@@ -21,7 +21,7 @@ maxiter 300
 """
 
 [coords]
-fmt = "xyzfile"  # Options: xyz, int, gzmt, xyzfile, gzmtfile
-charge = 0
+fmt          = "xyzfile"     # Options: xyz, int, gzmt, xyzfile, gzmtfile
+charge       = 0
 multiplicity = 1
-filedat = "h2_base.xyz"
+filedat      = "h2_base.xyz"

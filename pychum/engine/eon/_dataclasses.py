@@ -1,6 +1,6 @@
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from pathlib import Path
-from typing import List, Optional
+
 
 @dataclass
 class NWChemAtom:
@@ -9,9 +9,10 @@ class NWChemAtom:
     y: float
     z: float
 
+
 @dataclass
 class NWChemSocketConfig:
-    atoms: List[NWChemAtom]
+    atoms: list[NWChemAtom]
     settings_path: Path
     socket_address: str
     unix_mode: bool = False

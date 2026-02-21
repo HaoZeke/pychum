@@ -1,7 +1,8 @@
+from pathlib import Path
+
 from parsimonious.grammar import Grammar
 
-from pathlib import Path
-orca_content = Path('orca.inp').open().read()
+orca_content = Path("orca.inp").open().read()
 grammar_orca = Grammar(
     r"""
     file = (keyword_line / section / coord_line / newline)*

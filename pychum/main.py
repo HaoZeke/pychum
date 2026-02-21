@@ -1,5 +1,4 @@
 from pathlib import Path
-from typing import Optional
 
 from ase.io import read as ase_read
 
@@ -20,7 +19,7 @@ def render_nwchem(
     pos_file: Path,
     settings_path: Path,
     socket_address: str,
-    unix_mode: bool,
+    unix_mode: bool,  # noqa: FBT001
     mem_in_gb: int,
 ) -> str:
     """Library function to render NWChem input."""
