@@ -1,0 +1,878 @@
+pychum.engine.orca._dataclasses
+===============================
+
+.. py:module:: pychum.engine.orca._dataclasses
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   pychum.engine.orca._dataclasses.BlockType
+   pychum.engine.orca._dataclasses.OrcaBlock
+   pychum.engine.orca._dataclasses.UnitConversion
+   pychum.engine.orca._dataclasses.Atom
+   pychum.engine.orca._dataclasses.Coords
+   pychum.engine.orca._dataclasses.GeomScan
+   pychum.engine.orca._dataclasses.GeomBlock
+   pychum.engine.orca._dataclasses.LBFGSSettings
+   pychum.engine.orca._dataclasses.FIRESettings
+   pychum.engine.orca._dataclasses.ReparamSettings
+   pychum.engine.orca._dataclasses.ConvTolSettings
+   pychum.engine.orca._dataclasses.IDPPSettings
+   pychum.engine.orca._dataclasses.OptimSettings
+   pychum.engine.orca._dataclasses.FreeEndSettings
+   pychum.engine.orca._dataclasses.ZoomSettings
+   pychum.engine.orca._dataclasses.SpringSettings
+   pychum.engine.orca._dataclasses.RestartSettings
+   pychum.engine.orca._dataclasses.TSGuessSettings
+   pychum.engine.orca._dataclasses.FixCenterSettings
+   pychum.engine.orca._dataclasses.NebBlock
+   pychum.engine.orca._dataclasses.OrcaConfig
+
+
+Module Contents
+---------------
+
+.. py:class:: BlockType
+
+   Bases: :py:obj:`enum.Enum`
+
+
+   Create a collection of name/value pairs.
+
+   Example enumeration:
+
+   >>> class Color(Enum):
+   ...     RED = 1
+   ...     BLUE = 2
+   ...     GREEN = 3
+
+   Access them by:
+
+   - attribute access:
+
+     >>> Color.RED
+     <Color.RED: 1>
+
+   - value lookup:
+
+     >>> Color(1)
+     <Color.RED: 1>
+
+   - name lookup:
+
+     >>> Color['RED']
+     <Color.RED: 1>
+
+   Enumerations can be iterated over, and know how many members they have:
+
+   >>> len(Color)
+   3
+
+   >>> list(Color)
+   [<Color.RED: 1>, <Color.BLUE: 2>, <Color.GREEN: 3>]
+
+   Methods can be added to enumerations, and members can have their own
+   attributes -- see the documentation for details.
+
+
+   .. py:attribute:: NEB
+      :value: 'neb'
+
+
+
+   .. py:attribute:: GEOM
+      :value: 'geom'
+
+
+
+.. py:class:: OrcaBlock
+
+   Bases: :py:obj:`abc.ABC`
+
+
+   Helper class that provides a standard way to create an ABC using
+   inheritance.
+
+
+   .. py:method:: block_type() -> BlockType
+      :abstractmethod:
+
+
+
+.. py:class:: UnitConversion
+
+   .. py:attribute:: inp
+      :type:  str
+
+
+   .. py:attribute:: out
+      :type:  str
+
+
+.. py:class:: Atom
+
+   .. py:attribute:: x
+      :type:  float
+      :value: 0.0
+
+
+
+   .. py:attribute:: y
+      :type:  float
+      :value: 0.0
+
+
+
+   .. py:attribute:: z
+      :type:  float
+      :value: 0.0
+
+
+
+   .. py:attribute:: symbol
+      :type:  str
+      :value: None
+
+
+
+   .. py:attribute:: is_ghost
+      :type:  bool
+      :value: False
+
+
+
+   .. py:attribute:: embedding_potential
+      :type:  bool
+      :value: False
+
+
+
+   .. py:attribute:: is_frozen
+      :type:  bool
+      :value: False
+
+
+
+   .. py:attribute:: isotope
+      :type:  float | None
+      :value: None
+
+
+
+   .. py:attribute:: nuclear_charge
+      :type:  float | None
+      :value: None
+
+
+
+   .. py:attribute:: fragment_number
+      :type:  int | None
+      :value: None
+
+
+
+   .. py:attribute:: is_dummy
+      :type:  bool
+      :value: False
+
+
+
+   .. py:attribute:: point_charge
+      :type:  float | None
+      :value: None
+
+
+
+   .. py:attribute:: bond_atom
+      :type:  int | None
+      :value: None
+
+
+
+   .. py:attribute:: bond_length
+      :type:  float | None
+      :value: None
+
+
+
+   .. py:attribute:: angle_atom
+      :type:  int | None
+      :value: None
+
+
+
+   .. py:attribute:: angle
+      :type:  float | None
+      :value: None
+
+
+
+   .. py:attribute:: dihedral_atom
+      :type:  int | None
+      :value: None
+
+
+
+   .. py:attribute:: dihedral
+      :type:  float | None
+      :value: None
+
+
+
+   .. py:attribute:: is_frozen_x
+      :type:  bool
+      :value: False
+
+
+
+   .. py:attribute:: is_frozen_y
+      :type:  bool
+      :value: False
+
+
+
+   .. py:attribute:: is_frozen_z
+      :type:  bool
+      :value: False
+
+
+
+   .. py:method:: __post_init__()
+
+
+.. py:class:: Coords
+
+   .. py:attribute:: charge
+      :type:  int
+
+
+   .. py:attribute:: multiplicity
+      :type:  int
+
+
+   .. py:attribute:: fmt
+      :type:  str
+
+
+   .. py:attribute:: filedat
+      :type:  str
+      :value: ''
+
+
+
+   .. py:attribute:: atoms
+      :type:  list[Atom]
+      :value: []
+
+
+
+.. py:class:: GeomScan
+
+   .. py:attribute:: atoms
+      :type:  list[int]
+
+
+   .. py:attribute:: range
+      :type:  list[float]
+
+
+   .. py:attribute:: points
+      :type:  int
+
+
+.. py:class:: GeomBlock
+
+   Bases: :py:obj:`OrcaBlock`
+
+
+   Helper class that provides a standard way to create an ABC using
+   inheritance.
+
+
+   .. py:attribute:: bonds
+      :type:  list[GeomScan]
+      :value: []
+
+
+
+   .. py:attribute:: dihedrals
+      :type:  list[GeomScan]
+      :value: []
+
+
+
+   .. py:attribute:: angles
+      :type:  list[GeomScan]
+      :value: []
+
+
+
+   .. py:method:: block_type() -> BlockType
+
+
+.. py:class:: LBFGSSettings
+
+   .. py:attribute:: reparam_on_restart
+      :type:  bool
+      :value: False
+
+
+
+   .. py:attribute:: memory
+      :type:  int
+      :value: 20
+
+
+
+   .. py:attribute:: precondition
+      :type:  bool
+      :value: True
+
+
+
+   .. py:attribute:: dr
+      :type:  float
+      :value: 0.002
+
+
+
+   .. py:attribute:: restart_on_maxmove
+      :type:  bool
+      :value: True
+
+
+
+.. py:class:: FIRESettings
+
+   .. py:attribute:: init_damp
+      :type:  float
+      :value: 0.1
+
+
+
+   .. py:attribute:: damp_decr
+      :type:  float
+      :value: 0.99
+
+
+
+   .. py:attribute:: step_incr
+      :type:  float
+      :value: 1.1
+
+
+
+   .. py:attribute:: step_decr
+      :type:  float
+      :value: 0.5
+
+
+
+   .. py:attribute:: max_step
+      :type:  float
+      :value: 5.0
+
+
+
+   .. py:attribute:: retention
+      :type:  int
+      :value: 5
+
+
+
+.. py:class:: ReparamSettings
+
+   .. py:attribute:: interp
+      :type:  str
+      :value: 'linear'
+
+
+
+   .. py:attribute:: every
+      :type:  int
+      :value: 0
+
+
+
+   .. py:attribute:: tol
+      :type:  float
+      :value: 0.0
+
+
+
+   .. py:method:: __post_init__()
+
+
+.. py:class:: ConvTolSettings
+
+   .. py:attribute:: units
+      :type:  str
+      :value: 'Eh/Bohr'
+
+
+
+   .. py:attribute:: maxfp_i
+      :type:  float
+      :value: 0.005
+
+
+
+   .. py:attribute:: rmsfp_i
+      :type:  float
+      :value: 0.003
+
+
+
+   .. py:attribute:: maxf_ci
+      :type:  float
+      :value: 0.0005
+
+
+
+   .. py:attribute:: rmsf_ci
+      :type:  float
+      :value: 0.0003
+
+
+
+   .. py:attribute:: turn_on_ci
+      :type:  float
+      :value: 0.02
+
+
+
+   .. py:attribute:: scale
+      :type:  int
+      :value: 10
+
+
+
+.. py:class:: IDPPSettings
+
+   .. py:attribute:: tol_maxf
+      :type:  float
+      :value: 0.01
+
+
+
+   .. py:attribute:: maxmove
+      :type:  float
+      :value: 0.05
+
+
+
+   .. py:attribute:: alpha
+      :type:  float
+      :value: 0.01
+
+
+
+   .. py:attribute:: nmax
+      :type:  int
+      :value: 3000
+
+
+
+   .. py:attribute:: quatern
+      :type:  bool
+      :value: True
+
+
+
+   .. py:attribute:: ksp
+      :type:  float
+      :value: 1.0
+
+
+
+   .. py:attribute:: debug
+      :type:  bool
+      :value: False
+
+
+
+.. py:class:: OptimSettings
+
+   .. py:attribute:: method
+      :type:  str
+      :value: 'LBFGS'
+
+
+
+   .. py:attribute:: maxmove
+      :type:  float
+      :value: 0.2
+
+
+
+   .. py:attribute:: stepsize
+      :type:  float
+      :value: 1.0
+
+
+
+   .. py:attribute:: maxiter
+      :type:  float
+      :value: 500
+
+
+
+   .. py:attribute:: local
+      :type:  bool
+      :value: False
+
+
+
+   .. py:method:: __post_init__()
+
+
+.. py:class:: FreeEndSettings
+
+   .. py:attribute:: use
+      :type:  bool
+      :value: False
+
+
+
+   .. py:attribute:: opt_type
+      :type:  str
+      :value: 'PERP'
+
+
+
+   .. py:attribute:: ec
+      :type:  float
+      :value: 0.0
+
+
+
+   .. py:attribute:: ec_end
+      :type:  float
+      :value: 0.0
+
+
+
+   .. py:attribute:: kappa
+      :type:  float
+      :value: 1.0
+
+
+
+   .. py:method:: __post_init__()
+
+
+.. py:class:: ZoomSettings
+
+   .. py:attribute:: tol_turn_on
+      :type:  float
+      :value: 0.0
+
+
+
+   .. py:attribute:: offset
+      :type:  int
+      :value: 2
+
+
+
+   .. py:attribute:: auto
+      :type:  bool
+      :value: True
+
+
+
+   .. py:attribute:: tol_scale
+      :type:  int
+      :value: 10
+
+
+
+   .. py:attribute:: alpha
+      :type:  float
+      :value: 0.5
+
+
+
+   .. py:attribute:: interpolation
+      :type:  str
+      :value: 'linear'
+
+
+
+   .. py:attribute:: printfulltrj
+      :type:  bool
+      :value: True
+
+
+
+   .. py:method:: __post_init__()
+
+
+.. py:class:: SpringSettings
+
+   .. py:attribute:: spring_kind
+      :type:  str
+      :value: 'image'
+
+
+
+   .. py:attribute:: const1
+      :type:  float
+      :value: 0.01
+
+
+
+   .. py:attribute:: const2
+      :type:  float
+      :value: 0.1
+
+
+
+   .. py:attribute:: energy_weighted
+      :type:  bool
+      :value: True
+
+
+
+   .. py:attribute:: perpspring
+      :type:  str
+      :value: 'no'
+
+
+
+   .. py:attribute:: llt_cos
+      :type:  bool
+      :value: True
+
+
+
+   .. py:method:: __post_init__()
+
+
+.. py:class:: RestartSettings
+
+   .. py:attribute:: gbw_basename
+      :type:  str
+      :value: None
+
+
+
+   .. py:attribute:: allxyz
+      :type:  str
+      :value: None
+
+
+
+   .. py:method:: __post_init__()
+
+
+.. py:class:: TSGuessSettings
+
+   .. py:attribute:: xyz_struct
+      :type:  str
+      :value: None
+
+
+
+   .. py:attribute:: pdb_struct
+      :type:  str
+      :value: None
+
+
+
+   .. py:attribute:: ts_img
+      :type:  int
+      :value: -1
+
+
+
+   .. py:method:: __post_init__()
+
+
+.. py:class:: FixCenterSettings
+
+   .. py:attribute:: active
+      :type:  bool
+      :value: True
+
+
+
+   .. py:attribute:: remove_extern_force
+      :type:  bool
+      :value: True
+
+
+
+.. py:class:: NebBlock
+
+   Bases: :py:obj:`OrcaBlock`
+
+
+   Helper class that provides a standard way to create an ABC using
+   inheritance.
+
+
+   .. py:attribute:: end_xyz
+      :type:  str
+
+
+   .. py:attribute:: nimgs
+      :type:  int
+
+
+   .. py:attribute:: convtype
+      :type:  str
+      :value: 'CIONLY'
+
+
+
+   .. py:attribute:: printlevel
+      :type:  int
+      :value: 4
+
+
+
+   .. py:attribute:: neb_ts
+      :type:  bool
+      :value: False
+
+
+
+   .. py:attribute:: neb_ci
+      :type:  bool
+      :value: False
+
+
+
+   .. py:attribute:: quatern
+      :type:  str
+      :value: 'ALWAYS'
+
+
+
+   .. py:attribute:: climbingimage
+      :type:  bool
+      :value: True
+
+
+
+   .. py:attribute:: check_scf_conv
+      :type:  bool
+      :value: True
+
+
+
+   .. py:attribute:: preopt
+      :type:  bool
+      :value: False
+
+
+
+   .. py:attribute:: nsteps_foundintermediate
+      :type:  int
+      :value: 30
+
+
+
+   .. py:attribute:: abortif_foundintermediate
+      :type:  bool
+      :value: False
+
+
+
+   .. py:attribute:: npts_interpol
+      :type:  int
+      :value: 10
+
+
+
+   .. py:attribute:: interpolation
+      :type:  str
+      :value: 'IDPP'
+
+
+
+   .. py:attribute:: tangent
+      :type:  str
+      :value: 'IMPROVED'
+
+
+
+   .. py:attribute:: lbfgs_settings
+      :type:  LBFGSSettings
+
+
+   .. py:attribute:: fire_settings
+      :type:  FIRESettings
+
+
+   .. py:attribute:: reparam_settings
+      :type:  ReparamSettings
+
+
+   .. py:attribute:: idpp_settings
+      :type:  IDPPSettings
+
+
+   .. py:attribute:: zoom_settings
+      :type:  ZoomSettings
+
+
+   .. py:attribute:: optim_settings
+      :type:  OptimSettings
+
+
+   .. py:attribute:: convtol_settings
+      :type:  ConvTolSettings
+
+
+   .. py:attribute:: free_end_settings
+      :type:  FreeEndSettings
+
+
+   .. py:attribute:: spring_settings
+      :type:  SpringSettings
+
+
+   .. py:attribute:: restart_settings
+      :type:  RestartSettings
+
+
+   .. py:attribute:: tsguess_settings
+      :type:  TSGuessSettings
+
+
+   .. py:attribute:: fix_center_settings
+      :type:  FixCenterSettings
+
+
+   .. py:method:: __post_init__()
+
+
+   .. py:method:: block_type() -> BlockType
+
+
+.. py:class:: OrcaConfig
+
+   .. py:attribute:: kwlines
+      :type:  str
+
+
+   .. py:attribute:: coords
+      :type:  Coords
+
+
+   .. py:attribute:: blocks
+      :type:  dict[BlockType, OrcaBlock]
+
+
+   .. py:attribute:: extra_blocks
+      :type:  dict[str, str]
+
+
+   .. py:method:: add_block(block: OrcaBlock)
+
+

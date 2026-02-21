@@ -1,0 +1,66 @@
+pychum.engine.eon._dataclasses
+==============================
+
+.. py:module:: pychum.engine.eon._dataclasses
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   pychum.engine.eon._dataclasses.NWChemAtom
+   pychum.engine.eon._dataclasses.NWChemSocketConfig
+
+
+Module Contents
+---------------
+
+.. py:class:: NWChemAtom
+
+   .. py:attribute:: symbol
+      :type:  str
+
+
+   .. py:attribute:: x
+      :type:  float
+
+
+   .. py:attribute:: y
+      :type:  float
+
+
+   .. py:attribute:: z
+      :type:  float
+
+
+.. py:class:: NWChemSocketConfig
+
+   .. py:attribute:: atoms
+      :type:  list[NWChemAtom]
+
+
+   .. py:attribute:: settings_path
+      :type:  pathlib.Path
+
+
+   .. py:attribute:: socket_address
+      :type:  str
+
+
+   .. py:attribute:: unix_mode
+      :type:  bool
+      :value: False
+
+
+
+   .. py:attribute:: mem_in_gb
+      :type:  int
+      :value: 2
+
+
+
+   .. py:attribute:: output_path
+      :type:  pathlib.Path
+
+

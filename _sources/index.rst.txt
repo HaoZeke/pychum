@@ -1,0 +1,55 @@
+====================
+pychum Documentation
+====================
+
+    :Author: Rohit Goswami
+
+.. contents::
+
+
+1 Ecosystem Overview
+--------------------
+
+``pychum`` is a key library within the ``rgpycrumbs`` ecosystem, focusing on
+generating high-quality input files for simulation engines.
+
+2 Introduction
+--------------
+
+``pychum`` is a collection of input file generators for various computational chemistry engines.
+
+3 CLI Reference
+---------------
+
+The primary interface for ``pychum`` is its command-line interface.
+
+3.1 ORCA
+~~~~~~~~
+
+Generates ORCA input files from TOML configurations.
+
+.. code:: bash
+
+    pychum orca --help
+
+3.2 NWChem
+~~~~~~~~~~
+
+Generates NWChem input files, specifically for use with eOn's ``SocketNWChemPot``.
+
+.. code:: bash
+
+    pychum nwchem --help
+
+4 Engine Details
+----------------
+
+4.1 ORCA
+~~~~~~~~
+
+Details about ORCA input generation.
+
+4.2 NWChem
+~~~~~~~~~~
+
+Details about NWChem input generation.

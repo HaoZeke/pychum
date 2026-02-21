@@ -1,0 +1,22 @@
+=======
+Used By
+=======
+
+    :Author: `Rohit Goswami <https://rgoswami.me>`_
+
+The following projects use ``pychum`` as a dependency or tool.
+
+Libraries
+---------
+
+`rgpycrumbs <https://github.com/HaoZeke/rgpycrumbs>`_
+    A dispatcher-based analytical and computational suite for chemical physics. Uses ``pychum`` as a library for NWChem and ORCA input generation.
+
+Academic Work
+-------------
+
+- Rohit Goswami, *Efficient Exploration of Chemical Kinetics*, Doctoral
+  dissertation, University of Iceland, 2025.
+  arXiv: `2510.21368 <https://arxiv.org/abs/2510.21368>`_,
+  doi: `10.48550/arXiv.2510.21368 <https://doi.org/10.48550/arXiv.2510.21368>`_.
+  Uses ``pychum`` (formerly ``pychumpchem``) for generating input files for transition state searches and band calculations.

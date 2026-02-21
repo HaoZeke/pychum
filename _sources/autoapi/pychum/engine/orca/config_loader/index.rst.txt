@@ -1,0 +1,31 @@
+pychum.engine.orca.config_loader
+================================
+
+.. py:module:: pychum.engine.orca.config_loader
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   pychum.engine.orca.config_loader.ConfigLoader
+
+
+Module Contents
+---------------
+
+.. py:class:: ConfigLoader(file_path)
+
+   .. py:attribute:: file_path
+
+
+   .. py:attribute:: data
+
+
+   .. py:method:: load_neb_block(data)
+
+
+   .. py:method:: load_config()
+
+

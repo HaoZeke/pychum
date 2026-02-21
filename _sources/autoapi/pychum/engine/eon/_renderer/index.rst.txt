@@ -1,0 +1,28 @@
+pychum.engine.eon._renderer
+===========================
+
+.. py:module:: pychum.engine.eon._renderer
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   pychum.engine.eon._renderer.NWChemRenderer
+
+
+Module Contents
+---------------
+
+.. py:class:: NWChemRenderer(config: pychum.engine.eon._dataclasses.NWChemSocketConfig)
+
+   .. py:attribute:: config
+
+
+   .. py:attribute:: env
+
+
+   .. py:method:: render(template_name: str)
+
+

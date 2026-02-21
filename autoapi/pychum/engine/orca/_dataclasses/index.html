@@ -1,0 +1,1303 @@
+<!DOCTYPE html>
+<html lang="en" data-accent-color="violet" data-content_root="../../../../../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>pychum.engine.orca._dataclasses - pychum documentation</title><link rel="index" title="Index" href="../../../../../genindex.html" /><link rel="search" title="Search" href="../../../../../search.html" />
+      <link rel="canonical" href="https://pychum.rgoswami.me/autoapi/pychum/engine/orca/_dataclasses/" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=e1a1ceaf" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/shibuya.css?v=a318c5d4" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/autodoc_pydantic.css" />
+    <link media="print" rel="stylesheet" type="text/css" href="../../../../../_static/print.css?v=20ff2c19" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://pychum.rgoswami.me/autoapi/pychum/engine/orca/_dataclasses/"/>
+  <meta property="og:title" content="pychum.engine.orca._dataclasses"/>
+    <meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="../../../../../index.html">
+      
+      
+      <strong>pychum</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../../../../../search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <kbd>/</kbd>
+</form><div class="sy-head-socials">
+  <a href="https://github.com/HaoZeke/pychum" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="Switch to light color mode"
+data-aria-light="Switch to dark color mode"
+data-aria-dark="Switch to auto color mode">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="0">
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>On this page</h3><ul>
+<li><a class="reference internal" href="#classes">Classes</a></li>
+<li><a class="reference internal" href="#module-contents">Module Contents</a><ul>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.BlockType"><code class="docutils literal notranslate"><span class="pre">BlockType</span></code></a><ul>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.BlockType.NEB"><code class="docutils literal notranslate">NEB</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.BlockType.GEOM"><code class="docutils literal notranslate">GEOM</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.OrcaBlock"><code class="docutils literal notranslate"><span class="pre">OrcaBlock</span></code></a><ul>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.OrcaBlock.block_type"><code class="docutils literal notranslate">block_type()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.UnitConversion"><code class="docutils literal notranslate"><span class="pre">UnitConversion</span></code></a><ul>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.UnitConversion.inp"><code class="docutils literal notranslate">inp</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.UnitConversion.out"><code class="docutils literal notranslate">out</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.Atom"><code class="docutils literal notranslate"><span class="pre">Atom</span></code></a><ul>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.Atom.x"><code class="docutils literal notranslate">x</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.Atom.y"><code class="docutils literal notranslate">y</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.Atom.z"><code class="docutils literal notranslate">z</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.Atom.symbol"><code class="docutils literal notranslate">symbol</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.Atom.is_ghost"><code class="docutils literal notranslate">is_ghost</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.Atom.embedding_potential"><code class="docutils literal notranslate">embedding_potential</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.Atom.is_frozen"><code class="docutils literal notranslate">is_frozen</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.Atom.isotope"><code class="docutils literal notranslate">isotope</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.Atom.nuclear_charge"><code class="docutils literal notranslate">nuclear_charge</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.Atom.fragment_number"><code class="docutils literal notranslate">fragment_number</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.Atom.is_dummy"><code class="docutils literal notranslate">is_dummy</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.Atom.point_charge"><code class="docutils literal notranslate">point_charge</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.Atom.bond_atom"><code class="docutils literal notranslate">bond_atom</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.Atom.bond_length"><code class="docutils literal notranslate">bond_length</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.Atom.angle_atom"><code class="docutils literal notranslate">angle_atom</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.Atom.angle"><code class="docutils literal notranslate">angle</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.Atom.dihedral_atom"><code class="docutils literal notranslate">dihedral_atom</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.Atom.dihedral"><code class="docutils literal notranslate">dihedral</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.Atom.is_frozen_x"><code class="docutils literal notranslate">is_frozen_x</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.Atom.is_frozen_y"><code class="docutils literal notranslate">is_frozen_y</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.Atom.is_frozen_z"><code class="docutils literal notranslate">is_frozen_z</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.Atom.__post_init__"><code class="docutils literal notranslate">__post_init__()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.Coords"><code class="docutils literal notranslate"><span class="pre">Coords</span></code></a><ul>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.Coords.charge"><code class="docutils literal notranslate">charge</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.Coords.multiplicity"><code class="docutils literal notranslate">multiplicity</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.Coords.fmt"><code class="docutils literal notranslate">fmt</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.Coords.filedat"><code class="docutils literal notranslate">filedat</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.Coords.atoms"><code class="docutils literal notranslate">atoms</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.GeomScan"><code class="docutils literal notranslate"><span class="pre">GeomScan</span></code></a><ul>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.GeomScan.atoms"><code class="docutils literal notranslate">atoms</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.GeomScan.range"><code class="docutils literal notranslate">range</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.GeomScan.points"><code class="docutils literal notranslate">points</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.GeomBlock"><code class="docutils literal notranslate"><span class="pre">GeomBlock</span></code></a><ul>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.GeomBlock.bonds"><code class="docutils literal notranslate">bonds</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.GeomBlock.dihedrals"><code class="docutils literal notranslate">dihedrals</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.GeomBlock.angles"><code class="docutils literal notranslate">angles</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.GeomBlock.block_type"><code class="docutils literal notranslate">block_type()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.LBFGSSettings"><code class="docutils literal notranslate"><span class="pre">LBFGSSettings</span></code></a><ul>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.LBFGSSettings.reparam_on_restart"><code class="docutils literal notranslate">reparam_on_restart</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.LBFGSSettings.memory"><code class="docutils literal notranslate">memory</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.LBFGSSettings.precondition"><code class="docutils literal notranslate">precondition</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.LBFGSSettings.dr"><code class="docutils literal notranslate">dr</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.LBFGSSettings.restart_on_maxmove"><code class="docutils literal notranslate">restart_on_maxmove</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.FIRESettings"><code class="docutils literal notranslate"><span class="pre">FIRESettings</span></code></a><ul>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.FIRESettings.init_damp"><code class="docutils literal notranslate">init_damp</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.FIRESettings.damp_decr"><code class="docutils literal notranslate">damp_decr</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.FIRESettings.step_incr"><code class="docutils literal notranslate">step_incr</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.FIRESettings.step_decr"><code class="docutils literal notranslate">step_decr</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.FIRESettings.max_step"><code class="docutils literal notranslate">max_step</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.FIRESettings.retention"><code class="docutils literal notranslate">retention</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.ReparamSettings"><code class="docutils literal notranslate"><span class="pre">ReparamSettings</span></code></a><ul>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.ReparamSettings.interp"><code class="docutils literal notranslate">interp</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.ReparamSettings.every"><code class="docutils literal notranslate">every</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.ReparamSettings.tol"><code class="docutils literal notranslate">tol</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.ReparamSettings.__post_init__"><code class="docutils literal notranslate">__post_init__()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.ConvTolSettings"><code class="docutils literal notranslate"><span class="pre">ConvTolSettings</span></code></a><ul>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.ConvTolSettings.units"><code class="docutils literal notranslate">units</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.ConvTolSettings.maxfp_i"><code class="docutils literal notranslate">maxfp_i</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.ConvTolSettings.rmsfp_i"><code class="docutils literal notranslate">rmsfp_i</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.ConvTolSettings.maxf_ci"><code class="docutils literal notranslate">maxf_ci</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.ConvTolSettings.rmsf_ci"><code class="docutils literal notranslate">rmsf_ci</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.ConvTolSettings.turn_on_ci"><code class="docutils literal notranslate">turn_on_ci</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.ConvTolSettings.scale"><code class="docutils literal notranslate">scale</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.IDPPSettings"><code class="docutils literal notranslate"><span class="pre">IDPPSettings</span></code></a><ul>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.IDPPSettings.tol_maxf"><code class="docutils literal notranslate">tol_maxf</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.IDPPSettings.maxmove"><code class="docutils literal notranslate">maxmove</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.IDPPSettings.alpha"><code class="docutils literal notranslate">alpha</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.IDPPSettings.nmax"><code class="docutils literal notranslate">nmax</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.IDPPSettings.quatern"><code class="docutils literal notranslate">quatern</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.IDPPSettings.ksp"><code class="docutils literal notranslate">ksp</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.IDPPSettings.debug"><code class="docutils literal notranslate">debug</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.OptimSettings"><code class="docutils literal notranslate"><span class="pre">OptimSettings</span></code></a><ul>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.OptimSettings.method"><code class="docutils literal notranslate">method</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.OptimSettings.maxmove"><code class="docutils literal notranslate">maxmove</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.OptimSettings.stepsize"><code class="docutils literal notranslate">stepsize</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.OptimSettings.maxiter"><code class="docutils literal notranslate">maxiter</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.OptimSettings.local"><code class="docutils literal notranslate">local</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.OptimSettings.__post_init__"><code class="docutils literal notranslate">__post_init__()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.FreeEndSettings"><code class="docutils literal notranslate"><span class="pre">FreeEndSettings</span></code></a><ul>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.FreeEndSettings.use"><code class="docutils literal notranslate">use</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.FreeEndSettings.opt_type"><code class="docutils literal notranslate">opt_type</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.FreeEndSettings.ec"><code class="docutils literal notranslate">ec</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.FreeEndSettings.ec_end"><code class="docutils literal notranslate">ec_end</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.FreeEndSettings.kappa"><code class="docutils literal notranslate">kappa</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.FreeEndSettings.__post_init__"><code class="docutils literal notranslate">__post_init__()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.ZoomSettings"><code class="docutils literal notranslate"><span class="pre">ZoomSettings</span></code></a><ul>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.ZoomSettings.tol_turn_on"><code class="docutils literal notranslate">tol_turn_on</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.ZoomSettings.offset"><code class="docutils literal notranslate">offset</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.ZoomSettings.auto"><code class="docutils literal notranslate">auto</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.ZoomSettings.tol_scale"><code class="docutils literal notranslate">tol_scale</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.ZoomSettings.alpha"><code class="docutils literal notranslate">alpha</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.ZoomSettings.interpolation"><code class="docutils literal notranslate">interpolation</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.ZoomSettings.printfulltrj"><code class="docutils literal notranslate">printfulltrj</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.ZoomSettings.__post_init__"><code class="docutils literal notranslate">__post_init__()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.SpringSettings"><code class="docutils literal notranslate"><span class="pre">SpringSettings</span></code></a><ul>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.SpringSettings.spring_kind"><code class="docutils literal notranslate">spring_kind</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.SpringSettings.const1"><code class="docutils literal notranslate">const1</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.SpringSettings.const2"><code class="docutils literal notranslate">const2</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.SpringSettings.energy_weighted"><code class="docutils literal notranslate">energy_weighted</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.SpringSettings.perpspring"><code class="docutils literal notranslate">perpspring</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.SpringSettings.llt_cos"><code class="docutils literal notranslate">llt_cos</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.SpringSettings.__post_init__"><code class="docutils literal notranslate">__post_init__()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.RestartSettings"><code class="docutils literal notranslate"><span class="pre">RestartSettings</span></code></a><ul>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.RestartSettings.gbw_basename"><code class="docutils literal notranslate">gbw_basename</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.RestartSettings.allxyz"><code class="docutils literal notranslate">allxyz</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.RestartSettings.__post_init__"><code class="docutils literal notranslate">__post_init__()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.TSGuessSettings"><code class="docutils literal notranslate"><span class="pre">TSGuessSettings</span></code></a><ul>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.TSGuessSettings.xyz_struct"><code class="docutils literal notranslate">xyz_struct</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.TSGuessSettings.pdb_struct"><code class="docutils literal notranslate">pdb_struct</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.TSGuessSettings.ts_img"><code class="docutils literal notranslate">ts_img</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.TSGuessSettings.__post_init__"><code class="docutils literal notranslate">__post_init__()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.FixCenterSettings"><code class="docutils literal notranslate"><span class="pre">FixCenterSettings</span></code></a><ul>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.FixCenterSettings.active"><code class="docutils literal notranslate">active</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.FixCenterSettings.remove_extern_force"><code class="docutils literal notranslate">remove_extern_force</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.NebBlock"><code class="docutils literal notranslate"><span class="pre">NebBlock</span></code></a><ul>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.NebBlock.end_xyz"><code class="docutils literal notranslate">end_xyz</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.NebBlock.nimgs"><code class="docutils literal notranslate">nimgs</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.NebBlock.convtype"><code class="docutils literal notranslate">convtype</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.NebBlock.printlevel"><code class="docutils literal notranslate">printlevel</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.NebBlock.neb_ts"><code class="docutils literal notranslate">neb_ts</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.NebBlock.neb_ci"><code class="docutils literal notranslate">neb_ci</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.NebBlock.quatern"><code class="docutils literal notranslate">quatern</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.NebBlock.climbingimage"><code class="docutils literal notranslate">climbingimage</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.NebBlock.check_scf_conv"><code class="docutils literal notranslate">check_scf_conv</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.NebBlock.preopt"><code class="docutils literal notranslate">preopt</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.NebBlock.nsteps_foundintermediate"><code class="docutils literal notranslate">nsteps_foundintermediate</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.NebBlock.abortif_foundintermediate"><code class="docutils literal notranslate">abortif_foundintermediate</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.NebBlock.npts_interpol"><code class="docutils literal notranslate">npts_interpol</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.NebBlock.interpolation"><code class="docutils literal notranslate">interpolation</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.NebBlock.tangent"><code class="docutils literal notranslate">tangent</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.NebBlock.lbfgs_settings"><code class="docutils literal notranslate">lbfgs_settings</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.NebBlock.fire_settings"><code class="docutils literal notranslate">fire_settings</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.NebBlock.reparam_settings"><code class="docutils literal notranslate">reparam_settings</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.NebBlock.idpp_settings"><code class="docutils literal notranslate">idpp_settings</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.NebBlock.zoom_settings"><code class="docutils literal notranslate">zoom_settings</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.NebBlock.optim_settings"><code class="docutils literal notranslate">optim_settings</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.NebBlock.convtol_settings"><code class="docutils literal notranslate">convtol_settings</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.NebBlock.free_end_settings"><code class="docutils literal notranslate">free_end_settings</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.NebBlock.spring_settings"><code class="docutils literal notranslate">spring_settings</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.NebBlock.restart_settings"><code class="docutils literal notranslate">restart_settings</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.NebBlock.tsguess_settings"><code class="docutils literal notranslate">tsguess_settings</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.NebBlock.fix_center_settings"><code class="docutils literal notranslate">fix_center_settings</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.NebBlock.__post_init__"><code class="docutils literal notranslate">__post_init__()</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.NebBlock.block_type"><code class="docutils literal notranslate">block_type()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.OrcaConfig"><code class="docutils literal notranslate"><span class="pre">OrcaConfig</span></code></a><ul>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.OrcaConfig.kwlines"><code class="docutils literal notranslate">kwlines</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.OrcaConfig.coords"><code class="docutils literal notranslate">coords</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.OrcaConfig.blocks"><code class="docutils literal notranslate">blocks</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.OrcaConfig.extra_blocks"><code class="docutils literal notranslate">extra_blocks</span></code></a></li>
+<li><a class="reference internal" href="#pychum.engine.orca._dataclasses.OrcaConfig.add_block"><code class="docutils literal notranslate">add_block()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../../../../../index.html"><span itemprop="name">pychum</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">pychum.engine.orca._dataclasses</strong>
+        <meta itemprop="position" content="2" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <div class="copy-page-wrapper relative pb-4 lg:absolute lg:top-8 lg:right-6 xl:right-12">
+  <div id="copy-page-trigger">
+    <button
+      type="button"
+      class="js-copy px-3 py-1 inline-flex items-center gap-1"
+      data-url="https://pychum.rgoswami.me/_sources/autoapi/pychum/engine/orca/_dataclasses/index.rst.txt"
+    >
+      <i class="i-lucide" data-icon="copy"></i>
+      <span>Copy page</span>
+    </button>
+    <button class="js-menu px-2 py-1" type="button" aria-label="More actions"
+      aria-haspopup="menu" aria-expanded="false" aria-controls="copy-page-content">
+      <i class="i-lucide chevron-down"></i>
+    </button>
+  </div>
+  <div id="copy-page-content" role="menu" aria-orientation="vertical" aria-hidden="true">
+    <div role="presentation">
+      <div class="flex flex-col" role="group">
+        <button class="js-copy" type="button" role="menuitem"
+          data-url="https://pychum.rgoswami.me/_sources/autoapi/pychum/engine/orca/_dataclasses/index.rst.txt">
+          <span class="iconify-icon">
+            <i class="i-lucide" data-icon="copy"></i>
+          </span>
+          <span>Copy page</span>
+        </button>
+        <a role="menuitem" href="https://pychum.rgoswami.me/_sources/autoapi/pychum/engine/orca/_dataclasses/index.rst.txt" target="_blank" rel="nofollow"><iconify-icon icon="bi:code-slash"></iconify-icon>
+            <span>View Source</span></a><a role="menuitem" href="https://chatgpt.com/?hints=search&q=Read%20https%3A//pychum.rgoswami.me/_sources/autoapi/pychum/engine/orca/_dataclasses/index.rst.txt%20so%20I%20can%20ask%20questions%20about%20it." target="_blank" rel="nofollow">
+          <iconify-icon icon="bi:openai"></iconify-icon>
+          <span>Open in ChatGPT</span>
+        </a><a role="menuitem" href="https://claude.ai/new?q=Read%20https%3A//pychum.rgoswami.me/_sources/autoapi/pychum/engine/orca/_dataclasses/index.rst.txt%20so%20I%20can%20ask%20questions%20about%20it." target="_blank" rel="nofollow">
+          <iconify-icon icon="bi:claude"></iconify-icon>
+          <span>Open in Claude</span>
+        </a></div>
+    </div>
+  </div>
+</div><article class="yue" role="main">
+          <section id="module-pychum.engine.orca._dataclasses">
+<span id="pychum-engine-orca-dataclasses"></span><h1>pychum.engine.orca._dataclasses<a class="headerlink" href="#module-pychum.engine.orca._dataclasses" title="Link to this heading">¶</a></h1>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper autosummary longtable docutils container">
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pychum.engine.orca._dataclasses.BlockType" title="pychum.engine.orca._dataclasses.BlockType"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BlockType</span></code></a></p></td>
+<td><p>Create a collection of name/value pairs.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pychum.engine.orca._dataclasses.OrcaBlock" title="pychum.engine.orca._dataclasses.OrcaBlock"><code class="xref py py-obj docutils literal notranslate"><span class="pre">OrcaBlock</span></code></a></p></td>
+<td><p>Helper class that provides a standard way to create an ABC using</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pychum.engine.orca._dataclasses.UnitConversion" title="pychum.engine.orca._dataclasses.UnitConversion"><code class="xref py py-obj docutils literal notranslate"><span class="pre">UnitConversion</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pychum.engine.orca._dataclasses.Atom" title="pychum.engine.orca._dataclasses.Atom"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Atom</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pychum.engine.orca._dataclasses.Coords" title="pychum.engine.orca._dataclasses.Coords"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Coords</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pychum.engine.orca._dataclasses.GeomScan" title="pychum.engine.orca._dataclasses.GeomScan"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GeomScan</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pychum.engine.orca._dataclasses.GeomBlock" title="pychum.engine.orca._dataclasses.GeomBlock"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GeomBlock</span></code></a></p></td>
+<td><p>Helper class that provides a standard way to create an ABC using</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pychum.engine.orca._dataclasses.LBFGSSettings" title="pychum.engine.orca._dataclasses.LBFGSSettings"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LBFGSSettings</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pychum.engine.orca._dataclasses.FIRESettings" title="pychum.engine.orca._dataclasses.FIRESettings"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FIRESettings</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pychum.engine.orca._dataclasses.ReparamSettings" title="pychum.engine.orca._dataclasses.ReparamSettings"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ReparamSettings</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pychum.engine.orca._dataclasses.ConvTolSettings" title="pychum.engine.orca._dataclasses.ConvTolSettings"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ConvTolSettings</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pychum.engine.orca._dataclasses.IDPPSettings" title="pychum.engine.orca._dataclasses.IDPPSettings"><code class="xref py py-obj docutils literal notranslate"><span class="pre">IDPPSettings</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pychum.engine.orca._dataclasses.OptimSettings" title="pychum.engine.orca._dataclasses.OptimSettings"><code class="xref py py-obj docutils literal notranslate"><span class="pre">OptimSettings</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pychum.engine.orca._dataclasses.FreeEndSettings" title="pychum.engine.orca._dataclasses.FreeEndSettings"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FreeEndSettings</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pychum.engine.orca._dataclasses.ZoomSettings" title="pychum.engine.orca._dataclasses.ZoomSettings"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ZoomSettings</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pychum.engine.orca._dataclasses.SpringSettings" title="pychum.engine.orca._dataclasses.SpringSettings"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SpringSettings</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pychum.engine.orca._dataclasses.RestartSettings" title="pychum.engine.orca._dataclasses.RestartSettings"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RestartSettings</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pychum.engine.orca._dataclasses.TSGuessSettings" title="pychum.engine.orca._dataclasses.TSGuessSettings"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TSGuessSettings</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pychum.engine.orca._dataclasses.FixCenterSettings" title="pychum.engine.orca._dataclasses.FixCenterSettings"><code class="xref py py-obj docutils literal notranslate"><span class="pre">FixCenterSettings</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pychum.engine.orca._dataclasses.NebBlock" title="pychum.engine.orca._dataclasses.NebBlock"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NebBlock</span></code></a></p></td>
+<td><p>Helper class that provides a standard way to create an ABC using</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pychum.engine.orca._dataclasses.OrcaConfig" title="pychum.engine.orca._dataclasses.OrcaConfig"><code class="xref py py-obj docutils literal notranslate"><span class="pre">OrcaConfig</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.BlockType">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pychum.engine.orca._dataclasses.</span></span><span class="sig-name descname"><span class="pre">BlockType</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#BlockType"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.BlockType" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">enum.Enum</span></code></a></p>
+<p>Create a collection of name/value pairs.</p>
+<p>Example enumeration:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="k">class</span><span class="w"> </span><span class="nc">Color</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+</span><span data-line="2"><span class="gp">... </span>    <span class="n">RED</span> <span class="o">=</span> <span class="mi">1</span>
+</span><span data-line="3"><span class="gp">... </span>    <span class="n">BLUE</span> <span class="o">=</span> <span class="mi">2</span>
+</span><span data-line="4"><span class="gp">... </span>    <span class="n">GREEN</span> <span class="o">=</span> <span class="mi">3</span>
+</span></pre></div>
+</div>
+<p>Access them by:</p>
+<ul>
+<li><p>attribute access:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">Color</span><span class="o">.</span><span class="n">RED</span>
+</span><span data-line="2"><span class="go">&lt;Color.RED: 1&gt;</span>
+</span></pre></div>
+</div>
+</li>
+<li><p>value lookup:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">Color</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span><span data-line="2"><span class="go">&lt;Color.RED: 1&gt;</span>
+</span></pre></div>
+</div>
+</li>
+<li><p>name lookup:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="n">Color</span><span class="p">[</span><span class="s1">&#39;RED&#39;</span><span class="p">]</span>
+</span><span data-line="2"><span class="go">&lt;Color.RED: 1&gt;</span>
+</span></pre></div>
+</div>
+</li>
+</ul>
+<p>Enumerations can be iterated over, and know how many members they have:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">Color</span><span class="p">)</span>
+</span><span data-line="2"><span class="go">3</span>
+</span></pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">Color</span><span class="p">)</span>
+</span><span data-line="2"><span class="go">[&lt;Color.RED: 1&gt;, &lt;Color.BLUE: 2&gt;, &lt;Color.GREEN: 3&gt;]</span>
+</span></pre></div>
+</div>
+<p>Methods can be added to enumerations, and members can have their own
+attributes – see the documentation for details.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.BlockType.NEB">
+<span class="sig-name descname"><span class="pre">NEB</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'neb'</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#BlockType.NEB"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.BlockType.NEB" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.BlockType.GEOM">
+<span class="sig-name descname"><span class="pre">GEOM</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'geom'</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#BlockType.GEOM"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.BlockType.GEOM" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.OrcaBlock">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pychum.engine.orca._dataclasses.</span></span><span class="sig-name descname"><span class="pre">OrcaBlock</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#OrcaBlock"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.OrcaBlock" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/abc.html#abc.ABC" title="(in Python v3.14)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">abc.ABC</span></code></a></p>
+<p>Helper class that provides a standard way to create an ABC using
+inheritance.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.OrcaBlock.block_type">
+<span class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">block_type</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pychum.engine.orca._dataclasses.BlockType" title="pychum.engine.orca._dataclasses.BlockType"><span class="pre">BlockType</span></a></span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#OrcaBlock.block_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.OrcaBlock.block_type" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.UnitConversion">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pychum.engine.orca._dataclasses.</span></span><span class="sig-name descname"><span class="pre">UnitConversion</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#UnitConversion"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.UnitConversion" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.UnitConversion.inp">
+<span class="sig-name descname"><span class="pre">inp</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#UnitConversion.inp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.UnitConversion.inp" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.UnitConversion.out">
+<span class="sig-name descname"><span class="pre">out</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#UnitConversion.out"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.UnitConversion.out" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.Atom">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pychum.engine.orca._dataclasses.</span></span><span class="sig-name descname"><span class="pre">Atom</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#Atom"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.Atom" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.Atom.x">
+<span class="sig-name descname"><span class="pre">x</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.0</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#Atom.x"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.Atom.x" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.Atom.y">
+<span class="sig-name descname"><span class="pre">y</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.0</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#Atom.y"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.Atom.y" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.Atom.z">
+<span class="sig-name descname"><span class="pre">z</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.0</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#Atom.z"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.Atom.z" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.Atom.symbol">
+<span class="sig-name descname"><span class="pre">symbol</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#Atom.symbol"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.Atom.symbol" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.Atom.is_ghost">
+<span class="sig-name descname"><span class="pre">is_ghost</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#Atom.is_ghost"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.Atom.is_ghost" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.Atom.embedding_potential">
+<span class="sig-name descname"><span class="pre">embedding_potential</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#Atom.embedding_potential"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.Atom.embedding_potential" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.Atom.is_frozen">
+<span class="sig-name descname"><span class="pre">is_frozen</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#Atom.is_frozen"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.Atom.is_frozen" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.Atom.isotope">
+<span class="sig-name descname"><span class="pre">isotope</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#Atom.isotope"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.Atom.isotope" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.Atom.nuclear_charge">
+<span class="sig-name descname"><span class="pre">nuclear_charge</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#Atom.nuclear_charge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.Atom.nuclear_charge" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.Atom.fragment_number">
+<span class="sig-name descname"><span class="pre">fragment_number</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#Atom.fragment_number"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.Atom.fragment_number" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.Atom.is_dummy">
+<span class="sig-name descname"><span class="pre">is_dummy</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#Atom.is_dummy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.Atom.is_dummy" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.Atom.point_charge">
+<span class="sig-name descname"><span class="pre">point_charge</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#Atom.point_charge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.Atom.point_charge" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.Atom.bond_atom">
+<span class="sig-name descname"><span class="pre">bond_atom</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#Atom.bond_atom"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.Atom.bond_atom" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.Atom.bond_length">
+<span class="sig-name descname"><span class="pre">bond_length</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#Atom.bond_length"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.Atom.bond_length" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.Atom.angle_atom">
+<span class="sig-name descname"><span class="pre">angle_atom</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#Atom.angle_atom"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.Atom.angle_atom" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.Atom.angle">
+<span class="sig-name descname"><span class="pre">angle</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#Atom.angle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.Atom.angle" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.Atom.dihedral_atom">
+<span class="sig-name descname"><span class="pre">dihedral_atom</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#Atom.dihedral_atom"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.Atom.dihedral_atom" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.Atom.dihedral">
+<span class="sig-name descname"><span class="pre">dihedral</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.14)"><span class="pre">None</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#Atom.dihedral"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.Atom.dihedral" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.Atom.is_frozen_x">
+<span class="sig-name descname"><span class="pre">is_frozen_x</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#Atom.is_frozen_x"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.Atom.is_frozen_x" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.Atom.is_frozen_y">
+<span class="sig-name descname"><span class="pre">is_frozen_y</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#Atom.is_frozen_y"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.Atom.is_frozen_y" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.Atom.is_frozen_z">
+<span class="sig-name descname"><span class="pre">is_frozen_z</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#Atom.is_frozen_z"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.Atom.is_frozen_z" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.Atom.__post_init__">
+<span class="sig-name descname"><span class="pre">__post_init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#Atom.__post_init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.Atom.__post_init__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.Coords">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pychum.engine.orca._dataclasses.</span></span><span class="sig-name descname"><span class="pre">Coords</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#Coords"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.Coords" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.Coords.charge">
+<span class="sig-name descname"><span class="pre">charge</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#Coords.charge"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.Coords.charge" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.Coords.multiplicity">
+<span class="sig-name descname"><span class="pre">multiplicity</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#Coords.multiplicity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.Coords.multiplicity" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.Coords.fmt">
+<span class="sig-name descname"><span class="pre">fmt</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#Coords.fmt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.Coords.fmt" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.Coords.filedat">
+<span class="sig-name descname"><span class="pre">filedat</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">''</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#Coords.filedat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.Coords.filedat" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.Coords.atoms">
+<span class="sig-name descname"><span class="pre">atoms</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#pychum.engine.orca._dataclasses.Atom" title="pychum.engine.orca._dataclasses.Atom"><span class="pre">Atom</span></a><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#Coords.atoms"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.Coords.atoms" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.GeomScan">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pychum.engine.orca._dataclasses.</span></span><span class="sig-name descname"><span class="pre">GeomScan</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#GeomScan"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.GeomScan" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.GeomScan.atoms">
+<span class="sig-name descname"><span class="pre">atoms</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#GeomScan.atoms"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.GeomScan.atoms" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.GeomScan.range">
+<span class="sig-name descname"><span class="pre">range</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#GeomScan.range"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.GeomScan.range" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.GeomScan.points">
+<span class="sig-name descname"><span class="pre">points</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#GeomScan.points"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.GeomScan.points" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.GeomBlock">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pychum.engine.orca._dataclasses.</span></span><span class="sig-name descname"><span class="pre">GeomBlock</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#GeomBlock"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.GeomBlock" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pychum.engine.orca._dataclasses.OrcaBlock" title="pychum.engine.orca._dataclasses.OrcaBlock"><code class="xref py py-obj docutils literal notranslate"><span class="pre">OrcaBlock</span></code></a></p>
+<p>Helper class that provides a standard way to create an ABC using
+inheritance.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.GeomBlock.bonds">
+<span class="sig-name descname"><span class="pre">bonds</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#pychum.engine.orca._dataclasses.GeomScan" title="pychum.engine.orca._dataclasses.GeomScan"><span class="pre">GeomScan</span></a><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#GeomBlock.bonds"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.GeomBlock.bonds" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.GeomBlock.dihedrals">
+<span class="sig-name descname"><span class="pre">dihedrals</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#pychum.engine.orca._dataclasses.GeomScan" title="pychum.engine.orca._dataclasses.GeomScan"><span class="pre">GeomScan</span></a><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#GeomBlock.dihedrals"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.GeomBlock.dihedrals" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.GeomBlock.angles">
+<span class="sig-name descname"><span class="pre">angles</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.14)"><span class="pre">list</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#pychum.engine.orca._dataclasses.GeomScan" title="pychum.engine.orca._dataclasses.GeomScan"><span class="pre">GeomScan</span></a><span class="p"><span class="pre">]</span></span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[]</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#GeomBlock.angles"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.GeomBlock.angles" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.GeomBlock.block_type">
+<span class="sig-name descname"><span class="pre">block_type</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pychum.engine.orca._dataclasses.BlockType" title="pychum.engine.orca._dataclasses.BlockType"><span class="pre">BlockType</span></a></span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#GeomBlock.block_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.GeomBlock.block_type" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.LBFGSSettings">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pychum.engine.orca._dataclasses.</span></span><span class="sig-name descname"><span class="pre">LBFGSSettings</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#LBFGSSettings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.LBFGSSettings" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.LBFGSSettings.reparam_on_restart">
+<span class="sig-name descname"><span class="pre">reparam_on_restart</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#LBFGSSettings.reparam_on_restart"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.LBFGSSettings.reparam_on_restart" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.LBFGSSettings.memory">
+<span class="sig-name descname"><span class="pre">memory</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">20</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#LBFGSSettings.memory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.LBFGSSettings.memory" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.LBFGSSettings.precondition">
+<span class="sig-name descname"><span class="pre">precondition</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#LBFGSSettings.precondition"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.LBFGSSettings.precondition" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.LBFGSSettings.dr">
+<span class="sig-name descname"><span class="pre">dr</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.002</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#LBFGSSettings.dr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.LBFGSSettings.dr" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.LBFGSSettings.restart_on_maxmove">
+<span class="sig-name descname"><span class="pre">restart_on_maxmove</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#LBFGSSettings.restart_on_maxmove"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.LBFGSSettings.restart_on_maxmove" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.FIRESettings">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pychum.engine.orca._dataclasses.</span></span><span class="sig-name descname"><span class="pre">FIRESettings</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#FIRESettings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.FIRESettings" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.FIRESettings.init_damp">
+<span class="sig-name descname"><span class="pre">init_damp</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.1</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#FIRESettings.init_damp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.FIRESettings.init_damp" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.FIRESettings.damp_decr">
+<span class="sig-name descname"><span class="pre">damp_decr</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.99</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#FIRESettings.damp_decr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.FIRESettings.damp_decr" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.FIRESettings.step_incr">
+<span class="sig-name descname"><span class="pre">step_incr</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1.1</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#FIRESettings.step_incr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.FIRESettings.step_incr" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.FIRESettings.step_decr">
+<span class="sig-name descname"><span class="pre">step_decr</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.5</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#FIRESettings.step_decr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.FIRESettings.step_decr" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.FIRESettings.max_step">
+<span class="sig-name descname"><span class="pre">max_step</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">5.0</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#FIRESettings.max_step"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.FIRESettings.max_step" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.FIRESettings.retention">
+<span class="sig-name descname"><span class="pre">retention</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">5</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#FIRESettings.retention"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.FIRESettings.retention" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.ReparamSettings">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pychum.engine.orca._dataclasses.</span></span><span class="sig-name descname"><span class="pre">ReparamSettings</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#ReparamSettings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.ReparamSettings" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.ReparamSettings.interp">
+<span class="sig-name descname"><span class="pre">interp</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'linear'</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#ReparamSettings.interp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.ReparamSettings.interp" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.ReparamSettings.every">
+<span class="sig-name descname"><span class="pre">every</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#ReparamSettings.every"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.ReparamSettings.every" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.ReparamSettings.tol">
+<span class="sig-name descname"><span class="pre">tol</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.0</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#ReparamSettings.tol"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.ReparamSettings.tol" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.ReparamSettings.__post_init__">
+<span class="sig-name descname"><span class="pre">__post_init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#ReparamSettings.__post_init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.ReparamSettings.__post_init__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.ConvTolSettings">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pychum.engine.orca._dataclasses.</span></span><span class="sig-name descname"><span class="pre">ConvTolSettings</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#ConvTolSettings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.ConvTolSettings" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.ConvTolSettings.units">
+<span class="sig-name descname"><span class="pre">units</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Eh/Bohr'</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#ConvTolSettings.units"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.ConvTolSettings.units" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.ConvTolSettings.maxfp_i">
+<span class="sig-name descname"><span class="pre">maxfp_i</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.005</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#ConvTolSettings.maxfp_i"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.ConvTolSettings.maxfp_i" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.ConvTolSettings.rmsfp_i">
+<span class="sig-name descname"><span class="pre">rmsfp_i</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.003</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#ConvTolSettings.rmsfp_i"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.ConvTolSettings.rmsfp_i" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.ConvTolSettings.maxf_ci">
+<span class="sig-name descname"><span class="pre">maxf_ci</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.0005</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#ConvTolSettings.maxf_ci"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.ConvTolSettings.maxf_ci" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.ConvTolSettings.rmsf_ci">
+<span class="sig-name descname"><span class="pre">rmsf_ci</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.0003</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#ConvTolSettings.rmsf_ci"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.ConvTolSettings.rmsf_ci" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.ConvTolSettings.turn_on_ci">
+<span class="sig-name descname"><span class="pre">turn_on_ci</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.02</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#ConvTolSettings.turn_on_ci"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.ConvTolSettings.turn_on_ci" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.ConvTolSettings.scale">
+<span class="sig-name descname"><span class="pre">scale</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">10</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#ConvTolSettings.scale"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.ConvTolSettings.scale" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.IDPPSettings">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pychum.engine.orca._dataclasses.</span></span><span class="sig-name descname"><span class="pre">IDPPSettings</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#IDPPSettings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.IDPPSettings" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.IDPPSettings.tol_maxf">
+<span class="sig-name descname"><span class="pre">tol_maxf</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.01</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#IDPPSettings.tol_maxf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.IDPPSettings.tol_maxf" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.IDPPSettings.maxmove">
+<span class="sig-name descname"><span class="pre">maxmove</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.05</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#IDPPSettings.maxmove"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.IDPPSettings.maxmove" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.IDPPSettings.alpha">
+<span class="sig-name descname"><span class="pre">alpha</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.01</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#IDPPSettings.alpha"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.IDPPSettings.alpha" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.IDPPSettings.nmax">
+<span class="sig-name descname"><span class="pre">nmax</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3000</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#IDPPSettings.nmax"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.IDPPSettings.nmax" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.IDPPSettings.quatern">
+<span class="sig-name descname"><span class="pre">quatern</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#IDPPSettings.quatern"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.IDPPSettings.quatern" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.IDPPSettings.ksp">
+<span class="sig-name descname"><span class="pre">ksp</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1.0</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#IDPPSettings.ksp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.IDPPSettings.ksp" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.IDPPSettings.debug">
+<span class="sig-name descname"><span class="pre">debug</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#IDPPSettings.debug"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.IDPPSettings.debug" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.OptimSettings">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pychum.engine.orca._dataclasses.</span></span><span class="sig-name descname"><span class="pre">OptimSettings</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#OptimSettings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.OptimSettings" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.OptimSettings.method">
+<span class="sig-name descname"><span class="pre">method</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'LBFGS'</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#OptimSettings.method"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.OptimSettings.method" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.OptimSettings.maxmove">
+<span class="sig-name descname"><span class="pre">maxmove</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.2</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#OptimSettings.maxmove"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.OptimSettings.maxmove" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.OptimSettings.stepsize">
+<span class="sig-name descname"><span class="pre">stepsize</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1.0</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#OptimSettings.stepsize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.OptimSettings.stepsize" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.OptimSettings.maxiter">
+<span class="sig-name descname"><span class="pre">maxiter</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">500</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#OptimSettings.maxiter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.OptimSettings.maxiter" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.OptimSettings.local">
+<span class="sig-name descname"><span class="pre">local</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#OptimSettings.local"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.OptimSettings.local" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.OptimSettings.__post_init__">
+<span class="sig-name descname"><span class="pre">__post_init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#OptimSettings.__post_init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.OptimSettings.__post_init__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.FreeEndSettings">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pychum.engine.orca._dataclasses.</span></span><span class="sig-name descname"><span class="pre">FreeEndSettings</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#FreeEndSettings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.FreeEndSettings" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.FreeEndSettings.use">
+<span class="sig-name descname"><span class="pre">use</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#FreeEndSettings.use"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.FreeEndSettings.use" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.FreeEndSettings.opt_type">
+<span class="sig-name descname"><span class="pre">opt_type</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'PERP'</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#FreeEndSettings.opt_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.FreeEndSettings.opt_type" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.FreeEndSettings.ec">
+<span class="sig-name descname"><span class="pre">ec</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.0</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#FreeEndSettings.ec"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.FreeEndSettings.ec" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.FreeEndSettings.ec_end">
+<span class="sig-name descname"><span class="pre">ec_end</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.0</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#FreeEndSettings.ec_end"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.FreeEndSettings.ec_end" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.FreeEndSettings.kappa">
+<span class="sig-name descname"><span class="pre">kappa</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1.0</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#FreeEndSettings.kappa"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.FreeEndSettings.kappa" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.FreeEndSettings.__post_init__">
+<span class="sig-name descname"><span class="pre">__post_init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#FreeEndSettings.__post_init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.FreeEndSettings.__post_init__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.ZoomSettings">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pychum.engine.orca._dataclasses.</span></span><span class="sig-name descname"><span class="pre">ZoomSettings</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#ZoomSettings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.ZoomSettings" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.ZoomSettings.tol_turn_on">
+<span class="sig-name descname"><span class="pre">tol_turn_on</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.0</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#ZoomSettings.tol_turn_on"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.ZoomSettings.tol_turn_on" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.ZoomSettings.offset">
+<span class="sig-name descname"><span class="pre">offset</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#ZoomSettings.offset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.ZoomSettings.offset" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.ZoomSettings.auto">
+<span class="sig-name descname"><span class="pre">auto</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#ZoomSettings.auto"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.ZoomSettings.auto" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.ZoomSettings.tol_scale">
+<span class="sig-name descname"><span class="pre">tol_scale</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">10</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#ZoomSettings.tol_scale"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.ZoomSettings.tol_scale" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.ZoomSettings.alpha">
+<span class="sig-name descname"><span class="pre">alpha</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.5</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#ZoomSettings.alpha"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.ZoomSettings.alpha" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.ZoomSettings.interpolation">
+<span class="sig-name descname"><span class="pre">interpolation</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'linear'</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#ZoomSettings.interpolation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.ZoomSettings.interpolation" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.ZoomSettings.printfulltrj">
+<span class="sig-name descname"><span class="pre">printfulltrj</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#ZoomSettings.printfulltrj"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.ZoomSettings.printfulltrj" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.ZoomSettings.__post_init__">
+<span class="sig-name descname"><span class="pre">__post_init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#ZoomSettings.__post_init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.ZoomSettings.__post_init__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.SpringSettings">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pychum.engine.orca._dataclasses.</span></span><span class="sig-name descname"><span class="pre">SpringSettings</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#SpringSettings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.SpringSettings" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.SpringSettings.spring_kind">
+<span class="sig-name descname"><span class="pre">spring_kind</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'image'</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#SpringSettings.spring_kind"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.SpringSettings.spring_kind" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.SpringSettings.const1">
+<span class="sig-name descname"><span class="pre">const1</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.01</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#SpringSettings.const1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.SpringSettings.const1" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.SpringSettings.const2">
+<span class="sig-name descname"><span class="pre">const2</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.14)"><span class="pre">float</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.1</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#SpringSettings.const2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.SpringSettings.const2" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.SpringSettings.energy_weighted">
+<span class="sig-name descname"><span class="pre">energy_weighted</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#SpringSettings.energy_weighted"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.SpringSettings.energy_weighted" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.SpringSettings.perpspring">
+<span class="sig-name descname"><span class="pre">perpspring</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'no'</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#SpringSettings.perpspring"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.SpringSettings.perpspring" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.SpringSettings.llt_cos">
+<span class="sig-name descname"><span class="pre">llt_cos</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#SpringSettings.llt_cos"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.SpringSettings.llt_cos" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.SpringSettings.__post_init__">
+<span class="sig-name descname"><span class="pre">__post_init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#SpringSettings.__post_init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.SpringSettings.__post_init__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.RestartSettings">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pychum.engine.orca._dataclasses.</span></span><span class="sig-name descname"><span class="pre">RestartSettings</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#RestartSettings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.RestartSettings" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.RestartSettings.gbw_basename">
+<span class="sig-name descname"><span class="pre">gbw_basename</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#RestartSettings.gbw_basename"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.RestartSettings.gbw_basename" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.RestartSettings.allxyz">
+<span class="sig-name descname"><span class="pre">allxyz</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#RestartSettings.allxyz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.RestartSettings.allxyz" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.RestartSettings.__post_init__">
+<span class="sig-name descname"><span class="pre">__post_init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#RestartSettings.__post_init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.RestartSettings.__post_init__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.TSGuessSettings">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pychum.engine.orca._dataclasses.</span></span><span class="sig-name descname"><span class="pre">TSGuessSettings</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#TSGuessSettings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.TSGuessSettings" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.TSGuessSettings.xyz_struct">
+<span class="sig-name descname"><span class="pre">xyz_struct</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#TSGuessSettings.xyz_struct"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.TSGuessSettings.xyz_struct" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.TSGuessSettings.pdb_struct">
+<span class="sig-name descname"><span class="pre">pdb_struct</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#TSGuessSettings.pdb_struct"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.TSGuessSettings.pdb_struct" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.TSGuessSettings.ts_img">
+<span class="sig-name descname"><span class="pre">ts_img</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">-1</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#TSGuessSettings.ts_img"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.TSGuessSettings.ts_img" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.TSGuessSettings.__post_init__">
+<span class="sig-name descname"><span class="pre">__post_init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#TSGuessSettings.__post_init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.TSGuessSettings.__post_init__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.FixCenterSettings">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pychum.engine.orca._dataclasses.</span></span><span class="sig-name descname"><span class="pre">FixCenterSettings</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#FixCenterSettings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.FixCenterSettings" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.FixCenterSettings.active">
+<span class="sig-name descname"><span class="pre">active</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#FixCenterSettings.active"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.FixCenterSettings.active" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.FixCenterSettings.remove_extern_force">
+<span class="sig-name descname"><span class="pre">remove_extern_force</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#FixCenterSettings.remove_extern_force"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.FixCenterSettings.remove_extern_force" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.NebBlock">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pychum.engine.orca._dataclasses.</span></span><span class="sig-name descname"><span class="pre">NebBlock</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#NebBlock"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.NebBlock" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pychum.engine.orca._dataclasses.OrcaBlock" title="pychum.engine.orca._dataclasses.OrcaBlock"><code class="xref py py-obj docutils literal notranslate"><span class="pre">OrcaBlock</span></code></a></p>
+<p>Helper class that provides a standard way to create an ABC using
+inheritance.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.NebBlock.end_xyz">
+<span class="sig-name descname"><span class="pre">end_xyz</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#NebBlock.end_xyz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.NebBlock.end_xyz" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.NebBlock.nimgs">
+<span class="sig-name descname"><span class="pre">nimgs</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#NebBlock.nimgs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.NebBlock.nimgs" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.NebBlock.convtype">
+<span class="sig-name descname"><span class="pre">convtype</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'CIONLY'</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#NebBlock.convtype"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.NebBlock.convtype" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.NebBlock.printlevel">
+<span class="sig-name descname"><span class="pre">printlevel</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#NebBlock.printlevel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.NebBlock.printlevel" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.NebBlock.neb_ts">
+<span class="sig-name descname"><span class="pre">neb_ts</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#NebBlock.neb_ts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.NebBlock.neb_ts" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.NebBlock.neb_ci">
+<span class="sig-name descname"><span class="pre">neb_ci</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#NebBlock.neb_ci"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.NebBlock.neb_ci" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.NebBlock.quatern">
+<span class="sig-name descname"><span class="pre">quatern</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ALWAYS'</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#NebBlock.quatern"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.NebBlock.quatern" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.NebBlock.climbingimage">
+<span class="sig-name descname"><span class="pre">climbingimage</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#NebBlock.climbingimage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.NebBlock.climbingimage" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.NebBlock.check_scf_conv">
+<span class="sig-name descname"><span class="pre">check_scf_conv</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">True</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#NebBlock.check_scf_conv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.NebBlock.check_scf_conv" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.NebBlock.preopt">
+<span class="sig-name descname"><span class="pre">preopt</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#NebBlock.preopt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.NebBlock.preopt" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.NebBlock.nsteps_foundintermediate">
+<span class="sig-name descname"><span class="pre">nsteps_foundintermediate</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">30</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#NebBlock.nsteps_foundintermediate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.NebBlock.nsteps_foundintermediate" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.NebBlock.abortif_foundintermediate">
+<span class="sig-name descname"><span class="pre">abortif_foundintermediate</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.14)"><span class="pre">bool</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">False</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#NebBlock.abortif_foundintermediate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.NebBlock.abortif_foundintermediate" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.NebBlock.npts_interpol">
+<span class="sig-name descname"><span class="pre">npts_interpol</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.14)"><span class="pre">int</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">10</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#NebBlock.npts_interpol"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.NebBlock.npts_interpol" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.NebBlock.interpolation">
+<span class="sig-name descname"><span class="pre">interpolation</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'IDPP'</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#NebBlock.interpolation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.NebBlock.interpolation" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.NebBlock.tangent">
+<span class="sig-name descname"><span class="pre">tangent</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'IMPROVED'</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#NebBlock.tangent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.NebBlock.tangent" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.NebBlock.lbfgs_settings">
+<span class="sig-name descname"><span class="pre">lbfgs_settings</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#pychum.engine.orca._dataclasses.LBFGSSettings" title="pychum.engine.orca._dataclasses.LBFGSSettings"><span class="pre">LBFGSSettings</span></a></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#NebBlock.lbfgs_settings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.NebBlock.lbfgs_settings" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.NebBlock.fire_settings">
+<span class="sig-name descname"><span class="pre">fire_settings</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#pychum.engine.orca._dataclasses.FIRESettings" title="pychum.engine.orca._dataclasses.FIRESettings"><span class="pre">FIRESettings</span></a></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#NebBlock.fire_settings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.NebBlock.fire_settings" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.NebBlock.reparam_settings">
+<span class="sig-name descname"><span class="pre">reparam_settings</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#pychum.engine.orca._dataclasses.ReparamSettings" title="pychum.engine.orca._dataclasses.ReparamSettings"><span class="pre">ReparamSettings</span></a></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#NebBlock.reparam_settings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.NebBlock.reparam_settings" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.NebBlock.idpp_settings">
+<span class="sig-name descname"><span class="pre">idpp_settings</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#pychum.engine.orca._dataclasses.IDPPSettings" title="pychum.engine.orca._dataclasses.IDPPSettings"><span class="pre">IDPPSettings</span></a></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#NebBlock.idpp_settings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.NebBlock.idpp_settings" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.NebBlock.zoom_settings">
+<span class="sig-name descname"><span class="pre">zoom_settings</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#pychum.engine.orca._dataclasses.ZoomSettings" title="pychum.engine.orca._dataclasses.ZoomSettings"><span class="pre">ZoomSettings</span></a></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#NebBlock.zoom_settings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.NebBlock.zoom_settings" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.NebBlock.optim_settings">
+<span class="sig-name descname"><span class="pre">optim_settings</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#pychum.engine.orca._dataclasses.OptimSettings" title="pychum.engine.orca._dataclasses.OptimSettings"><span class="pre">OptimSettings</span></a></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#NebBlock.optim_settings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.NebBlock.optim_settings" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.NebBlock.convtol_settings">
+<span class="sig-name descname"><span class="pre">convtol_settings</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#pychum.engine.orca._dataclasses.ConvTolSettings" title="pychum.engine.orca._dataclasses.ConvTolSettings"><span class="pre">ConvTolSettings</span></a></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#NebBlock.convtol_settings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.NebBlock.convtol_settings" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.NebBlock.free_end_settings">
+<span class="sig-name descname"><span class="pre">free_end_settings</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#pychum.engine.orca._dataclasses.FreeEndSettings" title="pychum.engine.orca._dataclasses.FreeEndSettings"><span class="pre">FreeEndSettings</span></a></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#NebBlock.free_end_settings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.NebBlock.free_end_settings" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.NebBlock.spring_settings">
+<span class="sig-name descname"><span class="pre">spring_settings</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#pychum.engine.orca._dataclasses.SpringSettings" title="pychum.engine.orca._dataclasses.SpringSettings"><span class="pre">SpringSettings</span></a></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#NebBlock.spring_settings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.NebBlock.spring_settings" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.NebBlock.restart_settings">
+<span class="sig-name descname"><span class="pre">restart_settings</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#pychum.engine.orca._dataclasses.RestartSettings" title="pychum.engine.orca._dataclasses.RestartSettings"><span class="pre">RestartSettings</span></a></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#NebBlock.restart_settings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.NebBlock.restart_settings" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.NebBlock.tsguess_settings">
+<span class="sig-name descname"><span class="pre">tsguess_settings</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#pychum.engine.orca._dataclasses.TSGuessSettings" title="pychum.engine.orca._dataclasses.TSGuessSettings"><span class="pre">TSGuessSettings</span></a></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#NebBlock.tsguess_settings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.NebBlock.tsguess_settings" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.NebBlock.fix_center_settings">
+<span class="sig-name descname"><span class="pre">fix_center_settings</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#pychum.engine.orca._dataclasses.FixCenterSettings" title="pychum.engine.orca._dataclasses.FixCenterSettings"><span class="pre">FixCenterSettings</span></a></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#NebBlock.fix_center_settings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.NebBlock.fix_center_settings" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.NebBlock.__post_init__">
+<span class="sig-name descname"><span class="pre">__post_init__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#NebBlock.__post_init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.NebBlock.__post_init__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.NebBlock.block_type">
+<span class="sig-name descname"><span class="pre">block_type</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pychum.engine.orca._dataclasses.BlockType" title="pychum.engine.orca._dataclasses.BlockType"><span class="pre">BlockType</span></a></span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#NebBlock.block_type"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.NebBlock.block_type" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.OrcaConfig">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">pychum.engine.orca._dataclasses.</span></span><span class="sig-name descname"><span class="pre">OrcaConfig</span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#OrcaConfig"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.OrcaConfig" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.OrcaConfig.kwlines">
+<span class="sig-name descname"><span class="pre">kwlines</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#OrcaConfig.kwlines"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.OrcaConfig.kwlines" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.OrcaConfig.coords">
+<span class="sig-name descname"><span class="pre">coords</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#pychum.engine.orca._dataclasses.Coords" title="pychum.engine.orca._dataclasses.Coords"><span class="pre">Coords</span></a></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#OrcaConfig.coords"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.OrcaConfig.coords" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.OrcaConfig.blocks">
+<span class="sig-name descname"><span class="pre">blocks</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#pychum.engine.orca._dataclasses.BlockType" title="pychum.engine.orca._dataclasses.BlockType"><span class="pre">BlockType</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#pychum.engine.orca._dataclasses.OrcaBlock" title="pychum.engine.orca._dataclasses.OrcaBlock"><span class="pre">OrcaBlock</span></a><span class="p"><span class="pre">]</span></span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#OrcaConfig.blocks"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.OrcaConfig.blocks" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.OrcaConfig.extra_blocks">
+<span class="sig-name descname"><span class="pre">extra_blocks</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.14)"><span class="pre">dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.14)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#OrcaConfig.extra_blocks"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.OrcaConfig.extra_blocks" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pychum.engine.orca._dataclasses.OrcaConfig.add_block">
+<span class="sig-name descname"><span class="pre">add_block</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">block</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#pychum.engine.orca._dataclasses.OrcaBlock" title="pychum.engine.orca._dataclasses.OrcaBlock"><span class="pre">OrcaBlock</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../../_modules/pychum/engine/orca/_dataclasses.html#OrcaConfig.add_block"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pychum.engine.orca._dataclasses.OrcaConfig.add_block" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>Back to top</span>
+</button><div class="navigation flex print:hidden"></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>2026, Rohit Goswami</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials">
+<a href="https://github.com/HaoZeke/pychum" aria-label="GitHub">
+  <iconify-icon icon="simple-icons:github"></iconify-icon>
+</a></div>
+    </div>
+  </div>
+</footer>
+      <script src="../../../../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../../../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../../../../_static/shibuya.js?v=cac61aee"></script></body>
+</html>
