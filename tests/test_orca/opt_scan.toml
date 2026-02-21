@@ -24,18 +24,18 @@ inp = "electron-volt"
 out = "hartree"
 
 [coords]
-fmt = "xyzfile"  # Options: xyz, int, gzmt, xyzfile, gzmtfile
-charge = 0
+fmt          = "xyzfile"     # Options: xyz, int, gzmt, xyzfile, gzmtfile
+charge       = 0
 multiplicity = 1
-filedat = "h2_base.xyz"
+filedat      = "h2_base.xyz"
 # atoms = [
 #     { symbol = "C", x = 0.0, y = 0.0, z = 0.0 },
 #     { symbol = "O", x = 0.0, y = 0.0, z = 1.13 }
 # ]
 
 [[orca.geom.bonds]]
-atoms = [0, 1]
-range = [0.40, 2.00]
+atoms  = [ 0, 1 ]
+range  = [ 0.40, 2.00 ]
 points = 17
 
 # [[orca.geom.bonds]]
@@ -44,11 +44,11 @@ points = 17
 # points = 13
 
 [[orca.geom.dihedrals]]
-atoms = [0, 1]
-range = [60, 80]
+atoms  = [ 0, 1 ]
+range  = [ 60, 80 ]
 points = 39
 
 [[orca.geom.angles]]
-atoms = [0, 1, 2]
-range = [30, 80]
+atoms  = [ 0, 1, 2 ]
+range  = [ 30, 80 ]
 points = 62

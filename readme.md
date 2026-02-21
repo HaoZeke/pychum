@@ -1,20 +1,21 @@
 
 # Table of Contents
 
--   [About](#org476f174)
-    -   [Features](#org0168ce7)
-        -   [Supported Engines](#org24b6ad5)
-    -   [Rationale](#org49cd152)
--   [Usage](#org4a4d3d9)
--   [Development](#org7fadd95)
-    -   [Adding ORCA blocks](#org70cb903)
-    -   [Documentation](#org86de685)
-        -   [Readme](#org9468810)
--   [License](#orgc959d45)
+-   [About](#orgf82c3d6)
+    -   [Ecosystem Overview](#org1ef5b99)
+    -   [Features](#orgd7f6835)
+        -   [Supported Engines](#org6e22848)
+    -   [Rationale](#org5ac5dff)
+-   [Usage](#orgde48b7e)
+-   [Development](#org60cabf4)
+    -   [Adding ORCA blocks](#org4153b25)
+    -   [Documentation](#org721896a)
+        -   [Readme](#orga426038)
+-   [License](#org33508b4)
 
 
 
-<a id="org476f174"></a>
+<a id="orgf82c3d6"></a>
 
 # About
 
@@ -35,7 +36,16 @@ uniform visualizations for the outputs of various computational chemistry
 programs.
 
 
-<a id="org0168ce7"></a>
+<a id="org1ef5b99"></a>
+
+## Ecosystem Overview
+
+`pychum` is part of the `rgpycrumbs` suite of interlinked libraries.
+
+![img](branding/logo/ecosystem.png)
+
+
+<a id="orgd7f6835"></a>
 
 ## Features
 
@@ -45,7 +55,7 @@ programs.
     -   Via `pint`
 
 
-<a id="org24b6ad5"></a>
+<a id="org6e22848"></a>
 
 ### Supported Engines
 
@@ -57,24 +67,35 @@ programs.
     -   EON
 
 
-<a id="org49cd152"></a>
+<a id="org5ac5dff"></a>
 
 ## Rationale
 
 I needed to run a bunch of systems. `jobflow` / Fireworks / AiiDA were ideal,
 until I realized only VASP is really well supported by them.
 
+Also there were some minor problems with the ORCA input parser&#x2026;
 
-<a id="org4a4d3d9"></a>
+-   It chokes on multiple `#` symbols, so `# MaxIter 50 # something` will error
+    out on `SOMETHING`
+-   No real ordering or syntax highlighting in major IDEs
+
+Along with other minor inconveniences which make for enough friction over time
+to necessitate this library.
+
+
+<a id="orgde48b7e"></a>
 
 # Usage
 
 The simplest usage is via the CLI:
 
-    python -m pychum.cli
+    uv run pychum --help
+    # Or alternatively
+    python -m pychum.cli --help
 
 
-<a id="org7fadd95"></a>
+<a id="org60cabf4"></a>
 
 # Development
 
@@ -82,16 +103,14 @@ Before writing tests and incorporating the functions into the CLI it is helpful
 to often visualize the intermediate steps. For this we can setup a complete
 development environment including the notebook server.
 
-    pixi shell
-    pdm sync
-    pdm run $SHELL
-    jupyter lab --ServerApp.allow_remote_access=1 \
+    uv sync --all-extras
+    uv run jupyter lab --ServerApp.allow_remote_access=1 \
         --ServerApp.open_browser=False --port=8889
 
 Then go through the `nb` folder notebooks.
 
 
-<a id="org70cb903"></a>
+<a id="org4153b25"></a>
 
 ## Adding ORCA blocks
 
@@ -106,12 +125,12 @@ While working on this, it may be instructive to use the `nb` folder notebooks.
 Also all PRs must include a full test suite for the new blocks.
 
 
-<a id="org86de685"></a>
+<a id="org721896a"></a>
 
 ## Documentation
 
 
-<a id="org9468810"></a>
+<a id="orga426038"></a>
 
 ### Readme
 
@@ -120,7 +139,7 @@ The `readme` can be constructed via:
     ./scripts/org_to_md.sh readme_src.org readme.md
 
 
-<a id="orgc959d45"></a>
+<a id="org33508b4"></a>
 
 # License
 
@@ -129,4 +148,3 @@ via:
 
 -   The Zenodo DOI for general use.
 -   The `wailord` paper for ORCA usage
-

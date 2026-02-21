@@ -15,6 +15,12 @@ runs in a specific workflow, while ~pychum~ is meant to generate *single runs*.
 It is also a companion to ~chemparseplot~ ([[https://github.com/haoZeke/chemparseplot][here]]) which is meant to provide
 uniform visualizations for the outputs of various computational chemistry
 programs.
+
+** Ecosystem Overview
+   ~pychum~ is part of the ~rgpycrumbs~ suite of interlinked libraries.
+
+[[file:branding/logo/ecosystem.png]]
+
 ** Features
 - Jobflow support
   + Along with Fireworks
@@ -37,21 +43,21 @@ Also there were some minor problems with the ORCA input parser...
 - No real ordering or syntax highlighting in major IDEs
 
 Along with other minor inconveniences which make for enough friction over time
-to necessiate this library.
+to necessitate this library.
 * Usage
 The simplest usage is via the CLI:
 #+begin_src bash
-python -m pychum.cli
+uv run pychum --help
+# Or alternatively
+python -m pychum.cli --help
 #+end_src
 * Development
 Before writing tests and incorporating the functions into the CLI it is helpful
 to often visualize the intermediate steps. For this we can setup a complete
 development environment including the notebook server.
 #+begin_src bash
-pixi shell
-pdm sync
-pdm run $SHELL
-jupyter lab --ServerApp.allow_remote_access=1 \
+uv sync --all-extras
+uv run jupyter lab --ServerApp.allow_remote_access=1 \
     --ServerApp.open_browser=False --port=8889
 #+end_src
 Then go through the ~nb~ folder notebooks.

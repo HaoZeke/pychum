@@ -1,0 +1,22 @@
+# Changelog
+
+<!-- towncrier release notes start -->
+
+## [v1.1.0](https://github.com/HaoZeke/pychum/tree/v1.1.0) - 2026-02-21
+
+### Added
+
+- `uv`-first development workflow, replacing PDM.
+- Core dependencies on `rgpycrumbs>=1.1.0` and `chemparseplot>=1.1.0`.
+- Standard optional dependency groups for `test`, `lint`, `cli`, and `doc`.
+
+### Changed
+
+- Renamed package and all internal imports back to `pychum` (from `pychumpchem`) for PyPI consistency.
+- Updated ORCA input templates and test expectations for NEB blocks.
+- Synchronized project version to `1.1.0` across `pixi.toml` and metadata.
+
+### Fixed
+
+- Coverage path configurations in `pyproject.toml`.
+- Mass-corrected all legacy `pychum` imports in tests and notebooks.

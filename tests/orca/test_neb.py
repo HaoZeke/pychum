@@ -20,7 +20,7 @@ default_expectation = """%neb
     convtype  CIONLY
     printlevel  4
     neb_ts  false
-    neb_ci  false
+    ci  false
     quatern  ALWAYS
     climbingimage  true
     CheckSCFConv True
@@ -67,7 +67,7 @@ default_expectation = """%neb
     maxiter  500
     local  false
 
-    lbfgs_mem  20
+    lbfgs_memory  20
     lbfgs_dr  0.002
     lbfgs_restart_on_maxmove  true
     lbfgs_reparam_on_restart  false
