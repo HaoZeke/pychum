@@ -12,7 +12,6 @@ author = "Rohit Goswami"
 
 # -- General configuration ---------------------------------------------------
 extensions = [
-    "sphinx_click",  # Generates the CLI reference (Options/Args)
     "sphinxcontrib.programoutput",  # Runs 'uv run ...' for dynamic examples
     # Include autodoc since sphinx-click relies on its mocking machinery.
     "sphinx.ext.autodoc",  # Needed for mocking machinery
@@ -37,7 +36,6 @@ autodoc_mock_imports = [
     "numpy",
     "ase",
     "rich",
-    "click",
     "jinja2",
     "tomli",
     "chemparseplot",

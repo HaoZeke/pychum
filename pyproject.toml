@@ -28,12 +28,10 @@ classifiers = [
 ]
 dynamic = [ "version" ]
 dependencies = [
-  "numpy>=1.26.2",
   "pint>=0.22",
   "tomli>=2.0.1",
   "jinja2>=3.1.2",
-  "rgpycrumbs>=1.1.0",
-  "chemparseplot>=1.1.0",
+  "ase>=3.27.0",
 ]
 
 [project.optional-dependencies]
@@ -49,7 +47,6 @@ doc = [
   "sphinx-togglebutton>=0.3.2",
   "sphinxcontrib-apidoc>=0.4",
 ]
-cli = [ "click>=8.1.7" ]
 test = [
   "pytest>=7.4.3",
   "pytest-cov>=4.1.0",

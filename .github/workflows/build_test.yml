@@ -26,4 +26,4 @@ jobs:
       - name: Install dependencies
         run: uv sync --all-extras
       - name: Run tests
-        run: uv run pytest --cov=pychum tests
+        run: uv run python -m pytest --cov=pychum tests
