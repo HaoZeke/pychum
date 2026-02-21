@@ -1,0 +1,22 @@
+start nwchem_socket_job
+title "NWChem Server for eOn"
+
+memory {{ config.mem_in_gb }} gb
+
+geometry units bohr noautosym nocenter noautoz
+{% for atom in config.atoms %}
+  {{ "%-4s"|format(atom.symbol) }} {{ "%16.10f"|format(atom.x) }} {{ "%16.10f"|format(atom.y) }} {{ "%16.10f"|format(atom.z) }}
+{% endfor %}
+end
+
+include {{ config.settings_path.name }}
+
+driver
+{% if config.unix_mode %}
+  socket unix {{ config.socket_address }}
+{% else %}
+  socket ipi_client {{ config.socket_address }}
+{% endif %}
+end
+
+task scf optimize

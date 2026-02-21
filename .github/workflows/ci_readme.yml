@@ -1,0 +1,27 @@
+name: Generate README
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'readme_src.org'
+      - 'scripts/org_to_md.sh'
+
+jobs:
+  readme:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y emacs-nox
+      - name: Generate README
+        run: ./scripts/org_to_md.sh readme_src.org readme.md
+      - name: Commit and push if changed
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add readme.md
+          git diff --quiet && git diff --staged --quiet || git commit -m "docs: auto-generate readme.md from readme_src.org"
+          git push

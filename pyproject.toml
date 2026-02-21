@@ -6,40 +6,21 @@ requires      = [ "hatch-vcs", "hatchling" ]
 version-file = "_version.py"
 
 [tool.hatch.build]
-include = [ "pychumpchem/**/*.py", "pychumpchem/*.py", "/tests" ]
+include = [ "pychum/**/*.py", "pychum/*.py", "/tests" ]
 
-
-[tool.pdm.dev-dependencies]
-lint        = [ "ruff>=0.1.6" ]
-test        = [
-    "pytest>=7.4.3",
-    "pytest-cov>=4.1.0",
-    "coverage[toml]>=7.3.2",
-    "pytest-datadir>=1.5.0",
-]
-nbdoc       = [ "jupyterlab>=4.0.9", "jupytext>=1.15.2", "ase>=3.22.1" ]
-release_aid = [ "tbump>=6.11.0", "towncrier>=23.11.0" ]
-
-[tool.pdm.scripts]
-check_ruff  = "ruff ."
-ruff_fix    = "ruff --fix ."
-ruff_format = "ruff format ."
-lint        = { composite = [ "ruff_fix", "ruff_format" ] }
-test        = "pytest --cov=pychumpchem tests"
 
 [project]
-name = "pychumpchem"
+name = "pychum"
 description = "Input file generators for computational chemistry"
 readme = "readme.md"
 keywords = [ "compchem", "config" ]
 license = { text = "MIT" }
-authors = [ { name = "Rohit Goswami", email = "rog32@hi.is" } ]
+authors = [ { name = "Rohit Goswami", email = "rgoswami@ieee.org" } ]
 requires-python = ">=3.10"
 classifiers = [
   "Development Status :: 4 - Beta",
   "Programming Language :: Python",
   "Programming Language :: Python :: 3 :: Only",
-  "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
@@ -51,7 +32,10 @@ dependencies = [
   "pint>=0.22",
   "tomli>=2.0.1",
   "jinja2>=3.1.2",
+  "rgpycrumbs>=1.1.0",
+  "chemparseplot>=1.1.0",
 ]
+
 [project.optional-dependencies]
 doc = [
   "mdit-py-plugins>=0.3.4",
@@ -65,13 +49,25 @@ doc = [
   "sphinx-togglebutton>=0.3.2",
   "sphinxcontrib-apidoc>=0.4",
 ]
-"cli" = [
+cli = [
     "click>=8.1.7",
 ]
+test = [
+    "pytest>=7.4.3",
+    "pytest-cov>=4.1.0",
+    "coverage[toml]>=7.3.2",
+    "pytest-datadir>=1.5.0",
+]
+lint = [ "ruff>=0.1.6" ]
+
+[tool.uv.sources]
+rgpycrumbs = { git = "https://github.com/HaoZeke/rgpycrumbs" }
+chemparseplot = { git = "https://github.com/HaoZeke/chemparseplot" }
+
 [project.urls]
-Documentation = "https://github.com/HaoZeke/pychumpchem#readme"
-Issues        = "https://github.com/HaoZeke/pychumpchem/issues"
-Source        = "https://github.com/HaoZeke/pychumpchem"
+Documentation = "https://github.com/HaoZeke/pychum#readme"
+Issues        = "https://github.com/HaoZeke/pychum/issues"
+Source        = "https://github.com/HaoZeke/pychum"
 
 [tool.hatch.version]
 source = "vcs"
@@ -130,7 +126,7 @@ unfixable = [
 ]
 
 [tool.ruff.isort]
-known-first-party = [ "pychumpchem" ]
+known-first-party = [ "pychum" ]
 
 [tool.ruff.flake8-tidy-imports]
 ban-relative-imports = "all"
@@ -142,13 +138,13 @@ ban-relative-imports = "all"
 "__init__.py" = [ "F401" ]
 
 [tool.coverage.run]
-source_pkgs = [ "pychumpchem" ]
+source_pkgs = [ "pychum" ]
 branch      = true
 parallel    = true
 omit        = [ "_version.py" ]
 
 [tool.coverage.paths]
-pychumpchem = [ "src/pychumpchem", "*/pychumpchem/src/pychumpchem" ]
+pychum = [ "pychum", "*/pychum/pychum" ]
 tests  = [ "tests" ]
 
 [tool.coverage.report]
@@ -160,8 +156,8 @@ underlines   = [ "", "", "" ]
 single_file  = true
 filename     = "CHANGELOG.md"
 directory    = "doc/release/upcoming_changes/"
-issue_format = "[#{issue}](https://github.com/HaoZeke/pychumpchem/issues/{issue})"
-title_format = "## [{version}](https://github.com/HaoZeke/pychumpchem/tree/{version}) - {project_date}"
+issue_format = "[#{issue}](https://github.com/HaoZeke/pychum/issues/{issue})"
+title_format = "## [{version}](https://github.com/HaoZeke/pychum/tree/{version}) - {project_date}"
 all_bullets  = false
 
 [[tool.towncrier.type]]
