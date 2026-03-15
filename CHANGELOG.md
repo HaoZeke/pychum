@@ -2,7 +2,7 @@
 
 <!-- towncrier release notes start -->
 
-## [v1.1.0](https://github.com/HaoZeke/pychum/tree/v1.1.0) - 2026-02-21
+## v1.1.0 - 2026-02-21
 
 ### Added
 
