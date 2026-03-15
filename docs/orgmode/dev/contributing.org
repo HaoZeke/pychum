@@ -1,0 +1,60 @@
+#+TITLE: Contributing Guidelines
+#+AUTHOR: [[https://rgoswami.me][Rohit Goswami]]
+#+EMAIL: rgoswami@ieee.org
+#+OPTIONS: toc:t num:nil
+
+* Contributing to pychum
+
+** Getting Started
+
+*** 1. Fork and Clone
+
+#+begin_src bash
+git clone https://github.com/your-username/pychum
+cd pychum
+#+end_src
+
+*** 2. Set Up Environment
+
+#+begin_src bash
+uv sync --all-extras
+#+end_src
+
+*** 3. Run Tests
+
+#+begin_src bash
+uv run pytest
+#+end_src
+
+** Code Style
+
+*** Formatting
+
+#+begin_src bash
+uv run ruff format .
+uv run ruff check .
+#+end_src
+
+** Adding New Engines
+
+*** Directory Structure
+
+#+begin_src text
+pychum/engine/<code>/
+|-- __init__.py
+|-- _dataclasses.py
+|-- _renderer.py
+`-- test_renderer.py
+#+end_src
+
+** Pull Request Process
+
+1. Create branch
+2. Add tests
+3. Run CI checks
+4. Submit PR
+
+** See Also
+
+- [[file:best_practices.org][Best Practices]]
+- [[file:../howto/index.org][How-to Guides]]

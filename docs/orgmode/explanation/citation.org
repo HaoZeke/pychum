@@ -1,0 +1,40 @@
+#+TITLE: How to Cite pychum
+#+AUTHOR: [[https://rgoswami.me][Rohit Goswami]]
+#+EMAIL: rgoswami@ieee.org
+#+OPTIONS: toc:nil num:nil
+#+BIBLIOGRAPHY: ~/Documents/zotLib.bib
+
+* How to Cite pychum
+
+If you use pychum in your research, please cite:
+
+** Software Citation
+
+cite:[goswami2024pychum]
+
+** Methods Citation
+
+For reaction path visualization with 2D reaction valley projection:
+
+cite:[goswami2026valley]
+
+For NEB input generation and enhanced CI-NEB:
+
+cite:[goswami2026neb]
+
+** Combined Citation
+
+cite:[goswami2024pychum goswami2026valley goswami2026neb]
+
+** Acknowledgments
+
+#+begin_src text
+Input files were generated using pychum (https://github.com/HaoZeke/pychum).
+Reaction path visualization employed the 2D reaction valley projection method [cite:@goswami2026valley].
+NEB calculations used enhanced CI-NEB [cite:@goswami2026neb].
+#+end_src
+
+** See Also
+
+- [[file:../reference/index.org][Reference]]
+- [[file:../tutorials/index.org][Tutorials]]

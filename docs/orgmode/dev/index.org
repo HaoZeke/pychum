@@ -1,0 +1,61 @@
+#+TITLE: Developer Documentation
+#+AUTHOR: [[https://rgoswami.me][Rohit Goswami]]
+#+EMAIL: rgoswami@ieee.org
+#+OPTIONS: toc:t num:nil
+
+* Developer Documentation
+
+Technical documentation for developers working on pychum.
+
+** Architecture
+
+| Document | Description |
+|----------+-------------|
+| [[file:input_generation.org][Input Generation]] | How pychum generates input files |
+| [[file:template_system.org][Template System]] | Jinja2 template rendering |
+| [[file:orca_blocks.org][ORCA Blocks]] | ORCA input block system |
+
+** Patterns
+
+| Pattern | Description |
+|---------+-------------|
+| [[file:lazy_imports.org][Lazy Imports]] | Defer optional dependency loading |
+| [[file:dataclasses.org][Dataclasses]] | Data structure definitions |
+| [[file:validators.org][Validators]] | Input validation patterns |
+
+** Contributing
+
+- [[file:../contributing.org][Contributing Guidelines]]
+- [[file:../release.org][Release Process]]
+- [[file:../testing.org][Testing Guidelines]]
+
+* Quick Start for Developers
+
+** Setup**
+
+#+begin_src bash
+git clone https://github.com/HaoZeke/pychum
+cd pychum
+uv sync --all-extras
+#+end_src
+
+** Run Tests**
+
+#+begin_src bash
+uv run pytest
+#+end_src
+
+** Add New Engine**
+
+1. Create =pychum/engine/<code>/= directory
+2. Add _dataclasses.py, _renderer.py
+3. Add to pychum/engine/__init__.py
+4. Add tests in =tests/engine/<code>/=
+
+See [[file:input_generation.org][Input Generation]] for details.
+
+* Related
+
+- [[file:../index.org][Main Documentation]]
+- [[file:../tutorials/index.org][Tutorials]]
+- [[https://github.com/HaoZeke/pychum][GitHub Repository]]

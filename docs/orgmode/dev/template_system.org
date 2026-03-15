@@ -1,0 +1,117 @@
+#+TITLE: Template System
+#+AUTHOR: [[https://rgoswami.me][Rohit Goswami]]
+#+EMAIL: rgoswami@ieee.org
+#+OPTIONS: toc:t num:nil
+
+* Overview
+
+pychum uses Jinja2 templates to convert dataclass instances into
+engine-specific input text. Templates live in =_blocks/= directories
+under each engine package.
+
+* Environment Configuration
+
+Both =OrcaInputRenderer= and =NWChemRenderer= create a Jinja2
+=Environment= with a =FileSystemLoader= pointed at their respective
+=_blocks/= directory.
+
+Whitespace controls enabled for the ORCA renderer:
+
+| Setting | Value | Effect |
+|---------+-------+--------|
+| =trim_blocks= | =True= | Remove first newline after block tag |
+| =lstrip_blocks= | =True= | Strip leading whitespace before block tags |
+| =rstrip_blocks= | =True= | Strip trailing whitespace after block tags |
+
+The NWChem renderer uses =trim_blocks= and =lstrip_blocks= but not
+=rstrip_blocks=.
+
+The ORCA renderer also sets =autoescape= for =.toml= extensions. The NWChem
+renderer uses plain =autoescape=True=.
+
+* Rendering Flow
+
+1. Template is loaded by name from the =_blocks/= directory
+2. A context dict is built with the config dataclass under the ="config"= key
+3. Template renders with that context
+4. For ORCA, the rendered string has double newlines collapsed to single
+
+#+begin_src python
+def render(self, template_name: str):
+    template = self.env.get_template(template_name)
+    context = {"config": self.config}
+    return template.render(context).replace("\n\n", "\n")
+#+end_src
+
+* Coordinate Rendering Macros
+
+The =coord.jinja= template defines three macros for atom rendering based
+on coordinate format:
+
+** =render_atom(atom)= (xyz format)
+
+Renders Cartesian coordinates. Output format:
+
+#+begin_src text
+SYMBOL x y z
+#+end_src
+
+Special handling:
+- Dummy atoms: symbol becomes =DA=
+- Ghost atoms: appended =:= after symbol
+- Point charges: symbol becomes =Q=, charge value follows
+- Embedding potential: =>=  after symbol
+- Fragment number: =(N)= after symbol
+- Frozen coordinates: =$= appended to frozen coordinate values
+- Isotope: =M = value= appended
+- Nuclear charge: =Z = value= appended
+
+** =render_int_atom(atom)= (internal coordinates)
+
+Renders in Z-matrix format with bond atom indices and internal coordinate
+values:
+
+#+begin_src text
+SYMBOL bond_atom angle_atom dihedral_atom bond_length angle dihedral
+#+end_src
+
+** =render_gzmt_atom(atom)= (Gaussian Z-matrix)
+
+Renders in Gaussian-style Z-matrix format where connectivity is built
+incrementally. Fields are only included when the corresponding atom index
+is not =None=:
+
+#+begin_src text
+O
+C 1 1.2078
+H 2 1.1161 1 121.74
+H 2 1.1161 1 121.74 3 180
+#+end_src
+
+* Helper Macros
+
+** =render_post_symbol(atom)=
+
+Called by all three atom macros. Handles point charge values, ghost markers,
+embedding potential markers, and fragment numbers.
+
+** =render_additional_atom_properties(atom)=
+
+Appends isotope (=M = value=) and nuclear charge (=Z = value=) when set.
+
+* Conditional Rendering
+
+Templates use Jinja2 conditionals to include blocks only when present in
+the config. The =base.jinja= template iterates =config.blocks= and includes
+the matching =.jinja= file for each block type.
+
+For NEB, the =neb.jinja= template checks each settings object and renders
+its fields only when the object exists. This allows default settings to
+appear in output while optional sections (restart, tsguess) are omitted
+when not configured.
+
+* Related
+
+- [[file:orca_blocks.org][ORCA Blocks]] for the template hierarchy
+- [[file:input_generation.org][Input Generation]] for the full pipeline
+- [[file:dataclasses.org][Dataclasses]] for config structure

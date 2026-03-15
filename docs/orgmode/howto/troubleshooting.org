@@ -1,0 +1,59 @@
+#+TITLE: Troubleshooting Guide
+#+AUTHOR: [[https://rgoswami.me][Rohit Goswami]]
+#+EMAIL: rgoswami@ieee.org
+#+OPTIONS: toc:t num:nil
+
+* Troubleshooting Guide
+
+Common problems and solutions for pychum.
+
+** Installation
+
+*** Problem: "ModuleNotFoundError: No module named 'pychum'"
+
+**Solution:**
+#+begin_src bash
+pip install pychum
+#+end_src
+
+** Input Generation
+
+*** Problem: "Template not found"
+
+**Cause:** Jinja2 template missing.
+
+**Solution:**
+#+begin_src bash
+# Reinstall pychum
+pip install --force-reinstall pychum
+#+end_src
+
+*** Problem: "Invalid TOML configuration"
+
+**Cause:** TOML syntax error.
+
+**Solution:**
+#+begin_src bash
+# Validate TOML
+python -c "import tomllib; tomllib.load(open('input.toml', 'rb'))"
+#+end_src
+
+** ORCA Input
+
+*** Problem: "ORCA input file not generated"
+
+**Cause:** Missing required fields in TOML.
+
+**Solution:**
+Check TOML has required fields:
+#+begin_src toml
+[orca]
+method = "B3LYP"
+basis = "def2-SVP"
+#+end_src
+
+** Getting Help
+
+- [[file:faq.org][FAQ]] - Common questions
+- [[file:../reference/glossary.org][Glossary]] - Term definitions
+- [[https://github.com/HaoZeke/pychum/issues][GitHub Issues]]

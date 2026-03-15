@@ -1,0 +1,132 @@
+#+TITLE: ORCA Input Block System
+#+AUTHOR: [[https://rgoswami.me][Rohit Goswami]]
+#+EMAIL: rgoswami@ieee.org
+#+OPTIONS: toc:t num:nil
+
+* Overview
+
+ORCA input files are composed of keyword lines, coordinate blocks, and
+optional named blocks (=%neb=, =%geom=, etc.). pychum models these with
+Jinja2 templates in =pychum/engine/orca/_blocks/=.
+
+* Template Files
+
+| Template | Purpose |
+|----------+---------|
+| =base.jinja= | Top-level orchestrator |
+| =coord.jinja= | Coordinate block (xyz, int, gzmt, xyzfile, gzmtfile) |
+| =neb.jinja= | NEB calculation block |
+| =geom.jinja= | Geometry block wrapper |
+| =geom_scan.jinja= | Geometry scan sub-block |
+
+* base.jinja Structure
+
+The base template has three sections:
+
+1. Keyword lines (the =! ...= lines at the top of ORCA input)
+2. Extra blocks (arbitrary =%blockname ... end= sections from config)
+3. Dynamic block inclusion (iterates =config.blocks= dict)
+4. Coordinate inclusion (always rendered last)
+
+#+begin_src text
+{{ config.kwlines }}
+
+{% for block_name, block_content in config.extra_blocks.items() %}
+%{{ block_name }}
+{{ block_content }}
+end
+{% endfor %}
+
+{% for block_name, block_data in config.blocks.items() %}
+    {% include block_name + ".jinja" %}
+{% endfor %}
+
+{% include "coord.jinja" %}
+#+end_src
+
+The dynamic block inclusion means adding a new block type requires only a
+new =.jinja= template file and a corresponding entry in =config.blocks=.
+
+* coord.jinja
+
+Handles all coordinate formats:
+
+- =xyz=: Cartesian coordinates with the =render_atom= macro
+- =int=: Internal (Z-matrix) coordinates with =render_int_atom=
+- =gzmt=: Gaussian Z-matrix with =render_gzmt_atom=
+- =xyzfile=: External XYZ file reference
+- =gzmtfile=: External GZMT file reference
+
+The coordinate block is wrapped in =* format charge multiplicity ... *=
+markers as ORCA requires.
+
+* neb.jinja
+
+The NEB template is the largest. It renders the =%neb ... end= block with
+all NEB parameters and sub-sections:
+
+- Top-level NEB parameters (end_xyz, nimages, convtype, etc.)
+- TSGuess sub-block (optional, xyz_struct or pdb_struct)
+- Fix center sub-block
+- Restart sub-block (optional, gbw_basename or allxyz)
+- Spring settings
+- Free end settings
+- Convergence tolerances
+- Reparametrization settings
+- Optimizer settings (LBFGS, FIRE, VPO)
+- LBFGS-specific settings
+- FIRE-specific settings
+- Zoom NEB settings
+- IDPP settings
+
+Each sub-section is wrapped in a conditional that checks for the settings
+object, so sections with only defaults still appear but truly optional
+sections (restart, tsguess) are omitted when not configured.
+
+* geom.jinja and geom_scan.jinja
+
+=geom.jinja= wraps the =%geom ... end= block and includes =geom_scan.jinja=.
+
+=geom_scan.jinja= renders the =Scan ... end= sub-block within =%geom=. It
+handles bonds (=B=), angles (=A=), and dihedrals (=D=) with format:
+
+#+begin_src text
+B atom1 atom2 = start, end, npoints
+A atom1 atom2 atom3 = start, end, npoints
+D atom1 atom2 atom3 atom4 = start, end, npoints
+#+end_src
+
+A guard limits total scans to 3. If more than 3 scan coordinates are defined,
+an error message is emitted instead.
+
+* Extra Blocks
+
+The =extra_blocks= mechanism in =OrcaConfig= allows arbitrary ORCA blocks
+to be specified as plain strings in the TOML under =[orca.extra_blocks]=.
+These are rendered as-is without template processing:
+
+#+begin_src toml
+[orca.extra_blocks]
+scf = "maxiter 300"
+#+end_src
+
+Produces:
+
+#+begin_src text
+%scf
+maxiter 300
+end
+#+end_src
+
+* Placeholder Modules
+
+=_orcablocks.py= and =_validators.py= in the ORCA engine directory are
+empty placeholder files. Block type registration and validation are
+currently handled inline in the dataclasses (=__post_init__= methods) and
+the =ConfigLoader=.
+
+* Related
+
+- [[file:template_system.org][Template System]] for rendering mechanics
+- [[file:dataclasses.org][Dataclasses]] for the data structures that templates consume
+- [[file:input_generation.org][Input Generation]] for the full pipeline
