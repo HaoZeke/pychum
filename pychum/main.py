@@ -1,4 +1,5 @@
 from pathlib import Path
+from rgpycrumbs._aux import ensure_import
 
 from ase.io import read as ase_read
 
