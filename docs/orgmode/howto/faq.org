@@ -1,0 +1,40 @@
+#+TITLE: Frequently Asked Questions
+#+AUTHOR: [[https://rgoswami.me][Rohit Goswami]]
+#+EMAIL: rgoswami@ieee.org
+#+OPTIONS: toc:t num:nil
+
+* Frequently Asked Questions
+
+** Installation
+
+*** How do I install pychum?
+
+#+begin_src bash
+pip install pychum
+#+end_src
+
+** Usage
+
+*** How do I generate ORCA input files?
+
+#+begin_src bash
+pychum orca --config input.toml
+#+end_src
+
+*** How do I generate eOn input files?
+
+#+begin_src bash
+pychum eon --config input.toml
+#+end_src
+
+** Configuration
+
+*** What is the TOML format for input files?
+
+See: [[file:../tutorials/orca_input.org][ORCA Input Tutorial]]
+
+** See Also
+
+- [[file:install.org][Installation Guide]]
+- [[file:../reference/glossary.org][Glossary]]
+- [[file:../tutorials/index.org][Tutorials]]

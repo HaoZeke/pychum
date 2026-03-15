@@ -1,21 +1,21 @@
 [build-system]
 build-backend = "hatchling.build"
-requires      = [ "hatch-vcs", "hatchling" ]
+requires = ["hatch-vcs", "hatchling"]
 
 [tool.hatch.build.hooks.vcs]
 version-file = "_version.py"
 
 [tool.hatch.build]
-include = [ "pychum/**/*.py", "pychum/*.py", "/tests" ]
+include = ["pychum/**/*.py", "pychum/*.py", "/tests"]
 
 
 [project]
 name = "pychum"
 description = "Input file generators for computational chemistry"
 readme = "readme.md"
-keywords = [ "compchem", "config" ]
+keywords = ["compchem", "config"]
 license = { text = "MIT" }
-authors = [ { name = "Rohit Goswami", email = "rgoswami@ieee.org" } ]
+authors = [{ name = "Rohit Goswami", email = "rgoswami@ieee.org" }]
 requires-python = ">=3.10"
 classifiers = [
   "Development Status :: 4 - Beta",
@@ -26,12 +26,13 @@ classifiers = [
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: Implementation :: CPython",
 ]
-dynamic = [ "version" ]
+dynamic = ["version"]
 dependencies = [
   "pint>=0.22",
   "tomli>=2.0.1",
   "jinja2>=3.1.2",
   "ase>=3.27.0",
+  "rgpycrumbs>=1.3.0",
 ]
 
 [project.optional-dependencies]
@@ -53,16 +54,16 @@ test = [
   "coverage[toml]>=7.3.2",
   "pytest-datadir>=1.5.0",
 ]
-lint = [ "ruff>=0.1.6" ]
+lint = ["ruff>=0.1.6"]
 
 [tool.uv.sources]
-rgpycrumbs    = { git = "https://github.com/HaoZeke/rgpycrumbs" }
+rgpycrumbs = { git = "https://github.com/HaoZeke/rgpycrumbs" }
 chemparseplot = { git = "https://github.com/HaoZeke/chemparseplot" }
 
 [project.urls]
 Documentation = "https://github.com/HaoZeke/pychum#readme"
-Issues        = "https://github.com/HaoZeke/pychum/issues"
-Source        = "https://github.com/HaoZeke/pychum"
+Issues = "https://github.com/HaoZeke/pychum/issues"
+Source = "https://github.com/HaoZeke/pychum"
 
 [tool.hatch.version]
 source = "vcs"
@@ -121,66 +122,73 @@ lint.unfixable = [
 ]
 
 [tool.ruff.lint.isort]
-known-first-party = [ "pychum" ]
+known-first-party = ["pychum"]
 
 [tool.ruff.lint.flake8-tidy-imports]
 ban-relative-imports = "all"
 
 [tool.ruff.lint.per-file-ignores]
 # Tests can use magic values, assertions, and relative imports
-"tests/**/*" = [ "PLR2004", "S101", "TID252" ]
-# __init__.py can import without use
-"__init__.py" = [ "F401" ]
+"docs/source/conf.py" = ["A001"] # Sphinx requires 'copyright' variable
+"scripts/**/*" = [
+  "PLC0415",
+  "PLR2004",
+  "S101",
+  "S603",
+  "T201",
+] # doctest scripts
+"tests/**/*" = ["PLR2004", "S101", "TID252"]
+"__init__.py" = ["F401"]
 
 [tool.coverage.run]
-source_pkgs = [ "pychum" ]
-branch      = true
-parallel    = true
-omit        = [ "_version.py" ]
+source_pkgs = ["pychum"]
+branch = true
+parallel = true
+omit = ["_version.py"]
 
 [tool.coverage.paths]
-pychum = [ "pychum", "*/pychum/pychum" ]
-tests  = [ "tests" ]
+pychum = ["pychum", "*/pychum/pychum"]
+tests = ["tests"]
 
 [tool.coverage.report]
-exclude_lines = [ "no cov", "if __name__ == .__main__.:", "if TYPE_CHECKING:" ]
+exclude_lines = ["no cov", "if __name__ == .__main__.:", "if TYPE_CHECKING:"]
 
 [tool.towncrier]
 start_string = "<!-- towncrier release notes start -->\n"
-underlines   = [ "", "", "" ]
-single_file  = true
-filename     = "CHANGELOG.md"
-directory    = "doc/release/upcoming_changes/"
+underlines = ["", "", ""]
+single_file = true
+filename = "CHANGELOG.md"
+directory = "doc/release/upcoming_changes/"
 issue_format = "[#{issue}](https://github.com/HaoZeke/pychum/issues/{issue})"
 title_format = "## [{version}](https://github.com/HaoZeke/pychum/tree/{version}) - {project_date}"
-all_bullets  = false
+all_bullets = false
 
 [[tool.towncrier.type]]
-directory   = "removed"
-name        = "Removed"
+directory = "removed"
+name = "Removed"
 showcontent = true
 
 [[tool.towncrier.type]]
-directory   = "deprecated"
-name        = "Deprecated"
+directory = "deprecated"
+name = "Deprecated"
 showcontent = true
 
 [[tool.towncrier.type]]
-directory   = "added"
-name        = "Added"
+directory = "added"
+name = "Added"
 showcontent = true
 
 [[tool.towncrier.type]]
-directory   = "changed"
-name        = "Changed"
+directory = "changed"
+name = "Changed"
 showcontent = true
 
 [[tool.towncrier.type]]
-directory   = "fixed"
-name        = "Fixed"
+directory = "fixed"
+name = "Fixed"
 showcontent = true
 
 [[tool.towncrier.type]]
-directory   = "misc"
-name        = "Miscellaneous"
+directory = "misc"
+name = "Miscellaneous"
 showcontent = true

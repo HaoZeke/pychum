@@ -1,0 +1,38 @@
+name: Test Tutorials
+
+on:
+  push:
+    branches: [main, docs/tutorial-improvements]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test-tutorials:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: astral-sh/setup-uv@v5
+        with:
+          python-version: "3.12"
+
+      - name: Test pychum modules compile
+        run: |
+          uv run python3 -m py_compile pychum/main.py
+          uv run python3 -m py_compile pychum/engine/orca/input_generator.py
+          uv run python3 -m py_compile pychum/engine/orca/_renderer.py
+          uv run python3 -m py_compile pychum/engine/eon/_renderer.py
+          echo "✓ All pychum modules compile"
+
+      - name: Test lazy imports
+        run: |
+          uv run python3 -c "
+          from rgpycrumbs._aux import ensure_import
+          # Test that lazy imports work
+          np = ensure_import('numpy')
+          assert hasattr(np, 'array'), 'numpy import failed'
+          print('✓ Lazy imports work')
+          "

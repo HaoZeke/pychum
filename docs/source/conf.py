@@ -1,55 +1,54 @@
-import os
+# Configuration file for the Sphinx documentation builder.
+#
+# For the full list of built-in configuration values, see the documentation:
+# https://www.sphinx-doc.org/en/master/usage/configuration.html
+
 import sys
+from pathlib import Path
 
 # -- Path setup --------------------------------------------------------------
-sys.path.insert(0, os.path.abspath("../../pychum"))
+sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 # -- Project information -----------------------------------------------------
 project = "pychum"
-project_copyright = "2026, Rohit Goswami"
+copyright = "2026, Rohit Goswami"
 author = "Rohit Goswami"
-# html_logo = "../../branding/logo/pychum_logo.png"
 
 # -- General configuration ---------------------------------------------------
 extensions = [
-    "sphinxcontrib.programoutput",  # Runs 'uv run ...' for dynamic examples
-    # Include autodoc since sphinx-click relies on its mocking machinery.
-    "sphinx.ext.autodoc",  # Needed for mocking machinery
-    "sphinx.ext.viewcode",  # Adds '[source]' links
+    "sphinx.ext.autodoc",
+    "sphinx.ext.napoleon",
+    "sphinx.ext.viewcode",
     "sphinx.ext.intersphinx",
-    "autoapi.extension",
-    "sphinxcontrib.autodoc_pydantic",
-    "sphinx_sitemap",
+    "sphinx_copybutton",
+    "myst_nb",
 ]
 
 templates_path = ["_templates"]
-exclude_patterns = []
+exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 
-intersphinx_mapping = {
-    "python": ("https://docs.python.org/3", None),
-    "numpy": ("https://numpy.org/doc/stable", None),
-    "rgpycrumbs": ("https://rgpycrumbs.rgoswami.me", None),
+# -- Options for autodoc -----------------------------------------------------
+autodoc_default_options = {
+    "members": True,
+    "member-order": "bysource",
+    "special-members": "__init__",
+    "undoc-members": True,
+    "exclude-members": "__weakref__",
 }
 
-# -- Mocking Dependencies ----------------------------------------------------
-autodoc_mock_imports = [
-    "numpy",
-    "ase",
-    "rich",
-    "jinja2",
-    "tomli",
-    "chemparseplot",
-    "rgpycrumbs",
-]
+# -- Options for intersphinx -------------------------------------------------
+intersphinx_mapping = {
+    "python": ("https://docs.python.org/3", None),
+    "ase": ("https://wiki.fysik.dtu.dk/ase/", None),
+    # Link to other rgpkgs packages
+    "rgpycrumbs": ("https://rgpycrumbs.rgoswami.me", None),
+    "chemparseplot": ("https://chemparseplot.rgoswami.me", None),
+}
 
 # -- Options for HTML output -------------------------------------------------
 html_theme = "shibuya"
 html_static_path = ["_static"]
+html_title = "pychum"
 
-# Shibuya theme specific options
-html_theme_options = {
-    "github_url": "https://github.com/HaoZeke/pychum",
-}
-
-autoapi_dirs = ["../../pychum"]
-html_baseurl = "https://pychum.rgoswami.me"
+# -- Options for MyST-NB -----------------------------------------------------
+nb_execution_mode = "off"

@@ -1,0 +1,154 @@
+#+TITLE: Testing
+#+AUTHOR: [[https://rgoswami.me][Rohit Goswami]]
+#+EMAIL: rgoswami@ieee.org
+#+OPTIONS: toc:t num:nil
+
+* Overview
+
+pychum uses pytest for testing. Tests live in =tests/= and focus on the ORCA
+engine's rendering pipeline.
+
+* Test Structure
+
+#+begin_src text
+tests/
+└── orca/
+    ├── test_coord.py       # Coordinate rendering (xyz, int, gzmt, file refs)
+    ├── test_neb.py         # NEB block rendering
+    ├── test_geom_scan.py   # Geometry scan block rendering
+    └── test_extra.py       # Extra blocks rendering (uses datadir)
+#+end_src
+
+* Running Tests
+
+Run the full suite:
+
+#+begin_src bash
+uv run pytest
+#+end_src
+
+With coverage:
+
+#+begin_src bash
+uv run pytest --cov=pychum tests
+#+end_src
+
+Coverage configuration in =pyproject.toml= tracks =pychum= source, excludes
+=_version.py=, and ignores =TYPE_CHECKING= and =__main__= blocks.
+
+* Test Categories
+
+** Coordinate Tests (test_coord.py)
+
+Tests all ORCA coordinate formats through the =render_config= helper, which
+builds a =Coords= and =OrcaConfig=, then renders =coord.jinja=.
+
+Covered scenarios:
+
+- Standard atoms in xyz format
+- Dummy atoms (=DA=)
+- Ghost atoms (=:= suffix)
+- Point charges (=Q= symbol)
+- Atoms with isotope masses (=M = value=)
+- Frozen coordinates (=$= suffix, per-axis and global)
+- Embedding potentials (=>= marker)
+- Custom nuclear charges (=Z = value=)
+- Fragment numbers (=(N)= syntax)
+- Internal coordinates (Z-matrix format)
+- Gaussian Z-matrix (incrementally built connectivity)
+- External file references (=xyzfile=, =gzmtfile=)
+
+** NEB Tests (test_neb.py)
+
+Tests NEB block rendering through a helper that wraps =NebBlock= in a config
+dict and renders =neb.jinja=.
+
+Covered scenarios:
+
+- Default NEB settings (all sub-blocks with default values)
+- Custom IDPP settings
+- Restart settings with =gbw_basename=
+- Restart settings with =allxyz=
+- Mutual exclusion of =gbw_basename= and =allxyz= (ValueError)
+- RestartSettings with neither field set
+
+** Geometry Scan Tests (test_geom_scan.py)
+
+Tests geometry scan rendering through a helper that wraps =GeomBlock= in a
+config dict and renders =geom.jinja=.
+
+Covered scenarios:
+
+- Single bond scan
+- Single angle scan
+- Single dihedral scan
+- Combined scans (bond + angle + dihedral)
+- Exceeding the 3-scan limit (error message)
+
+** Extra Blocks Tests (test_extra.py)
+
+Tests full pipeline rendering (=base.jinja=) with extra blocks using
+=pytest-datadir= for TOML fixture files. Loads a TOML file through
+=ConfigLoader=, renders through =OrcaInputRenderer=, and compares against
+expected output with whitespace normalization.
+
+* Test Helpers
+
+Each test module defines a render helper that constructs the minimal config
+needed for the template under test:
+
+#+begin_src python
+# test_coord.py
+def render_config(atoms, coord_type="xyz", charge=0, multiplicity=1):
+    coords = Coords(charge=charge, multiplicity=multiplicity, atoms=atoms, fmt=coord_type)
+    config = OrcaConfig(coords=coords, kwlines=default_kwline)
+    renderer = OrcaInputRenderer(config)
+    return renderer.render("coord.jinja")
+#+end_src
+
+The NEB and geom_scan tests pass raw dicts as configs rather than =OrcaConfig=
+instances, relying on Jinja2's attribute access to read the dict values.
+
+* CI Workflows
+
+** build_test.yml
+
+Runs on push to =main= and PRs targeting =main=. Tests against Python 3.10,
+3.11, and 3.12 using a matrix strategy:
+
+#+begin_src yaml
+strategy:
+  matrix:
+    python-version: ["3.10", "3.11", "3.12"]
+#+end_src
+
+Steps: checkout (with fetch-depth 0 for VCS versioning), install uv, install
+dependencies (=uv sync --all-extras=), run pytest with coverage.
+
+** ci_tutorials.yml
+
+Runs on push to =main= and =docs/tutorial-improvements= branches. Tests that
+pychum modules compile (=py_compile=) and that the =ensure_import= lazy import
+pattern from rgpycrumbs works.
+
+* Test Dependencies
+
+Defined in =[project.optional-dependencies.test]=:
+
+| Package | Purpose |
+|---------+---------|
+| pytest | Test runner |
+| pytest-cov | Coverage reporting |
+| coverage | Coverage measurement |
+| pytest-datadir | Test fixture data directories |
+
+Install with:
+
+#+begin_src bash
+uv sync --extra test
+#+end_src
+
+* Related
+
+- [[file:release.org][Release Process]] for CI and build configuration
+- [[file:dev/index.org][Developer Documentation]] for architecture
