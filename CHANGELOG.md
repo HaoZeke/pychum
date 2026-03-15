@@ -2,6 +2,15 @@
 
 <!-- towncrier release notes start -->
 
+## [1.4.0](https://github.com/HaoZeke/pychum/tree/1.4.0) - 2026-03-15
+
+### Added
+
+- Diataxis documentation structure: tutorial, API reference (autodoc), developer guides
+(dataclasses, templates, validators, ORCA blocks), how-to guides, and reference (glossary).
+Switched to shibuya Sphinx theme. ([#docs_tutorials](https://github.com/HaoZeke/pychum/issues/docs_tutorials))
+
+
 ## v1.1.0 - 2026-02-21
 
 ### Added
