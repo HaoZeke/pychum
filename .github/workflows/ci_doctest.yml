@@ -18,4 +18,4 @@ jobs:
       - name: Run tutorial doctests
         run: |
           uv run python3 scripts/run_org_doctests.py \
-            docs/orgmode/tutorials/*.org
+            docs/orgmode/tutorial.org

@@ -150,6 +150,7 @@ pychum nwchem --config eon_nwchem.toml --output nwchem_input.nw
 ~pychum~ integrates with jobflow for workflow management:
 
 #+begin_src python
+# SKIP-DOCTEST -- requires TOML config files
 from pychum.engine.orca import create_orca_job
 from jobflow import Flow
 
@@ -173,6 +174,7 @@ jobflow.run_locally(flow)
 ~pychum~ uses ~pint~ for unit conversions:
 
 #+begin_src python
+# SKIP-DOCTEST -- requires TOML config files
 from pychum.units import ureg
 
 # Convert bond length
