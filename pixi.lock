@@ -3001,8 +3001,8 @@ packages:
   - pytest ; extra == 'tests'
 - pypi: ./
   name: pychum
-  version: 0.1.1.dev8+g3ecb66e0f.d20260315
-  sha256: 2bc49e0fe252f63fa0404c8a0c8510a730ad8ddd5acd4546b515db5fc9aa2daf
+  version: 0.1.1.dev9+g8395270d5.d20260315
+  sha256: cf83b2d4adfb1493981fecb10312e16593dd9bd5a2810ce1f87ae710fadd133e
   requires_dist:
   - ase>=3.27.0
   - jinja2>=3.1.2
