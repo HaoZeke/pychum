@@ -1,0 +1,74 @@
+========
+Glossary
+========
+
+    :Author: `Rohit Goswami <https://rgoswami.me>`_
+
+.. contents::
+
+
+Glossary of Computational Chemistry Terms
+-----------------------------------------
+
+A
+~
+
+ASE
+^^^
+
+Atomic Simulation Environment. Python library used for structure handling.
+
+I
+~
+
+Image
+^^^^^
+
+In NEB context, a replica of the system along reaction path.
+
+J
+~
+
+Jinja2
+^^^^^^
+
+Template engine used by pychum for input file generation.
+
+N
+~
+
+NEB
+^^^
+
+Nudged Elastic Band. Method for finding minimum energy path.
+
+O
+~
+
+ORCA
+^^^^
+
+Quantum chemistry software package. pychum generates ORCA input files.
+
+P
+~
+
+PEP 723
+^^^^^^^
+
+Python Enhancement Proposal for inline script metadata.
+
+T
+~
+
+TOML
+^^^^
+
+Tom's Obvious, Minimal Language. Used by pychum for configuration files.
+
+See Also
+~~~~~~~~
+
+- `FAQ <../howto/faq.rst>`_
+
+- `Tutorials <../tutorials/index.rst>`_

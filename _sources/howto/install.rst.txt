@@ -1,0 +1,52 @@
+==================
+Installation Guide
+==================
+
+    :Author: `Rohit Goswami <https://rgoswami.me>`_
+
+.. contents::
+
+
+Installation Guide
+------------------
+
+Quick Install
+~~~~~~~~~~~~~
+
+.. code:: bash
+
+    pip install pychum
+
+Requirements
+~~~~~~~~~~~~
+
+- Python 3.10, 3.11, or 3.12
+
+- pint (unit handling)
+
+- jinja2 (template rendering)
+
+- tomli (TOML parsing)
+
+Platform Notes
+~~~~~~~~~~~~~~
+
+- Linux: Full support
+
+- macOS: Full support
+
+- Windows: Full support
+
+Verification
+~~~~~~~~~~~~
+
+.. code:: bash
+
+    python -c "import pychum; print(pychum.__version__)"
+
+See Also
+~~~~~~~~
+
+- `FAQ <faq.rst>`_
+
+- `Glossary <../reference/glossary.rst>`_

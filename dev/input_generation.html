@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en" data-accent-color="violet" data-content_root="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Input Generation Pipeline - pychum</title><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=e1a1ceaf" />
+    <link rel="stylesheet" type="text/css" href="../_static/shibuya.css?v=a318c5d4" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link media="print" rel="stylesheet" type="text/css" href="../_static/print.css?v=20ff2c19" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    <meta property="og:type" content="website"/><meta property="og:title" content="Input Generation Pipeline"/>
+    <meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="../index.html">
+      
+      
+      <strong>pychum</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <kbd>/</kbd>
+</form><div class="sy-head-socials"></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="Switch to light color mode"
+data-aria-light="Switch to dark color mode"
+data-aria-dark="Switch to auto color mode">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="0"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a></li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>On this page</h3><ul>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#configloader">ConfigLoader</a><ul>
+<li><a class="reference internal" href="#initialization">Initialization</a></li>
+<li><a class="reference internal" href="#toml-section-mapping">TOML Section Mapping</a></li>
+<li><a class="reference internal" href="#neb-sub-block-loading">NEB Sub-block Loading</a></li>
+<li><a class="reference internal" href="#geometry-scan-loading">Geometry Scan Loading</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#renderer">Renderer</a><ul>
+<li><a class="reference internal" href="#template-environment">Template Environment</a></li>
+<li><a class="reference internal" href="#rendering">Rendering</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#public-api">Public API</a></li>
+<li><a class="reference internal" href="#nwchem-pipeline">NWChem Pipeline</a></li>
+<li><a class="reference internal" href="#related">Related</a></li>
+</ul>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../index.html"><span itemprop="name">pychum</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">Input Generation Pipeline</strong>
+        <meta itemprop="position" content="2" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <article class="yue" role="main">
+          <section id="input-generation-pipeline">
+<h1><a class="toc-backref" href="#id1" role="doc-backlink">Input Generation Pipeline</a><a class="headerlink" href="#input-generation-pipeline" title="Link to this heading">¶</a></h1>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">Author<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://rgoswami.me">Rohit Goswami</a></p>
+</dd>
+</dl>
+</div></blockquote>
+<nav class="contents" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#input-generation-pipeline" id="id1">Input Generation Pipeline</a></p>
+<ul>
+<li><p><a class="reference internal" href="#overview" id="id2">Overview</a></p></li>
+<li><p><a class="reference internal" href="#configloader" id="id3">ConfigLoader</a></p>
+<ul>
+<li><p><a class="reference internal" href="#initialization" id="id4">Initialization</a></p></li>
+<li><p><a class="reference internal" href="#toml-section-mapping" id="id5">TOML Section Mapping</a></p></li>
+<li><p><a class="reference internal" href="#neb-sub-block-loading" id="id6">NEB Sub-block Loading</a></p></li>
+<li><p><a class="reference internal" href="#geometry-scan-loading" id="id7">Geometry Scan Loading</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#renderer" id="id8">Renderer</a></p>
+<ul>
+<li><p><a class="reference internal" href="#template-environment" id="id9">Template Environment</a></p></li>
+<li><p><a class="reference internal" href="#rendering" id="id10">Rendering</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#public-api" id="id11">Public API</a></p></li>
+<li><p><a class="reference internal" href="#nwchem-pipeline" id="id12">NWChem Pipeline</a></p></li>
+<li><p><a class="reference internal" href="#related" id="id13">Related</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="overview">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Overview</a><a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
+<p>pychum generates computational chemistry input files through a three-stage
+pipeline: TOML configuration is parsed into Python dataclasses, then rendered
+through Jinja2 templates into engine-specific input text.</p>
+<p>The pipeline runs as:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><span data-line="1">TOML file --&gt; ConfigLoader --&gt; dataclasses --&gt; Renderer --&gt; input string
+</span></pre></div>
+</div>
+</section>
+<section id="configloader">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">ConfigLoader</a><a class="headerlink" href="#configloader" title="Link to this heading">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">ConfigLoader</span></code> class in <code class="docutils literal notranslate"><span class="pre">pychum/engine/orca/config_loader.py</span></code> handles the
+first two stages. It reads a TOML file with <code class="docutils literal notranslate"><span class="pre">tomli</span></code> and maps sections to
+dataclass instances.</p>
+<section id="initialization">
+<h3><a class="toc-backref" href="#id4" role="doc-backlink">Initialization</a><a class="headerlink" href="#initialization" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">pychum.engine.orca.config_loader</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConfigLoader</span>
+</span><span data-line="2">
+</span><span data-line="3"><span class="n">loader</span> <span class="o">=</span> <span class="n">ConfigLoader</span><span class="p">(</span><span class="s2">&quot;input.toml&quot;</span><span class="p">)</span>
+</span><span data-line="4"><span class="n">config</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">load_config</span><span class="p">()</span>
+</span></pre></div>
+</div>
+<p>The constructor opens the TOML file and stores the parsed dictionary in
+<code class="docutils literal notranslate"><span class="pre">self.data</span></code>.</p>
+</section>
+<section id="toml-section-mapping">
+<h3><a class="toc-backref" href="#id5" role="doc-backlink">TOML Section Mapping</a><a class="headerlink" href="#toml-section-mapping" title="Link to this heading">¶</a></h3>
+<p>The loader maps TOML sections to dataclass constructors:</p>
+<div class="table-wrapper docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>TOML path</p></th>
+<th class="head"><p>Dataclass</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">[orca].kwlines</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">str</span></code></p></td>
+<td><p>Raw ORCA keyword lines</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">[coords]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Coords</span></code></p></td>
+<td><p>Charge, multiplicity, format, atoms</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">[coords.atoms]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">list[Atom]</span></code></p></td>
+<td><p>One <code class="docutils literal notranslate"><span class="pre">Atom</span></code> per array entry</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">[orca.geom]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">GeomBlock</span></code></p></td>
+<td><p>Geometry scan specification</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">[orca.neb]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">NebBlock</span></code></p></td>
+<td><p>NEB calculation settings</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">[orca.extra_blocks]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">dict[str,</span> <span class="pre">str]</span></code></p></td>
+<td><p>Arbitrary ORCA blocks as raw text</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">[units]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">UnitConversion</span></code></p></td>
+<td><p>Distance/energy unit pairs</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="neb-sub-block-loading">
+<h3><a class="toc-backref" href="#id6" role="doc-backlink">NEB Sub-block Loading</a><a class="headerlink" href="#neb-sub-block-loading" title="Link to this heading">¶</a></h3>
+<p>NEB configuration is the most complex section. The loader pops recognized
+sub-keys from the NEB dictionary and converts each to a settings dataclass:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="k">if</span> <span class="s2">&quot;optim&quot;</span> <span class="ow">in</span> <span class="n">neb_data</span><span class="p">:</span>
+</span><span data-line="2">    <span class="n">neb_block_args</span><span class="p">[</span><span class="s2">&quot;optim_settings&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">OptimSettings</span><span class="p">(</span><span class="o">**</span><span class="n">neb_data</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;optim&quot;</span><span class="p">))</span>
+</span><span data-line="3"><span class="k">if</span> <span class="s2">&quot;lbfgs&quot;</span> <span class="ow">in</span> <span class="n">neb_data</span><span class="p">:</span>
+</span><span data-line="4">    <span class="n">neb_block_args</span><span class="p">[</span><span class="s2">&quot;lbfgs_settings&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">LBFGSSettings</span><span class="p">(</span><span class="o">**</span><span class="n">neb_data</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;lbfgs&quot;</span><span class="p">))</span>
+</span></pre></div>
+</div>
+<p>After processing all recognized sub-keys, leftover top-level NEB fields (like
+<code class="docutils literal notranslate"><span class="pre">end_xyz</span></code>, <code class="docutils literal notranslate"><span class="pre">nimgs</span></code>) are merged with the settings dict and passed to the
+<code class="docutils literal notranslate"><span class="pre">NebBlock</span></code> constructor.</p>
+</section>
+<section id="geometry-scan-loading">
+<h3><a class="toc-backref" href="#id7" role="doc-backlink">Geometry Scan Loading</a><a class="headerlink" href="#geometry-scan-loading" title="Link to this heading">¶</a></h3>
+<p>Geometry scans convert TOML arrays of bond/angle/dihedral definitions into
+<code class="docutils literal notranslate"><span class="pre">GeomScan</span></code> dataclass lists:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">bonds</span> <span class="o">=</span> <span class="p">[</span><span class="n">GeomScan</span><span class="p">(</span><span class="o">**</span><span class="n">bond</span><span class="p">)</span> <span class="k">for</span> <span class="n">bond</span> <span class="ow">in</span> <span class="n">geom_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;bonds&quot;</span><span class="p">,</span> <span class="p">[])]</span>
+</span></pre></div>
+</div>
+<p>These are collected into a <code class="docutils literal notranslate"><span class="pre">GeomBlock</span></code> instance.</p>
+</section>
+</section>
+<section id="renderer">
+<h2><a class="toc-backref" href="#id8" role="doc-backlink">Renderer</a><a class="headerlink" href="#renderer" title="Link to this heading">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">OrcaInputRenderer</span></code> class in <code class="docutils literal notranslate"><span class="pre">pychum/engine/orca/_renderer.py</span></code> handles the
+third stage. It takes an <code class="docutils literal notranslate"><span class="pre">OrcaConfig</span></code> dataclass and renders it through Jinja2
+templates.</p>
+<section id="template-environment">
+<h3><a class="toc-backref" href="#id9" role="doc-backlink">Template Environment</a><a class="headerlink" href="#template-environment" title="Link to this heading">¶</a></h3>
+<p>The renderer creates a Jinja2 <code class="docutils literal notranslate"><span class="pre">Environment</span></code> with <code class="docutils literal notranslate"><span class="pre">FileSystemLoader</span></code> pointed at
+the <code class="docutils literal notranslate"><span class="pre">_blocks/</span></code> directory. Three whitespace controls are enabled:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">trim_blocks</span></code>: removes the first newline after a block tag</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lstrip_blocks</span></code>: strips leading whitespace before block tags</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rstrip_blocks</span></code>: strips trailing whitespace after block tags</p></li>
+</ul>
+</section>
+<section id="rendering">
+<h3><a class="toc-backref" href="#id10" role="doc-backlink">Rendering</a><a class="headerlink" href="#rendering" title="Link to this heading">¶</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">renderer</span> <span class="o">=</span> <span class="n">OrcaInputRenderer</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+</span><span data-line="2"><span class="n">output</span> <span class="o">=</span> <span class="n">renderer</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="s2">&quot;base.jinja&quot;</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">render</span></code> method loads a template, passes the config as context, and
+post-processes by collapsing double newlines.</p>
+</section>
+</section>
+<section id="public-api">
+<h2><a class="toc-backref" href="#id11" role="doc-backlink">Public API</a><a class="headerlink" href="#public-api" title="Link to this heading">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">pychum.main</span></code> module wraps the loader and renderer into two functions:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">render_orca(toml_path)</span></code>: loads TOML, builds <code class="docutils literal notranslate"><span class="pre">OrcaConfig</span></code>, renders through
+<code class="docutils literal notranslate"><span class="pre">base.jinja</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">render_nwchem(pos_file,</span> <span class="pre">...)</span></code>: reads an ASE atoms file, builds
+<code class="docutils literal notranslate"><span class="pre">NWChemSocketConfig</span></code>, renders through <code class="docutils literal notranslate"><span class="pre">nwchem_socket.jinja</span></code></p></li>
+</ul>
+<p>These are re-exported from <code class="docutils literal notranslate"><span class="pre">pychum.__init__</span></code>.</p>
+</section>
+<section id="nwchem-pipeline">
+<h2><a class="toc-backref" href="#id12" role="doc-backlink">NWChem Pipeline</a><a class="headerlink" href="#nwchem-pipeline" title="Link to this heading">¶</a></h2>
+<p>The eOn/NWChem pipeline is simpler. <code class="docutils literal notranslate"><span class="pre">render_nwchem</span></code> reads atomic positions from
+a file with ASE, constructs <code class="docutils literal notranslate"><span class="pre">NWChemAtom</span></code> instances (optionally zeroing
+positions since eOn overwrites them), builds a <code class="docutils literal notranslate"><span class="pre">NWChemSocketConfig</span></code>, and renders
+through the <code class="docutils literal notranslate"><span class="pre">NWChemRenderer</span></code>.</p>
+</section>
+<section id="related">
+<h2><a class="toc-backref" href="#id13" role="doc-backlink">Related</a><a class="headerlink" href="#related" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="template_system.rst">Template System</a> for Jinja2 template details</p></li>
+<li><p><a class="reference external" href="dataclasses.rst">Dataclasses</a> for the full dataclass hierarchy</p></li>
+<li><p><a class="reference external" href="orca_blocks.rst">ORCA Blocks</a> for template structure</p></li>
+</ul>
+</section>
+</section>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>Back to top</span>
+</button><div class="navigation flex print:hidden"></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>2026, Rohit Goswami</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials"></div>
+    </div>
+  </div>
+</footer>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script src="../_static/shibuya.js?v=cac61aee"></script></body>
+</html>

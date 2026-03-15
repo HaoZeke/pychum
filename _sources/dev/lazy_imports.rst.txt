@@ -1,0 +1,91 @@
+============
+Lazy Imports
+============
+
+    :Author: `Rohit Goswami <https://rgoswami.me>`_
+
+.. contents::
+
+
+Overview
+--------
+
+pychum uses the ``ensure_import`` pattern from rgpycrumbs to defer loading of
+optional dependencies until they are actually needed.
+
+The ensure\ :sub:`import`\ Function
+-----------------------------------
+
+``ensure_import`` is imported from ``rgpycrumbs._aux``:
+
+.. code:: python
+
+    from rgpycrumbs._aux import ensure_import
+
+It returns the imported module if available. If the module is missing and the
+``RGPYCRUMBS_AUTO_DEPS`` environment variable is set, it attempts to install
+the package automatically before importing.
+
+Usage in pychum
+---------------
+
+In ``pychum/main.py``:
+
+.. code:: python
+
+    from rgpycrumbs._aux import ensure_import
+
+This import is at the module level. The actual use of ``ensure_import`` is for
+optional dependencies that are not always needed at import time.
+
+When to Use Lazy Imports
+------------------------
+
+Use ``ensure_import`` when:
+
+- A dependency is optional (not in the base ``dependencies`` list)
+
+- A dependency is heavy and slow to import (e.g., JAX, torch)
+
+- A dependency is only needed in specific code paths
+
+Do not use ``ensure_import`` for:
+
+- Required dependencies listed in ``pyproject.toml`` (tomli, jinja2, pint, ase)
+
+- Standard library modules
+
+- Internal pychum modules
+
+Auto-install Behavior
+---------------------
+
+When ``RGPYCRUMBS_AUTO_DEPS`` is set in the environment, ``ensure_import`` will
+attempt to ``pip install`` missing packages. This is useful for notebook
+environments or quick scripts where explicit dependency management is not
+practical.
+
+In production or CI, leave ``RGPYCRUMBS_AUTO_DEPS`` unset. Missing dependencies
+should fail with a clear ``ImportError``.
+
+CI Testing
+----------
+
+The ``ci_tutorials.yml`` workflow tests that ``ensure_import`` works:
+
+.. code:: yaml
+
+    - name: Test lazy imports
+      run: |
+        uv run python3 -c "
+        from rgpycrumbs._aux import ensure_import
+        np = ensure_import('numpy')
+        assert hasattr(np, 'array'), 'numpy import failed'
+        "
+
+Related
+-------
+
+- `rgpycrumbs <https://github.com/HaoZeke/rgpycrumbs>`_ for the ``ensure_import`` implementation
+
+- `Input Generation <input_generation.rst>`_ for where lazy imports are used in the pipeline

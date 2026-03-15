@@ -10,46 +10,122 @@ pychum Documentation
 1 Ecosystem Overview
 --------------------
 
-``pychum`` is a key library within the ``rgpycrumbs`` ecosystem, focusing on
-generating high-quality input files for simulation engines.
+``pychum`` is a library within the ``rgpycrumbs`` ecosystem that generates
+input files for simulation engines.
 
-2 Introduction
---------------
+2 Getting Started
+-----------------
 
-``pychum`` is a collection of input file generators for various computational chemistry engines.
-
-3 CLI Reference
----------------
-
-The primary interface for ``pychum`` is its command-line interface.
-
-3.1 ORCA
-~~~~~~~~
-
-Generates ORCA input files from TOML configurations.
+2.1 Installation
+~~~~~~~~~~~~~~~~
 
 .. code:: bash
 
-    pychum orca --help
+    pip install pychum
 
-3.2 NWChem
-~~~~~~~~~~
-
-Generates NWChem input files, specifically for use with eOn's ``SocketNWChemPot``.
+For development:
 
 .. code:: bash
 
-    pychum nwchem --help
+    git clone https://github.com/HaoZeke/pychum
+    cd pychum
+    uv sync --all-extras
 
-4 Engine Details
+2.2 Quick Example
+~~~~~~~~~~~~~~~~~
+
+Generate an ORCA input file from TOML configuration:
+
+.. code:: toml
+
+    # input.toml
+    [calculation]
+    type = "single_point"
+    functional = "PBE0"
+    basis = "def2-SVP"
+
+    [geometry]
+    method = "xyz"
+    file = "molecule.xyz"
+
+.. code:: bash
+
+    pychum orca --config input.toml --output calculation.inp
+
+3 Tutorials
+-----------
+
+Step-by-step guides for common workflows:
+
+.. toctree::
+   :maxdepth: 2
+
+   tutorial
+
+4 Library API
+-------------
+
+``pychum`` is a library. The public API lives in ``pychum.main``.
+
+4.1 ``render_orca(toml_path)``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Load a TOML configuration and return an ORCA input string.
+
+4.2 ``render_nwchem(pos_file, settings_path, ...)``
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Generate an NWChem socket input file for eOn's ``SocketNWChemPot``.
+
+5 Engine Details
 ----------------
 
-4.1 ORCA
+5.1 ORCA
 ~~~~~~~~
 
 Details about ORCA input generation.
 
-4.2 NWChem
+5.2 NWChem
 ~~~~~~~~~~
 
-Details about NWChem input generation.
+Details about NWChem input generation for eOn's ``SocketNWChemPot``.
+
+6 Architecture
+--------------
+
+6.1 Design Philosophy
+~~~~~~~~~~~~~~~~~~~~~
+
+``pychum`` is designed with the following principles:
+
+1. **Unit-aware**: All physical quantities use ``pint`` for automatic unit conversion
+
+2. **Template-based**: Jinja2 templates for flexible input generation
+
+3. **Type-safe**: Full type hints with mypy validation
+
+4. **Workflow-ready**: Integration with jobflow and Fireworks
+
+6.2 Package Structure
+~~~~~~~~~~~~~~~~~~~~~
+
+.. code:: text
+
+    pychum/
+    ├── main.py          # Public API (render_orca, render_nwchem)
+    ├── _base.py         # Abstract base class
+    ├── units.py         # pint unit registry
+    └── engine/          # Engine-specific generators
+        ├── orca/        # ORCA input generation
+        │   ├── config_loader.py   # TOML loading
+        │   ├── _renderer.py       # Jinja2 rendering
+        │   ├── _dataclasses.py    # Configuration dataclasses
+        │   └── _blocks/           # Jinja2 templates
+        └── eon/         # eOn/NWChem input generation
+            ├── _renderer.py       # NWChem rendering
+            └── _dataclasses.py    # NWChem dataclasses
+
+7 Contributing
+--------------
+
+See `CONTRIBUTING.md <https://github.com/HaoZeke/pychum/blob/main/CONTRIBUTING.md>`_ for development setup and guidelines.

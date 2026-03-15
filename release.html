@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en" data-accent-color="violet" data-content_root="./">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Release Process - pychum</title><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="_static/pygments.css?v=e1a1ceaf" />
+    <link rel="stylesheet" type="text/css" href="_static/shibuya.css?v=a318c5d4" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link media="print" rel="stylesheet" type="text/css" href="_static/print.css?v=20ff2c19" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    <meta property="og:type" content="website"/><meta property="og:title" content="Release Process"/>
+    <meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="index.html">
+      
+      
+      <strong>pychum</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <kbd>/</kbd>
+</form><div class="sy-head-socials"></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="Switch to light color mode"
+data-aria-light="Switch to dark color mode"
+data-aria-dark="Switch to auto color mode">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="0"><ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>On this page</h3><ul>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#version-management">Version Management</a></li>
+<li><a class="reference internal" href="#changelog-with-towncrier">Changelog with towncrier</a><ul>
+<li><a class="reference internal" href="#adding-a-changelog-entry">Adding a Changelog Entry</a></li>
+<li><a class="reference internal" href="#building-the-changelog">Building the Changelog</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cutting-a-release">Cutting a Release</a></li>
+<li><a class="reference internal" href="#build-system">Build System</a></li>
+<li><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li><a class="reference internal" href="#related">Related</a></li>
+</ul>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="index.html"><span itemprop="name">pychum</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">Release Process</strong>
+        <meta itemprop="position" content="2" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <article class="yue" role="main">
+          <section id="release-process">
+<h1><a class="toc-backref" href="#id1" role="doc-backlink">Release Process</a><a class="headerlink" href="#release-process" title="Link to this heading">¶</a></h1>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">Author<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://rgoswami.me">Rohit Goswami</a></p>
+</dd>
+</dl>
+</div></blockquote>
+<nav class="contents" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#release-process" id="id1">Release Process</a></p>
+<ul>
+<li><p><a class="reference internal" href="#overview" id="id2">Overview</a></p></li>
+<li><p><a class="reference internal" href="#version-management" id="id3">Version Management</a></p></li>
+<li><p><a class="reference internal" href="#changelog-with-towncrier" id="id4">Changelog with towncrier</a></p>
+<ul>
+<li><p><a class="reference internal" href="#adding-a-changelog-entry" id="id5">Adding a Changelog Entry</a></p></li>
+<li><p><a class="reference internal" href="#building-the-changelog" id="id6">Building the Changelog</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#cutting-a-release" id="id7">Cutting a Release</a></p></li>
+<li><p><a class="reference internal" href="#build-system" id="id8">Build System</a></p></li>
+<li><p><a class="reference internal" href="#dependencies" id="id9">Dependencies</a></p></li>
+<li><p><a class="reference internal" href="#related" id="id10">Related</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="overview">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Overview</a><a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
+<p>pychum uses hatchling with VCS-based versioning and towncrier for changelog
+management.</p>
+</section>
+<section id="version-management">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Version Management</a><a class="headerlink" href="#version-management" title="Link to this heading">¶</a></h2>
+<p>Version is determined automatically from git tags via <code class="docutils literal notranslate"><span class="pre">hatch-vcs</span></code>. The
+<code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code> configures this:</p>
+<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="k">[tool.hatch.version]</span>
+</span><span data-line="2"><span class="n">source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;vcs&quot;</span>
+</span><span data-line="3">
+</span><span data-line="4"><span class="k">[tool.hatch.build.hooks.vcs]</span>
+</span><span data-line="5"><span class="n">version-file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;_version.py&quot;</span>
+</span></pre></div>
+</div>
+<p>At build time, <code class="docutils literal notranslate"><span class="pre">hatch-vcs</span></code> reads the latest git tag and writes the version
+string to <code class="docutils literal notranslate"><span class="pre">_version.py</span></code>. There is no manual version field to update.</p>
+</section>
+<section id="changelog-with-towncrier">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">Changelog with towncrier</a><a class="headerlink" href="#changelog-with-towncrier" title="Link to this heading">¶</a></h2>
+<p>Changelog entries are stored as individual files in
+<code class="docutils literal notranslate"><span class="pre">doc/release/upcoming_changes/</span></code>. Each file is named
+<code class="docutils literal notranslate"><span class="pre">&lt;issue_number&gt;.&lt;change_type&gt;</span></code> where <code class="docutils literal notranslate"><span class="pre">&lt;change_type&gt;</span></code> is one of:</p>
+<div class="table-wrapper docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Type</p></th>
+<th class="head"><p>Directory</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Added</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">added/</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Changed</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">changed/</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Deprecated</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">deprecated/</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Fixed</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">fixed/</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>Removed</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">removed/</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Miscellaneous</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">misc/</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="adding-a-changelog-entry">
+<h3><a class="toc-backref" href="#id5" role="doc-backlink">Adding a Changelog Entry</a><a class="headerlink" href="#adding-a-changelog-entry" title="Link to this heading">¶</a></h3>
+<p>Create a file in the appropriate subdirectory:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Added NEB restart support&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>doc/release/upcoming_changes/added/42.added
+</span></pre></div>
+</div>
+<p>The issue number in the filename links to the GitHub issue.</p>
+</section>
+<section id="building-the-changelog">
+<h3><a class="toc-backref" href="#id6" role="doc-backlink">Building the Changelog</a><a class="headerlink" href="#building-the-changelog" title="Link to this heading">¶</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">uvx<span class="w"> </span>towncrier<span class="w"> </span>build<span class="w"> </span>--version<span class="w"> </span>X.Y.Z
+</span></pre></div>
+</div>
+<p>This collects all fragment files, generates a formatted section in
+<code class="docutils literal notranslate"><span class="pre">CHANGELOG.md</span></code>, and removes the consumed fragments. The format uses the
+issue link template:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><span data-line="1">[#42](https://github.com/HaoZeke/pychum/issues/42)
+</span></pre></div>
+</div>
+</section>
+</section>
+<section id="cutting-a-release">
+<h2><a class="toc-backref" href="#id7" role="doc-backlink">Cutting a Release</a><a class="headerlink" href="#cutting-a-release" title="Link to this heading">¶</a></h2>
+<ol class="arabic">
+<li><p>Ensure all changes have changelog fragments in <code class="docutils literal notranslate"><span class="pre">doc/release/upcoming_changes/</span></code></p></li>
+<li><p>Run towncrier to build the changelog:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">uvx<span class="w"> </span>towncrier<span class="w"> </span>build<span class="w"> </span>--version<span class="w"> </span>X.Y.Z
+</span></pre></div>
+</div>
+</li>
+<li><p>Commit the updated <code class="docutils literal notranslate"><span class="pre">CHANGELOG.md</span></code> and removed fragments</p></li>
+<li><p>Tag the release:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">git<span class="w"> </span>tag<span class="w"> </span>-a<span class="w"> </span>vX.Y.Z<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Release X.Y.Z&quot;</span>
+</span></pre></div>
+</div>
+</li>
+<li><p>Push the tag:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>vX.Y.Z
+</span></pre></div>
+</div>
+</li>
+</ol>
+<p>The version is derived from the tag, so the tag name must match the
+version format (<code class="docutils literal notranslate"><span class="pre">vX.Y.Z</span></code>).</p>
+</section>
+<section id="build-system">
+<h2><a class="toc-backref" href="#id8" role="doc-backlink">Build System</a><a class="headerlink" href="#build-system" title="Link to this heading">¶</a></h2>
+<p>pychum uses hatchling as the build backend:</p>
+<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="k">[build-system]</span>
+</span><span data-line="2"><span class="n">build-backend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;hatchling.build&quot;</span>
+</span><span data-line="3"><span class="n">requires</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;hatch-vcs&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;hatchling&quot;</span><span class="p">]</span>
+</span></pre></div>
+</div>
+<p>The build includes:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">pychum/**/*.py</span></code> – all Python source</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pychum/*.py</span></code> – top-level modules</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/tests</span></code> – test files</p></li>
+</ul>
+<p>Building a distribution:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">uv<span class="w"> </span>build
+</span></pre></div>
+</div>
+</section>
+<section id="dependencies">
+<h2><a class="toc-backref" href="#id9" role="doc-backlink">Dependencies</a><a class="headerlink" href="#dependencies" title="Link to this heading">¶</a></h2>
+<p>Runtime dependencies:</p>
+<div class="table-wrapper docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Package</p></th>
+<th class="head"><p>Minimum</p></th>
+<th class="head"><p>Purpose</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>pint</p></td>
+<td><p>0.22</p></td>
+<td><p>Unit-aware quantities</p></td>
+</tr>
+<tr class="row-odd"><td><p>tomli</p></td>
+<td><p>2.0.1</p></td>
+<td><p>TOML parsing</p></td>
+</tr>
+<tr class="row-even"><td><p>jinja2</p></td>
+<td><p>3.1.2</p></td>
+<td><p>Template rendering</p></td>
+</tr>
+<tr class="row-odd"><td><p>ase</p></td>
+<td><p>3.27.0</p></td>
+<td><p>Atomic structure I/O</p></td>
+</tr>
+<tr class="row-even"><td><p>rgpycrumbs</p></td>
+<td><p>1.3.0</p></td>
+<td><p>Utility functions</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Optional dependency groups: <code class="docutils literal notranslate"><span class="pre">doc</span></code>, <code class="docutils literal notranslate"><span class="pre">test</span></code>, <code class="docutils literal notranslate"><span class="pre">lint</span></code>.</p>
+</section>
+<section id="related">
+<h2><a class="toc-backref" href="#id10" role="doc-backlink">Related</a><a class="headerlink" href="#related" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="testing.rst">Testing</a> for the test infrastructure</p></li>
+<li><p><a class="reference external" href="dev/index.rst">Developer Documentation</a> for architecture overview</p></li>
+</ul>
+</section>
+</section>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>Back to top</span>
+</button><div class="navigation flex print:hidden"></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>2026, Rohit Goswami</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials"></div>
+    </div>
+  </div>
+</footer>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=f281be69"></script>
+      <script src="_static/shibuya.js?v=cac61aee"></script></body>
+</html>

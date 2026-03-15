@@ -1,0 +1,200 @@
+
+========
+Tutorial
+========
+
+This tutorial walks you through creating your first input files with ``pychum``.
+
+Prerequisites
+-------------
+
+Ensure you have ``pychum`` installed:
+
+.. code:: bash
+
+    pip install pychum
+
+Or for development:
+
+.. code:: bash
+
+    cd pychum
+    uv sync --all-extras
+
+Generating ORCA Input Files
+---------------------------
+
+Single Point Calculation
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+The simplest use case is generating a single point energy calculation input file.
+
+1. Create a TOML configuration file:
+
+.. code:: toml
+
+    # single_point.toml
+    [engine]
+    name = "orca"
+
+    [orca]
+    kwlines = """
+    !PBE0 def2-SVP
+    """
+
+    [units.distance]
+    inp = "angstrom"
+    out = "bohr"
+
+    [units.energy]
+    inp = "hartree"
+    out = "hartree"
+
+    [coords]
+    fmt = "xyz"
+    charge = 0
+    multiplicity = 1
+
+    [[coords.atoms]]
+    symbol = "O"
+    x = 0.0
+    y = 0.0
+    z = 0.0
+
+    [[coords.atoms]]
+    symbol = "H"
+    x = 0.757
+    y = 0.586
+    z = 0.0
+
+    [[coords.atoms]]
+    symbol = "H"
+    x = -0.757
+    y = 0.586
+    z = 0.0
+
+    [orca.extra_blocks]
+    scf = """
+    maxiter 100
+    """
+
+1. Generate the input file:
+
+.. code:: bash
+
+    pychum orca --config single_point.toml --output water.inp
+
+1. Run with ORCA:
+
+.. code:: bash
+
+    orca water.inp
+
+NEB Calculation
+~~~~~~~~~~~~~~~
+
+For nudged elastic band calculations:
+
+.. code:: toml
+
+    # neb.toml
+    [calculation]
+    type = "neb"
+    functional = "PBE0"
+    basis = "def2-SVP"
+    n_images = 5
+
+    [geometry.reactant]
+    method = "xyz"
+    file = "reactant.xyz"
+
+    [geometry.product]
+    method = "xyz"
+    file = "product.xyz"
+
+    [neb]
+    method = "idpp"  # IDPP interpolation
+
+.. code:: bash
+
+    pychum orca --config neb.toml --output neb/
+
+Generating eOn Input Files
+--------------------------
+
+SocketNWChemPot Setup
+~~~~~~~~~~~~~~~~~~~~~
+
+For eOn calculations using NWChem:
+
+.. code:: toml
+
+    # eon_nwchem.toml
+    [calculation]
+    type = "single_point"
+    theory = "dft"
+    functional = "b3lyp"
+    basis = "6-31g*"
+
+    [geometry]
+    method = "xyz"
+    file = "molecule.xyz"
+
+    [nwchem]
+    task = "energy"
+
+.. code:: bash
+
+    pychum nwchem --config eon_nwchem.toml --output nwchem_input.nw
+
+Using with Jobflow
+------------------
+
+``pychum`` integrates with jobflow for workflow management:
+
+.. code:: python
+
+    # SKIP-DOCTEST -- requires TOML config files
+    from pychum.engine.orca import create_orca_job
+    from jobflow import Flow
+
+    # Create a single point job
+    job = create_orca_job(
+        geometry="water.xyz",
+        functional="PBE0",
+        basis="def2-SVP",
+    )
+
+    # Create a flow
+    flow = Flow([job], name="ORCA Calculation")
+
+    # Run the flow
+    import jobflow.flows.local
+    jobflow.run_locally(flow)
+
+Unit-Aware Conversions
+----------------------
+
+``pychum`` uses ``pint`` for unit conversions:
+
+.. code:: python
+
+    # SKIP-DOCTEST -- requires TOML config files
+    from pychum.units import ureg
+
+    # Convert bond length
+    distance = 1.5 * ureg.angstrom
+    print(distance.to(ureg.bohr))
+
+    # Convert energy
+    energy = -76.0 * ureg.hartree
+    print(energy.to(ureg.kJ))
+
+Next Steps
+----------
+
+- See the `API Reference <../source/apidocs/index.rst>`_ for detailed documentation
+
+- Explore `Engine Details <../orgmode/index.rst>`_ for ORCA and NWChem specifics
+
+- Check out `rgpycrumbs <https://github.com/HaoZeke/rgpycrumbs>`_ for parsing and visualization

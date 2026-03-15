@@ -1,0 +1,155 @@
+=========================
+Input Generation Pipeline
+=========================
+
+    :Author: `Rohit Goswami <https://rgoswami.me>`_
+
+.. contents::
+
+
+Overview
+--------
+
+pychum generates computational chemistry input files through a three-stage
+pipeline: TOML configuration is parsed into Python dataclasses, then rendered
+through Jinja2 templates into engine-specific input text.
+
+The pipeline runs as:
+
+.. code:: text
+
+    TOML file --> ConfigLoader --> dataclasses --> Renderer --> input string
+
+ConfigLoader
+------------
+
+The ``ConfigLoader`` class in ``pychum/engine/orca/config_loader.py`` handles the
+first two stages. It reads a TOML file with ``tomli`` and maps sections to
+dataclass instances.
+
+Initialization
+~~~~~~~~~~~~~~
+
+.. code:: python
+
+    from pychum.engine.orca.config_loader import ConfigLoader
+
+    loader = ConfigLoader("input.toml")
+    config = loader.load_config()
+
+The constructor opens the TOML file and stores the parsed dictionary in
+``self.data``.
+
+TOML Section Mapping
+~~~~~~~~~~~~~~~~~~~~
+
+The loader maps TOML sections to dataclass constructors:
+
+.. table::
+
+    +-------------------------+--------------------+-------------------------------------+
+    | TOML path               | Dataclass          | Notes                               |
+    +=========================+====================+=====================================+
+    | ``[orca].kwlines``      | ``str``            | Raw ORCA keyword lines              |
+    +-------------------------+--------------------+-------------------------------------+
+    | ``[coords]``            | ``Coords``         | Charge, multiplicity, format, atoms |
+    +-------------------------+--------------------+-------------------------------------+
+    | ``[coords.atoms]``      | ``list[Atom]``     | One ``Atom`` per array entry        |
+    +-------------------------+--------------------+-------------------------------------+
+    | ``[orca.geom]``         | ``GeomBlock``      | Geometry scan specification         |
+    +-------------------------+--------------------+-------------------------------------+
+    | ``[orca.neb]``          | ``NebBlock``       | NEB calculation settings            |
+    +-------------------------+--------------------+-------------------------------------+
+    | ``[orca.extra_blocks]`` | ``dict[str, str]`` | Arbitrary ORCA blocks as raw text   |
+    +-------------------------+--------------------+-------------------------------------+
+    | ``[units]``             | ``UnitConversion`` | Distance/energy unit pairs          |
+    +-------------------------+--------------------+-------------------------------------+
+
+NEB Sub-block Loading
+~~~~~~~~~~~~~~~~~~~~~
+
+NEB configuration is the most complex section. The loader pops recognized
+sub-keys from the NEB dictionary and converts each to a settings dataclass:
+
+.. code:: python
+
+    if "optim" in neb_data:
+        neb_block_args["optim_settings"] = OptimSettings(**neb_data.pop("optim"))
+    if "lbfgs" in neb_data:
+        neb_block_args["lbfgs_settings"] = LBFGSSettings(**neb_data.pop("lbfgs"))
+
+After processing all recognized sub-keys, leftover top-level NEB fields (like
+``end_xyz``, ``nimgs``) are merged with the settings dict and passed to the
+``NebBlock`` constructor.
+
+Geometry Scan Loading
+~~~~~~~~~~~~~~~~~~~~~
+
+Geometry scans convert TOML arrays of bond/angle/dihedral definitions into
+``GeomScan`` dataclass lists:
+
+.. code:: python
+
+    bonds = [GeomScan(**bond) for bond in geom_data.get("bonds", [])]
+
+These are collected into a ``GeomBlock`` instance.
+
+Renderer
+--------
+
+The ``OrcaInputRenderer`` class in ``pychum/engine/orca/_renderer.py`` handles the
+third stage. It takes an ``OrcaConfig`` dataclass and renders it through Jinja2
+templates.
+
+Template Environment
+~~~~~~~~~~~~~~~~~~~~
+
+The renderer creates a Jinja2 ``Environment`` with ``FileSystemLoader`` pointed at
+the ``_blocks/`` directory. Three whitespace controls are enabled:
+
+- ``trim_blocks``: removes the first newline after a block tag
+
+- ``lstrip_blocks``: strips leading whitespace before block tags
+
+- ``rstrip_blocks``: strips trailing whitespace after block tags
+
+Rendering
+~~~~~~~~~
+
+.. code:: python
+
+    renderer = OrcaInputRenderer(config)
+    output = renderer.render("base.jinja")
+
+The ``render`` method loads a template, passes the config as context, and
+post-processes by collapsing double newlines.
+
+Public API
+----------
+
+The ``pychum.main`` module wraps the loader and renderer into two functions:
+
+- ``render_orca(toml_path)``: loads TOML, builds ``OrcaConfig``, renders through
+  ``base.jinja``
+
+- ``render_nwchem(pos_file, ...)``: reads an ASE atoms file, builds
+  ``NWChemSocketConfig``, renders through ``nwchem_socket.jinja``
+
+These are re-exported from ``pychum.__init__``.
+
+NWChem Pipeline
+---------------
+
+The eOn/NWChem pipeline is simpler. ``render_nwchem`` reads atomic positions from
+a file with ASE, constructs ``NWChemAtom`` instances (optionally zeroing
+positions since eOn overwrites them), builds a ``NWChemSocketConfig``, and renders
+through the ``NWChemRenderer``.
+
+Related
+-------
+
+- `Template System <template_system.rst>`_ for Jinja2 template details
+
+- `Dataclasses <dataclasses.rst>`_ for the full dataclass hierarchy
+
+- `ORCA Blocks <orca_blocks.rst>`_ for template structure

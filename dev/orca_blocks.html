@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en" data-accent-color="violet" data-content_root="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>ORCA Input Block System - pychum</title><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=e1a1ceaf" />
+    <link rel="stylesheet" type="text/css" href="../_static/shibuya.css?v=a318c5d4" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link media="print" rel="stylesheet" type="text/css" href="../_static/print.css?v=20ff2c19" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    <meta property="og:type" content="website"/><meta property="og:title" content="ORCA Input Block System"/>
+    <meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="../index.html">
+      
+      
+      <strong>pychum</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <kbd>/</kbd>
+</form><div class="sy-head-socials"></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="Switch to light color mode"
+data-aria-light="Switch to dark color mode"
+data-aria-dark="Switch to auto color mode">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="0"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a></li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>On this page</h3><ul>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#template-files">Template Files</a></li>
+<li><a class="reference internal" href="#base-jinja-structure">base.jinja Structure</a></li>
+<li><a class="reference internal" href="#coord-jinja">coord.jinja</a></li>
+<li><a class="reference internal" href="#neb-jinja">neb.jinja</a></li>
+<li><a class="reference internal" href="#geom-jinja-and-geomscan-jinja">geom.jinja and geom<sub>scan.jinja</sub></a></li>
+<li><a class="reference internal" href="#extra-blocks">Extra Blocks</a></li>
+<li><a class="reference internal" href="#placeholder-modules">Placeholder Modules</a></li>
+<li><a class="reference internal" href="#related">Related</a></li>
+</ul>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../index.html"><span itemprop="name">pychum</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">ORCA Input Block System</strong>
+        <meta itemprop="position" content="2" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <article class="yue" role="main">
+          <section id="orca-input-block-system">
+<h1><a class="toc-backref" href="#id1" role="doc-backlink">ORCA Input Block System</a><a class="headerlink" href="#orca-input-block-system" title="Link to this heading">¶</a></h1>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">Author<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://rgoswami.me">Rohit Goswami</a></p>
+</dd>
+</dl>
+</div></blockquote>
+<nav class="contents" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#orca-input-block-system" id="id1">ORCA Input Block System</a></p>
+<ul>
+<li><p><a class="reference internal" href="#overview" id="id2">Overview</a></p></li>
+<li><p><a class="reference internal" href="#template-files" id="id3">Template Files</a></p></li>
+<li><p><a class="reference internal" href="#base-jinja-structure" id="id4">base.jinja Structure</a></p></li>
+<li><p><a class="reference internal" href="#coord-jinja" id="id5">coord.jinja</a></p></li>
+<li><p><a class="reference internal" href="#neb-jinja" id="id6">neb.jinja</a></p></li>
+<li><p><a class="reference internal" href="#geom-jinja-and-geomscan-jinja" id="id7">geom.jinja and geom<sub>scan.jinja</sub></a></p></li>
+<li><p><a class="reference internal" href="#extra-blocks" id="id8">Extra Blocks</a></p></li>
+<li><p><a class="reference internal" href="#placeholder-modules" id="id9">Placeholder Modules</a></p></li>
+<li><p><a class="reference internal" href="#related" id="id10">Related</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="overview">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Overview</a><a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
+<p>ORCA input files are composed of keyword lines, coordinate blocks, and
+optional named blocks (<code class="docutils literal notranslate"><span class="pre">%neb</span></code>, <code class="docutils literal notranslate"><span class="pre">%geom</span></code>, etc.). pychum models these with
+Jinja2 templates in <code class="docutils literal notranslate"><span class="pre">pychum/engine/orca/_blocks/</span></code>.</p>
+</section>
+<section id="template-files">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Template Files</a><a class="headerlink" href="#template-files" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Template</p></th>
+<th class="head"><p>Purpose</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">base.jinja</span></code></p></td>
+<td><p>Top-level orchestrator</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">coord.jinja</span></code></p></td>
+<td><p>Coordinate block (xyz, int, gzmt, xyzfile, gzmtfile)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">neb.jinja</span></code></p></td>
+<td><p>NEB calculation block</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">geom.jinja</span></code></p></td>
+<td><p>Geometry block wrapper</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">geom_scan.jinja</span></code></p></td>
+<td><p>Geometry scan sub-block</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="base-jinja-structure">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">base.jinja Structure</a><a class="headerlink" href="#base-jinja-structure" title="Link to this heading">¶</a></h2>
+<p>The base template has three sections:</p>
+<ol class="arabic simple">
+<li><p>Keyword lines (the <code class="docutils literal notranslate"><span class="pre">!</span> <span class="pre">...</span></code> lines at the top of ORCA input)</p></li>
+<li><p>Extra blocks (arbitrary <code class="docutils literal notranslate"><span class="pre">%blockname</span> <span class="pre">...</span> <span class="pre">end</span></code> sections from config)</p></li>
+<li><p>Dynamic block inclusion (iterates <code class="docutils literal notranslate"><span class="pre">config.blocks</span></code> dict)</p></li>
+<li><p>Coordinate inclusion (always rendered last)</p></li>
+</ol>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><span data-line="1">{{ config.kwlines }}
+</span><span data-line="2">
+</span><span data-line="3">{% for block_name, block_content in config.extra_blocks.items() %}
+</span><span data-line="4">%{{ block_name }}
+</span><span data-line="5">{{ block_content }}
+</span><span data-line="6">end
+</span><span data-line="7">{% endfor %}
+</span><span data-line="8">
+</span><span data-line="9">{% for block_name, block_data in config.blocks.items() %}
+</span><span data-line="10">    {% include block_name + &quot;.jinja&quot; %}
+</span><span data-line="11">{% endfor %}
+</span><span data-line="12">
+</span><span data-line="13">{% include &quot;coord.jinja&quot; %}
+</span></pre></div>
+</div>
+<p>The dynamic block inclusion means adding a new block type requires only a
+new <code class="docutils literal notranslate"><span class="pre">.jinja</span></code> template file and a corresponding entry in <code class="docutils literal notranslate"><span class="pre">config.blocks</span></code>.</p>
+</section>
+<section id="coord-jinja">
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">coord.jinja</a><a class="headerlink" href="#coord-jinja" title="Link to this heading">¶</a></h2>
+<p>Handles all coordinate formats:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">xyz</span></code>: Cartesian coordinates with the <code class="docutils literal notranslate"><span class="pre">render_atom</span></code> macro</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">int</span></code>: Internal (Z-matrix) coordinates with <code class="docutils literal notranslate"><span class="pre">render_int_atom</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gzmt</span></code>: Gaussian Z-matrix with <code class="docutils literal notranslate"><span class="pre">render_gzmt_atom</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">xyzfile</span></code>: External XYZ file reference</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gzmtfile</span></code>: External GZMT file reference</p></li>
+</ul>
+<p>The coordinate block is wrapped in <code class="docutils literal notranslate"><span class="pre">\*</span> <span class="pre">format</span> <span class="pre">charge</span> <span class="pre">multiplicity</span> <span class="pre">...</span> <span class="pre">*</span></code>
+markers as ORCA requires.</p>
+</section>
+<section id="neb-jinja">
+<h2><a class="toc-backref" href="#id6" role="doc-backlink">neb.jinja</a><a class="headerlink" href="#neb-jinja" title="Link to this heading">¶</a></h2>
+<p>The NEB template is the largest. It renders the <code class="docutils literal notranslate"><span class="pre">%neb</span> <span class="pre">...</span> <span class="pre">end</span></code> block with
+all NEB parameters and sub-sections:</p>
+<ul class="simple">
+<li><p>Top-level NEB parameters (end<sub>xyz</sub>, nimages, convtype, etc.)</p></li>
+<li><p>TSGuess sub-block (optional, xyz<sub>struct</sub>or pdb<sub>struct</sub>)</p></li>
+<li><p>Fix center sub-block</p></li>
+<li><p>Restart sub-block (optional, gbw<sub>basename</sub>or allxyz)</p></li>
+<li><p>Spring settings</p></li>
+<li><p>Free end settings</p></li>
+<li><p>Convergence tolerances</p></li>
+<li><p>Reparametrization settings</p></li>
+<li><p>Optimizer settings (LBFGS, FIRE, VPO)</p></li>
+<li><p>LBFGS-specific settings</p></li>
+<li><p>FIRE-specific settings</p></li>
+<li><p>Zoom NEB settings</p></li>
+<li><p>IDPP settings</p></li>
+</ul>
+<p>Each sub-section is wrapped in a conditional that checks for the settings
+object, so sections with only defaults still appear but truly optional
+sections (restart, tsguess) are omitted when not configured.</p>
+</section>
+<section id="geom-jinja-and-geomscan-jinja">
+<h2><a class="toc-backref" href="#id7" role="doc-backlink">geom.jinja and geom<sub>scan.jinja</sub></a><a class="headerlink" href="#geom-jinja-and-geomscan-jinja" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">geom.jinja</span></code> wraps the <code class="docutils literal notranslate"><span class="pre">%geom</span> <span class="pre">...</span> <span class="pre">end</span></code> block and includes <code class="docutils literal notranslate"><span class="pre">geom_scan.jinja</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">geom_scan.jinja</span></code> renders the <code class="docutils literal notranslate"><span class="pre">Scan</span> <span class="pre">...</span> <span class="pre">end</span></code> sub-block within <code class="docutils literal notranslate"><span class="pre">%geom</span></code>. It
+handles bonds (<code class="docutils literal notranslate"><span class="pre">B</span></code>), angles (<code class="docutils literal notranslate"><span class="pre">A</span></code>), and dihedrals (<code class="docutils literal notranslate"><span class="pre">D</span></code>) with format:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><span data-line="1">B atom1 atom2 = start, end, npoints
+</span><span data-line="2">A atom1 atom2 atom3 = start, end, npoints
+</span><span data-line="3">D atom1 atom2 atom3 atom4 = start, end, npoints
+</span></pre></div>
+</div>
+<p>A guard limits total scans to 3. If more than 3 scan coordinates are defined,
+an error message is emitted instead.</p>
+</section>
+<section id="extra-blocks">
+<h2><a class="toc-backref" href="#id8" role="doc-backlink">Extra Blocks</a><a class="headerlink" href="#extra-blocks" title="Link to this heading">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">extra_blocks</span></code> mechanism in <code class="docutils literal notranslate"><span class="pre">OrcaConfig</span></code> allows arbitrary ORCA blocks
+to be specified as plain strings in the TOML under <code class="docutils literal notranslate"><span class="pre">[orca.extra_blocks]</span></code>.
+These are rendered as-is without template processing:</p>
+<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="k">[orca.extra_blocks]</span>
+</span><span data-line="2"><span class="n">scf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;maxiter 300&quot;</span>
+</span></pre></div>
+</div>
+<p>Produces:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><span data-line="1">%scf
+</span><span data-line="2">maxiter 300
+</span><span data-line="3">end
+</span></pre></div>
+</div>
+</section>
+<section id="placeholder-modules">
+<h2><a class="toc-backref" href="#id9" role="doc-backlink">Placeholder Modules</a><a class="headerlink" href="#placeholder-modules" title="Link to this heading">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">_orcablocks.py</span></code> and <code class="docutils literal notranslate"><span class="pre">_validators.py</span></code> in the ORCA engine directory are
+empty placeholder files. Block type registration and validation are
+currently handled inline in the dataclasses (<code class="docutils literal notranslate"><span class="pre">__post_init__</span></code> methods) and
+the <code class="docutils literal notranslate"><span class="pre">ConfigLoader</span></code>.</p>
+</section>
+<section id="related">
+<h2><a class="toc-backref" href="#id10" role="doc-backlink">Related</a><a class="headerlink" href="#related" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="template_system.rst">Template System</a> for rendering mechanics</p></li>
+<li><p><a class="reference external" href="dataclasses.rst">Dataclasses</a> for the data structures that templates consume</p></li>
+<li><p><a class="reference external" href="input_generation.rst">Input Generation</a> for the full pipeline</p></li>
+</ul>
+</section>
+</section>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>Back to top</span>
+</button><div class="navigation flex print:hidden"></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>2026, Rohit Goswami</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials"></div>
+    </div>
+  </div>
+</footer>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script src="../_static/shibuya.js?v=cac61aee"></script></body>
+</html>

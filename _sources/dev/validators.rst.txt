@@ -1,0 +1,176 @@
+================
+Input Validation
+================
+
+    :Author: `Rohit Goswami <https://rgoswami.me>`_
+
+.. contents::
+
+
+Overview
+--------
+
+pychum validates input at dataclass construction time using ``__post_init__``
+methods. Validation is inline -- the ``_validators.py`` file exists as an
+empty placeholder for future extraction.
+
+Validation Approach
+-------------------
+
+All validation happens when a dataclass is instantiated. Invalid values raise
+``ValueError`` immediately, before any rendering occurs. This catches
+configuration errors at load time rather than producing malformed input files.
+
+Validated Fields
+----------------
+
+Atom
+~~~~
+
+.. table::
+
+    +---------------------------------------------------------+-------------------------------------------------------+
+    | Condition                                               | Error                                                 |
+    +=========================================================+=======================================================+
+    | ``point_charge`` is ``None`` and ``symbol`` is ``None`` | "Atom symbol is required unless it's a point charge." |
+    +---------------------------------------------------------+-------------------------------------------------------+
+
+When ``point_charge`` is set, ``symbol`` is forced to ``"Q"`` (no error).
+
+OptimSettings
+~~~~~~~~~~~~~
+
+.. table::
+
+    +------------+------------------+
+    | Field      | Allowed values   |
+    +============+==================+
+    | ``method`` | LBFGS, VPO, FIRE |
+    +------------+------------------+
+
+Comparison is case-insensitive (``.upper()``).
+
+ReparamSettings
+~~~~~~~~~~~~~~~
+
+.. table::
+
+    +------------+----------------+
+    | Field      | Allowed values |
+    +============+================+
+    | ``interp`` | linear, cubic  |
+    +------------+----------------+
+
+Comparison is case-insensitive (``.lower()``).
+
+FreeEndSettings
+~~~~~~~~~~~~~~~
+
+.. table::
+
+    +--------------+---------------------+
+    | Field        | Allowed values      |
+    +==============+=====================+
+    | ``opt_type`` | PERP, CONTOUR, FULL |
+    +--------------+---------------------+
+
+Comparison is case-insensitive (``.upper()``).
+
+ZoomSettings
+~~~~~~~~~~~~
+
+.. table::
+
+    +-------------------+----------------+
+    | Field             | Allowed values |
+    +===================+================+
+    | ``interpolation`` | linear, cubic  |
+    +-------------------+----------------+
+
+Comparison is case-insensitive (``.lower()``).
+
+SpringSettings
+~~~~~~~~~~~~~~
+
+.. table::
+
+    +-----------------+----------------------------+
+    | Field           | Allowed values             |
+    +=================+============================+
+    | ``spring_kind`` | image, dof, ideal          |
+    +-----------------+----------------------------+
+    | ``perpspring``  | no, cos, tan, cosTan, DNEB |
+    +-----------------+----------------------------+
+
+Both comparisons are case-insensitive (``.lower()``).
+
+NebBlock
+~~~~~~~~
+
+.. table::
+
+    +-------------------+------------------------------------------+
+    | Field             | Allowed values                           |
+    +===================+==========================================+
+    | ``convtype``      | all, cionly                              |
+    +-------------------+------------------------------------------+
+    | ``quatern``       | no, startonly, always                    |
+    +-------------------+------------------------------------------+
+    | ``tangent``       | improved, original                       |
+    +-------------------+------------------------------------------+
+    | ``interpolation`` | IDPP, LINEAR, XTB1TS, XTB1, XTB2TS, XTB2 |
+    +-------------------+------------------------------------------+
+
+``convtype``, ``quatern``, and ``tangent`` use ``.lower()``. ``interpolation`` uses
+``.upper()``.
+
+RestartSettings
+~~~~~~~~~~~~~~~
+
+.. table::
+
+    +----------------------------------------------+-------------------------------------------------------------------+
+    | Condition                                    | Error                                                             |
+    +==============================================+===================================================================+
+    | Both ``gbw_basename`` and ``allxyz`` are set | "Only one of gbw\ :sub:`basename`\ or allxyz should be provided." |
+    +----------------------------------------------+-------------------------------------------------------------------+
+
+TSGuessSettings
+~~~~~~~~~~~~~~~
+
+.. table::
+
+    +------------------------------------------------+------------------------------------------------------------------------------+
+    | Condition                                      | Error                                                                        |
+    +================================================+==============================================================================+
+    | Both ``xyz_struct`` and ``pdb_struct`` are set | "Only one of xyz\ :sub:`struct`\ or pdb\ :sub:`struct`\ should be provided." |
+    +------------------------------------------------+------------------------------------------------------------------------------+
+
+Unvalidated Fields
+------------------
+
+Most numeric fields (tolerances, step sizes, spring constants) accept any
+value without range checking. Boolean fields are not validated. The
+``ConfigLoader`` relies on TOML parsing to enforce basic type correctness.
+
+Template-level Validation
+-------------------------
+
+The ``geom_scan.jinja`` template has an additional guard: if the total number
+of scan coordinates (bonds + angles + dihedrals) exceeds 3, it emits an
+error message instead of rendering the scan block. This is a template-level
+check, not a dataclass validator.
+
+Future Work
+-----------
+
+The empty ``_validators.py`` and ``_orcablocks.py`` placeholders suggest planned
+extraction of validation logic into dedicated modules. Currently all
+validation is co-located with the dataclass definitions.
+
+Related
+-------
+
+- `Dataclasses <dataclasses.rst>`_ for the full field listing
+
+- `Input Generation <input_generation.rst>`_ for where validation triggers

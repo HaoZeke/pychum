@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en" data-accent-color="violet" data-content_root="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Glossary - pychum</title><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=e1a1ceaf" />
+    <link rel="stylesheet" type="text/css" href="../_static/shibuya.css?v=a318c5d4" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link media="print" rel="stylesheet" type="text/css" href="../_static/print.css?v=20ff2c19" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    <meta property="og:type" content="website"/><meta property="og:title" content="Glossary"/>
+    <meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="../index.html">
+      
+      
+      <strong>pychum</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <kbd>/</kbd>
+</form><div class="sy-head-socials"></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="Switch to light color mode"
+data-aria-light="Switch to dark color mode"
+data-aria-dark="Switch to auto color mode">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="0"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a></li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>On this page</h3><ul>
+<li><a class="reference internal" href="#glossary-of-computational-chemistry-terms">Glossary of Computational Chemistry Terms</a><ul>
+<li><a class="reference internal" href="#a">A</a><ul>
+<li><a class="reference internal" href="#ase">ASE</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#i">I</a><ul>
+<li><a class="reference internal" href="#image">Image</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#j">J</a><ul>
+<li><a class="reference internal" href="#jinja2">Jinja2</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#n">N</a><ul>
+<li><a class="reference internal" href="#neb">NEB</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#o">O</a><ul>
+<li><a class="reference internal" href="#orca">ORCA</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#p">P</a><ul>
+<li><a class="reference internal" href="#pep-723">PEP 723</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#t">T</a><ul>
+<li><a class="reference internal" href="#toml">TOML</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#see-also">See Also</a></li>
+</ul>
+</li>
+</ul>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../index.html"><span itemprop="name">pychum</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">Glossary</strong>
+        <meta itemprop="position" content="2" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <article class="yue" role="main">
+          <section id="glossary">
+<h1><a class="toc-backref" href="#id1" role="doc-backlink">Glossary</a><a class="headerlink" href="#glossary" title="Link to this heading">¶</a></h1>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">Author<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://rgoswami.me">Rohit Goswami</a></p>
+</dd>
+</dl>
+</div></blockquote>
+<nav class="contents" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#glossary" id="id1">Glossary</a></p>
+<ul>
+<li><p><a class="reference internal" href="#glossary-of-computational-chemistry-terms" id="id2">Glossary of Computational Chemistry Terms</a></p>
+<ul>
+<li><p><a class="reference internal" href="#a" id="id3">A</a></p>
+<ul>
+<li><p><a class="reference internal" href="#ase" id="id4">ASE</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#i" id="id5">I</a></p>
+<ul>
+<li><p><a class="reference internal" href="#image" id="id6">Image</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#j" id="id7">J</a></p>
+<ul>
+<li><p><a class="reference internal" href="#jinja2" id="id8">Jinja2</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#n" id="id9">N</a></p>
+<ul>
+<li><p><a class="reference internal" href="#neb" id="id10">NEB</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#o" id="id11">O</a></p>
+<ul>
+<li><p><a class="reference internal" href="#orca" id="id12">ORCA</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#p" id="id13">P</a></p>
+<ul>
+<li><p><a class="reference internal" href="#pep-723" id="id14">PEP 723</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#t" id="id15">T</a></p>
+<ul>
+<li><p><a class="reference internal" href="#toml" id="id16">TOML</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#see-also" id="id17">See Also</a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="glossary-of-computational-chemistry-terms">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Glossary of Computational Chemistry Terms</a><a class="headerlink" href="#glossary-of-computational-chemistry-terms" title="Link to this heading">¶</a></h2>
+<section id="a">
+<h3><a class="toc-backref" href="#id3" role="doc-backlink">A</a><a class="headerlink" href="#a" title="Link to this heading">¶</a></h3>
+<section id="ase">
+<h4><a class="toc-backref" href="#id4" role="doc-backlink">ASE</a><a class="headerlink" href="#ase" title="Link to this heading">¶</a></h4>
+<p>Atomic Simulation Environment. Python library used for structure handling.</p>
+</section>
+</section>
+<section id="i">
+<h3><a class="toc-backref" href="#id5" role="doc-backlink">I</a><a class="headerlink" href="#i" title="Link to this heading">¶</a></h3>
+<section id="image">
+<h4><a class="toc-backref" href="#id6" role="doc-backlink">Image</a><a class="headerlink" href="#image" title="Link to this heading">¶</a></h4>
+<p>In NEB context, a replica of the system along reaction path.</p>
+</section>
+</section>
+<section id="j">
+<h3><a class="toc-backref" href="#id7" role="doc-backlink">J</a><a class="headerlink" href="#j" title="Link to this heading">¶</a></h3>
+<section id="jinja2">
+<h4><a class="toc-backref" href="#id8" role="doc-backlink">Jinja2</a><a class="headerlink" href="#jinja2" title="Link to this heading">¶</a></h4>
+<p>Template engine used by pychum for input file generation.</p>
+</section>
+</section>
+<section id="n">
+<h3><a class="toc-backref" href="#id9" role="doc-backlink">N</a><a class="headerlink" href="#n" title="Link to this heading">¶</a></h3>
+<section id="neb">
+<h4><a class="toc-backref" href="#id10" role="doc-backlink">NEB</a><a class="headerlink" href="#neb" title="Link to this heading">¶</a></h4>
+<p>Nudged Elastic Band. Method for finding minimum energy path.</p>
+</section>
+</section>
+<section id="o">
+<h3><a class="toc-backref" href="#id11" role="doc-backlink">O</a><a class="headerlink" href="#o" title="Link to this heading">¶</a></h3>
+<section id="orca">
+<h4><a class="toc-backref" href="#id12" role="doc-backlink">ORCA</a><a class="headerlink" href="#orca" title="Link to this heading">¶</a></h4>
+<p>Quantum chemistry software package. pychum generates ORCA input files.</p>
+</section>
+</section>
+<section id="p">
+<h3><a class="toc-backref" href="#id13" role="doc-backlink">P</a><a class="headerlink" href="#p" title="Link to this heading">¶</a></h3>
+<section id="pep-723">
+<h4><a class="toc-backref" href="#id14" role="doc-backlink">PEP 723</a><a class="headerlink" href="#pep-723" title="Link to this heading">¶</a></h4>
+<p>Python Enhancement Proposal for inline script metadata.</p>
+</section>
+</section>
+<section id="t">
+<h3><a class="toc-backref" href="#id15" role="doc-backlink">T</a><a class="headerlink" href="#t" title="Link to this heading">¶</a></h3>
+<section id="toml">
+<h4><a class="toc-backref" href="#id16" role="doc-backlink">TOML</a><a class="headerlink" href="#toml" title="Link to this heading">¶</a></h4>
+<p>Tom’s Obvious, Minimal Language. Used by pychum for configuration files.</p>
+</section>
+</section>
+<section id="see-also">
+<h3><a class="toc-backref" href="#id17" role="doc-backlink">See Also</a><a class="headerlink" href="#see-also" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="../howto/faq.rst">FAQ</a></p></li>
+<li><p><a class="reference external" href="../tutorials/index.rst">Tutorials</a></p></li>
+</ul>
+</section>
+</section>
+</section>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>Back to top</span>
+</button><div class="navigation flex print:hidden"></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>2026, Rohit Goswami</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials"></div>
+    </div>
+  </div>
+</footer>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script src="../_static/shibuya.js?v=cac61aee"></script></body>
+</html>

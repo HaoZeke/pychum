@@ -2,14 +2,13 @@
 <html lang="en" data-accent-color="violet" data-content_root="../../../../">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>pychum.engine.eon._renderer - pychum documentation</title><link rel="index" title="Index" href="../../../../genindex.html" /><link rel="search" title="Search" href="../../../../search.html" />
-      <link rel="canonical" href="https://pychum.rgoswami.me/_modules/pychum/engine/eon/_renderer.html" /><script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>pychum.engine.eon._renderer - pychum</title><link rel="index" title="Index" href="../../../../genindex.html" /><link rel="search" title="Search" href="../../../../search.html" /><script>
     function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
     setColorMode(localStorage._theme||"auto");
   </script><link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=e1a1ceaf" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/shibuya.css?v=a318c5d4" />
-    <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
-    <link rel="stylesheet" type="text/css" href="../../../../_static/autodoc_pydantic.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link media="print" rel="stylesheet" type="text/css" href="../../../../_static/print.css?v=20ff2c19" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,9 +19,7 @@
   --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
 }
 </style>
-    <meta property="og:type" content="website"/>
-  <meta property="og:url" content="https://pychum.rgoswami.me/_modules/pychum/engine/eon/_renderer.html"/>
-  <meta property="og:title" content="pychum.engine.eon._renderer"/>
+    <meta property="og:type" content="website"/><meta property="og:title" content="pychum.engine.eon._renderer"/>
     <meta name="twitter:card" content="summary"/>
   </head>
 <body><div class="sy-head">
@@ -38,10 +35,7 @@
       <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../../../../search.html" method="get">
   <input type="text" name="q" placeholder="Search" />
   <kbd>/</kbd>
-</form><div class="sy-head-socials">
-  <a href="https://github.com/HaoZeke/pychum" aria-label="GitHub">
-    <iconify-icon icon="simple-icons:github"></iconify-icon>
-  </a></div></div>
+</form><div class="sy-head-socials"></div></div>
     </div>
     <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
 data-aria-auto="Switch to light color mode"
@@ -62,7 +56,10 @@ data-aria-dark="Switch to auto color mode">
   <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
     <div class="sy-lside-inner md:sticky">
       <div class="sy-scrollbar p-6">
-        <div class="globaltoc" data-expand-depth="0">
+        <div class="globaltoc" data-expand-depth="0"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tutorial.html">Tutorial</a></li>
+</ul>
+
         </div>
       </div>
     </div>
@@ -114,24 +111,21 @@ data-aria-dark="Switch to auto color mode">
 </span><span data-line="6">
 </span><span data-line="7">
 <div class="viewcode-block" id="NWChemRenderer">
-<a class="viewcode-back" href="../../../../autoapi/pychum/engine/eon/index.html#pychum.engine.eon._renderer.NWChemRenderer">[docs]</a>
+<a class="viewcode-back" href="../../../../api/pychum.engine.eon.html#pychum.engine.eon.NWChemRenderer">[docs]</a>
 </span><span data-line="8"><span class="k">class</span><span class="w"> </span><span class="nc">NWChemRenderer</span><span class="p">:</span>
+<div class="viewcode-block" id="NWChemRenderer.__init__">
+<a class="viewcode-back" href="../../../../api/pychum.engine.eon.html#pychum.engine.eon.NWChemRenderer.__init__">[docs]</a>
 </span><span data-line="9">    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="p">:</span> <span class="n">NWChemSocketConfig</span><span class="p">):</span>
-<div class="viewcode-block" id="NWChemRenderer.config">
-<a class="viewcode-back" href="../../../../autoapi/pychum/engine/eon/_renderer/index.html#pychum.engine.eon._renderer.NWChemRenderer.config">[docs]</a>
-</span><span data-line="10">        <span class="bp">self</span><span class="o">.</span><span class="n">config</span> <span class="o">=</span> <span class="n">config</span></div>
-
+</span><span data-line="10">        <span class="bp">self</span><span class="o">.</span><span class="n">config</span> <span class="o">=</span> <span class="n">config</span>
 </span><span data-line="11">        <span class="n">package_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
 </span><span data-line="12">        <span class="n">template_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">package_path</span><span class="p">,</span> <span class="s2">&quot;_blocks&quot;</span><span class="p">)</span>
-<div class="viewcode-block" id="NWChemRenderer.env">
-<a class="viewcode-back" href="../../../../autoapi/pychum/engine/eon/_renderer/index.html#pychum.engine.eon._renderer.NWChemRenderer.env">[docs]</a>
-</span><span data-line="13">        <span class="bp">self</span><span class="o">.</span><span class="n">env</span> <span class="o">=</span> <span class="n">Environment</span><span class="p">(</span><span class="n">loader</span><span class="o">=</span><span class="n">FileSystemLoader</span><span class="p">(</span><span class="n">template_dir</span><span class="p">),</span> <span class="n">autoescape</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
-
+</span><span data-line="13">        <span class="bp">self</span><span class="o">.</span><span class="n">env</span> <span class="o">=</span> <span class="n">Environment</span><span class="p">(</span><span class="n">loader</span><span class="o">=</span><span class="n">FileSystemLoader</span><span class="p">(</span><span class="n">template_dir</span><span class="p">),</span> <span class="n">autoescape</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </span><span data-line="14">        <span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">trim_blocks</span> <span class="o">=</span> <span class="kc">True</span>
-</span><span data-line="15">        <span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">lstrip_blocks</span> <span class="o">=</span> <span class="kc">True</span>
+</span><span data-line="15">        <span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">lstrip_blocks</span> <span class="o">=</span> <span class="kc">True</span></div>
+
 </span><span data-line="16">
 <div class="viewcode-block" id="NWChemRenderer.render">
-<a class="viewcode-back" href="../../../../autoapi/pychum/engine/eon/index.html#pychum.engine.eon._renderer.NWChemRenderer.render">[docs]</a>
+<a class="viewcode-back" href="../../../../api/pychum.engine.eon.html#pychum.engine.eon.NWChemRenderer.render">[docs]</a>
 </span><span data-line="17">    <span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">template_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
 </span><span data-line="18">        <span class="n">template</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">get_template</span><span class="p">(</span><span class="n">template_name</span><span class="p">)</span>
 </span><span data-line="19">        <span class="n">context</span> <span class="o">=</span> <span class="p">{</span>
@@ -163,15 +157,14 @@ data-aria-dark="Switch to auto color mode">
     <a href="https://shibuya.lepture.com">Shibuya theme</a>.
   </p>
 </div>
-      <div class="sy-foot-socials">
-<a href="https://github.com/HaoZeke/pychum" aria-label="GitHub">
-  <iconify-icon icon="simple-icons:github"></iconify-icon>
-</a></div>
+      <div class="sy-foot-socials"></div>
     </div>
   </div>
 </footer>
       <script src="../../../../_static/documentation_options.js?v=5929fcd5"></script>
       <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
       <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../../../_static/copybutton.js?v=f281be69"></script>
       <script src="../../../../_static/shibuya.js?v=cac61aee"></script></body>
 </html>

@@ -1,0 +1,55 @@
+==========================
+Frequently Asked Questions
+==========================
+
+    :Author: `Rohit Goswami <https://rgoswami.me>`_
+
+.. contents::
+
+
+Frequently Asked Questions
+--------------------------
+
+Installation
+~~~~~~~~~~~~
+
+How do I install pychum?
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code:: bash
+
+    pip install pychum
+
+Usage
+~~~~~
+
+How do I generate ORCA input files?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code:: bash
+
+    pychum orca --config input.toml
+
+How do I generate eOn input files?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code:: bash
+
+    pychum eon --config input.toml
+
+Configuration
+~~~~~~~~~~~~~
+
+What is the TOML format for input files?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+See: `ORCA Input Tutorial <../tutorials/orca_input.rst>`_
+
+See Also
+~~~~~~~~
+
+- `Installation Guide <install.rst>`_
+
+- `Glossary <../reference/glossary.rst>`_
+
+- `Tutorials <../tutorials/index.rst>`_

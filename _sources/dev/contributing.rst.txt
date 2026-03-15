@@ -1,0 +1,79 @@
+=======================
+Contributing Guidelines
+=======================
+
+    :Author: `Rohit Goswami <https://rgoswami.me>`_
+
+.. contents::
+
+
+Contributing to pychum
+----------------------
+
+Getting Started
+~~~~~~~~~~~~~~~
+
+1. Fork and Clone
+^^^^^^^^^^^^^^^^^
+
+.. code:: bash
+
+    git clone https://github.com/your-username/pychum
+    cd pychum
+
+2. Set Up Environment
+^^^^^^^^^^^^^^^^^^^^^
+
+.. code:: bash
+
+    uv sync --all-extras
+
+3. Run Tests
+^^^^^^^^^^^^
+
+.. code:: bash
+
+    uv run pytest
+
+Code Style
+~~~~~~~~~~
+
+Formatting
+^^^^^^^^^^
+
+.. code:: bash
+
+    uv run ruff format .
+    uv run ruff check .
+
+Adding New Engines
+~~~~~~~~~~~~~~~~~~
+
+Directory Structure
+^^^^^^^^^^^^^^^^^^^
+
+.. code:: text
+
+    pychum/engine/<code>/
+    |-- __init__.py
+    |-- _dataclasses.py
+    |-- _renderer.py
+    `-- test_renderer.py
+
+Pull Request Process
+~~~~~~~~~~~~~~~~~~~~
+
+1. Create branch
+
+2. Add tests
+
+3. Run CI checks
+
+4. Submit PR
+
+See Also
+~~~~~~~~
+
+- `Best Practices <best_practices.rst>`_
+
+- `How-to Guides <../howto/index.rst>`_

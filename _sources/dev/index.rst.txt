@@ -1,0 +1,93 @@
+=======================
+Developer Documentation
+=======================
+
+    :Author: `Rohit Goswami <https://rgoswami.me>`_
+
+.. contents::
+
+
+Developer Documentation
+-----------------------
+
+Technical documentation for developers working on pychum.
+
+Architecture
+~~~~~~~~~~~~
+
+.. table::
+
+    +--------------------------------------------+----------------------------------+
+    | Document                                   | Description                      |
+    +============================================+==================================+
+    | `Input Generation <input_generation.rst>`_ | How pychum generates input files |
+    +--------------------------------------------+----------------------------------+
+    | `Template System <template_system.rst>`_   | Jinja2 template rendering        |
+    +--------------------------------------------+----------------------------------+
+    | `ORCA Blocks <orca_blocks.rst>`_           | ORCA input block system          |
+    +--------------------------------------------+----------------------------------+
+
+Patterns
+~~~~~~~~
+
+.. table::
+
+    +------------------------------------+-----------------------------------+
+    | Pattern                            | Description                       |
+    +====================================+===================================+
+    | `Lazy Imports <lazy_imports.rst>`_ | Defer optional dependency loading |
+    +------------------------------------+-----------------------------------+
+    | `Dataclasses <dataclasses.rst>`_   | Data structure definitions        |
+    +------------------------------------+-----------------------------------+
+    | `Validators <validators.rst>`_     | Input validation patterns         |
+    +------------------------------------+-----------------------------------+
+
+Contributing
+~~~~~~~~~~~~
+
+- `Contributing Guidelines <../contributing.rst>`_
+
+- `Release Process <../release.rst>`_
+
+- `Testing Guidelines <../testing.rst>`_
+
+Quick Start for Developers
+--------------------------
+
+Setup\*\*
+~~~~~~~~~
+
+.. code:: bash
+
+    git clone https://github.com/HaoZeke/pychum
+    cd pychum
+    uv sync --all-extras
+
+Run Tests\*\*
+~~~~~~~~~~~~~
+
+.. code:: bash
+
+    uv run pytest
+
+Add New Engine\*\*
+~~~~~~~~~~~~~~~~~~
+
+1. Create ``pychum/engine/<code>/`` directory
+
+2. Add \_dataclasses.py, \_renderer.py
+
+3. Add to pychum/engine/\_\ :sub:`init`\\_\ :sub:`.py`\
+
+4. Add tests in ``tests/engine/<code>/``
+
+See `Input Generation <input_generation.rst>`_ for details.
+
+Related
+-------
+
+- `Main Documentation <../index.rst>`_
+
+- `Tutorials <../tutorials/index.rst>`_
+
+- `GitHub Repository <https://github.com/HaoZeke/pychum>`_

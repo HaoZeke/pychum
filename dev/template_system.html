@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en" data-accent-color="violet" data-content_root="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Template System - pychum</title><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=e1a1ceaf" />
+    <link rel="stylesheet" type="text/css" href="../_static/shibuya.css?v=a318c5d4" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link media="print" rel="stylesheet" type="text/css" href="../_static/print.css?v=20ff2c19" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    <meta property="og:type" content="website"/><meta property="og:title" content="Template System"/>
+    <meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="../index.html">
+      
+      
+      <strong>pychum</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <kbd>/</kbd>
+</form><div class="sy-head-socials"></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="Switch to light color mode"
+data-aria-light="Switch to dark color mode"
+data-aria-dark="Switch to auto color mode">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="0"><ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a></li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>On this page</h3><ul>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#environment-configuration">Environment Configuration</a></li>
+<li><a class="reference internal" href="#rendering-flow">Rendering Flow</a></li>
+<li><a class="reference internal" href="#coordinate-rendering-macros">Coordinate Rendering Macros</a><ul>
+<li><a class="reference internal" href="#render-atom-atom-xyz-format"><code class="docutils literal notranslate"><span class="pre">render_atom(atom)</span></code> (xyz format)</a></li>
+<li><a class="reference internal" href="#render-int-atom-atom-internal-coordinates"><code class="docutils literal notranslate"><span class="pre">render_int_atom(atom)</span></code> (internal coordinates)</a></li>
+<li><a class="reference internal" href="#render-gzmt-atom-atom-gaussian-z-matrix"><code class="docutils literal notranslate"><span class="pre">render_gzmt_atom(atom)</span></code> (Gaussian Z-matrix)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#helper-macros">Helper Macros</a><ul>
+<li><a class="reference internal" href="#render-post-symbol-atom"><code class="docutils literal notranslate"><span class="pre">render_post_symbol(atom)</span></code></a></li>
+<li><a class="reference internal" href="#render-additional-atom-properties-atom"><code class="docutils literal notranslate"><span class="pre">render_additional_atom_properties(atom)</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#conditional-rendering">Conditional Rendering</a></li>
+<li><a class="reference internal" href="#related">Related</a></li>
+</ul>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../index.html"><span itemprop="name">pychum</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">Template System</strong>
+        <meta itemprop="position" content="2" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <article class="yue" role="main">
+          <section id="template-system">
+<h1><a class="toc-backref" href="#id1" role="doc-backlink">Template System</a><a class="headerlink" href="#template-system" title="Link to this heading">¶</a></h1>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">Author<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://rgoswami.me">Rohit Goswami</a></p>
+</dd>
+</dl>
+</div></blockquote>
+<nav class="contents" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#template-system" id="id1">Template System</a></p>
+<ul>
+<li><p><a class="reference internal" href="#overview" id="id2">Overview</a></p></li>
+<li><p><a class="reference internal" href="#environment-configuration" id="id3">Environment Configuration</a></p></li>
+<li><p><a class="reference internal" href="#rendering-flow" id="id4">Rendering Flow</a></p></li>
+<li><p><a class="reference internal" href="#coordinate-rendering-macros" id="id5">Coordinate Rendering Macros</a></p>
+<ul>
+<li><p><a class="reference internal" href="#render-atom-atom-xyz-format" id="id6"><code class="docutils literal notranslate"><span class="pre">render_atom(atom)</span></code> (xyz format)</a></p></li>
+<li><p><a class="reference internal" href="#render-int-atom-atom-internal-coordinates" id="id7"><code class="docutils literal notranslate"><span class="pre">render_int_atom(atom)</span></code> (internal coordinates)</a></p></li>
+<li><p><a class="reference internal" href="#render-gzmt-atom-atom-gaussian-z-matrix" id="id8"><code class="docutils literal notranslate"><span class="pre">render_gzmt_atom(atom)</span></code> (Gaussian Z-matrix)</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#helper-macros" id="id9">Helper Macros</a></p>
+<ul>
+<li><p><a class="reference internal" href="#render-post-symbol-atom" id="id10"><code class="docutils literal notranslate"><span class="pre">render_post_symbol(atom)</span></code></a></p></li>
+<li><p><a class="reference internal" href="#render-additional-atom-properties-atom" id="id11"><code class="docutils literal notranslate"><span class="pre">render_additional_atom_properties(atom)</span></code></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#conditional-rendering" id="id12">Conditional Rendering</a></p></li>
+<li><p><a class="reference internal" href="#related" id="id13">Related</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="overview">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Overview</a><a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
+<p>pychum uses Jinja2 templates to convert dataclass instances into
+engine-specific input text. Templates live in <code class="docutils literal notranslate"><span class="pre">_blocks/</span></code> directories
+under each engine package.</p>
+</section>
+<section id="environment-configuration">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Environment Configuration</a><a class="headerlink" href="#environment-configuration" title="Link to this heading">¶</a></h2>
+<p>Both <code class="docutils literal notranslate"><span class="pre">OrcaInputRenderer</span></code> and <code class="docutils literal notranslate"><span class="pre">NWChemRenderer</span></code> create a Jinja2
+<code class="docutils literal notranslate"><span class="pre">Environment</span></code> with a <code class="docutils literal notranslate"><span class="pre">FileSystemLoader</span></code> pointed at their respective
+<code class="docutils literal notranslate"><span class="pre">_blocks/</span></code> directory.</p>
+<p>Whitespace controls enabled for the ORCA renderer:</p>
+<div class="table-wrapper docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Setting</p></th>
+<th class="head"><p>Value</p></th>
+<th class="head"><p>Effect</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">trim_blocks</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
+<td><p>Remove first newline after block tag</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">lstrip_blocks</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
+<td><p>Strip leading whitespace before block tags</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rstrip_blocks</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">True</span></code></p></td>
+<td><p>Strip trailing whitespace after block tags</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The NWChem renderer uses <code class="docutils literal notranslate"><span class="pre">trim_blocks</span></code> and <code class="docutils literal notranslate"><span class="pre">lstrip_blocks</span></code> but not
+<code class="docutils literal notranslate"><span class="pre">rstrip_blocks</span></code>.</p>
+<p>The ORCA renderer also sets <code class="docutils literal notranslate"><span class="pre">autoescape</span></code> for <code class="docutils literal notranslate"><span class="pre">.toml</span></code> extensions. The NWChem
+renderer uses plain <code class="docutils literal notranslate"><span class="pre">autoescape=True</span></code>.</p>
+</section>
+<section id="rendering-flow">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">Rendering Flow</a><a class="headerlink" href="#rendering-flow" title="Link to this heading">¶</a></h2>
+<ol class="arabic simple">
+<li><p>Template is loaded by name from the <code class="docutils literal notranslate"><span class="pre">_blocks/</span></code> directory</p></li>
+<li><p>A context dict is built with the config dataclass under the <code class="docutils literal notranslate"><span class="pre">&quot;config&quot;</span></code> key</p></li>
+<li><p>Template renders with that context</p></li>
+<li><p>For ORCA, the rendered string has double newlines collapsed to single</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="k">def</span><span class="w"> </span><span class="nf">render</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">template_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+</span><span data-line="2">    <span class="n">template</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">env</span><span class="o">.</span><span class="n">get_template</span><span class="p">(</span><span class="n">template_name</span><span class="p">)</span>
+</span><span data-line="3">    <span class="n">context</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;config&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">}</span>
+</span><span data-line="4">    <span class="k">return</span> <span class="n">template</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">context</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+</span></pre></div>
+</div>
+</section>
+<section id="coordinate-rendering-macros">
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">Coordinate Rendering Macros</a><a class="headerlink" href="#coordinate-rendering-macros" title="Link to this heading">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">coord.jinja</span></code> template defines three macros for atom rendering based
+on coordinate format:</p>
+<section id="render-atom-atom-xyz-format">
+<h3><a class="toc-backref" href="#id6" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">render_atom(atom)</span></code> (xyz format)</a><a class="headerlink" href="#render-atom-atom-xyz-format" title="Link to this heading">¶</a></h3>
+<p>Renders Cartesian coordinates. Output format:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><span data-line="1">SYMBOL x y z
+</span></pre></div>
+</div>
+<p>Special handling:</p>
+<ul class="simple">
+<li><p>Dummy atoms: symbol becomes <code class="docutils literal notranslate"><span class="pre">DA</span></code></p></li>
+<li><p>Ghost atoms: appended <code class="docutils literal notranslate"><span class="pre">:</span></code> after symbol</p></li>
+<li><p>Point charges: symbol becomes <code class="docutils literal notranslate"><span class="pre">Q</span></code>, charge value follows</p></li>
+<li><p>Embedding potential: <code class="docutils literal notranslate"><span class="pre">&gt;</span></code>  after symbol</p></li>
+<li><p>Fragment number: <code class="docutils literal notranslate"><span class="pre">(N)</span></code> after symbol</p></li>
+<li><p>Frozen coordinates: <code class="docutils literal notranslate"><span class="pre">$</span></code> appended to frozen coordinate values</p></li>
+<li><p>Isotope: <code class="docutils literal notranslate"><span class="pre">M</span> <span class="pre">=</span> <span class="pre">value</span></code> appended</p></li>
+<li><p>Nuclear charge: <code class="docutils literal notranslate"><span class="pre">Z</span> <span class="pre">=</span> <span class="pre">value</span></code> appended</p></li>
+</ul>
+</section>
+<section id="render-int-atom-atom-internal-coordinates">
+<h3><a class="toc-backref" href="#id7" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">render_int_atom(atom)</span></code> (internal coordinates)</a><a class="headerlink" href="#render-int-atom-atom-internal-coordinates" title="Link to this heading">¶</a></h3>
+<p>Renders in Z-matrix format with bond atom indices and internal coordinate
+values:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><span data-line="1">SYMBOL bond_atom angle_atom dihedral_atom bond_length angle dihedral
+</span></pre></div>
+</div>
+</section>
+<section id="render-gzmt-atom-atom-gaussian-z-matrix">
+<h3><a class="toc-backref" href="#id8" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">render_gzmt_atom(atom)</span></code> (Gaussian Z-matrix)</a><a class="headerlink" href="#render-gzmt-atom-atom-gaussian-z-matrix" title="Link to this heading">¶</a></h3>
+<p>Renders in Gaussian-style Z-matrix format where connectivity is built
+incrementally. Fields are only included when the corresponding atom index
+is not <code class="docutils literal notranslate"><span class="pre">None</span></code>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><span data-line="1">O
+</span><span data-line="2">C 1 1.2078
+</span><span data-line="3">H 2 1.1161 1 121.74
+</span><span data-line="4">H 2 1.1161 1 121.74 3 180
+</span></pre></div>
+</div>
+</section>
+</section>
+<section id="helper-macros">
+<h2><a class="toc-backref" href="#id9" role="doc-backlink">Helper Macros</a><a class="headerlink" href="#helper-macros" title="Link to this heading">¶</a></h2>
+<section id="render-post-symbol-atom">
+<h3><a class="toc-backref" href="#id10" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">render_post_symbol(atom)</span></code></a><a class="headerlink" href="#render-post-symbol-atom" title="Link to this heading">¶</a></h3>
+<p>Called by all three atom macros. Handles point charge values, ghost markers,
+embedding potential markers, and fragment numbers.</p>
+</section>
+<section id="render-additional-atom-properties-atom">
+<h3><a class="toc-backref" href="#id11" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">render_additional_atom_properties(atom)</span></code></a><a class="headerlink" href="#render-additional-atom-properties-atom" title="Link to this heading">¶</a></h3>
+<p>Appends isotope (<code class="docutils literal notranslate"><span class="pre">M</span> <span class="pre">=</span> <span class="pre">value</span></code>) and nuclear charge (<code class="docutils literal notranslate"><span class="pre">Z</span> <span class="pre">=</span> <span class="pre">value</span></code>) when set.</p>
+</section>
+</section>
+<section id="conditional-rendering">
+<h2><a class="toc-backref" href="#id12" role="doc-backlink">Conditional Rendering</a><a class="headerlink" href="#conditional-rendering" title="Link to this heading">¶</a></h2>
+<p>Templates use Jinja2 conditionals to include blocks only when present in
+the config. The <code class="docutils literal notranslate"><span class="pre">base.jinja</span></code> template iterates <code class="docutils literal notranslate"><span class="pre">config.blocks</span></code> and includes
+the matching <code class="docutils literal notranslate"><span class="pre">.jinja</span></code> file for each block type.</p>
+<p>For NEB, the <code class="docutils literal notranslate"><span class="pre">neb.jinja</span></code> template checks each settings object and renders
+its fields only when the object exists. This allows default settings to
+appear in output while optional sections (restart, tsguess) are omitted
+when not configured.</p>
+</section>
+<section id="related">
+<h2><a class="toc-backref" href="#id13" role="doc-backlink">Related</a><a class="headerlink" href="#related" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="orca_blocks.rst">ORCA Blocks</a> for the template hierarchy</p></li>
+<li><p><a class="reference external" href="input_generation.rst">Input Generation</a> for the full pipeline</p></li>
+<li><p><a class="reference external" href="dataclasses.rst">Dataclasses</a> for config structure</p></li>
+</ul>
+</section>
+</section>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>Back to top</span>
+</button><div class="navigation flex print:hidden"></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>2026, Rohit Goswami</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials"></div>
+    </div>
+  </div>
+</footer>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script src="../_static/shibuya.js?v=cac61aee"></script></body>
+</html>

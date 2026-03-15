@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en" data-accent-color="violet" data-content_root="./">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Testing - pychum</title><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="_static/pygments.css?v=e1a1ceaf" />
+    <link rel="stylesheet" type="text/css" href="_static/shibuya.css?v=a318c5d4" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link media="print" rel="stylesheet" type="text/css" href="_static/print.css?v=20ff2c19" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    <meta property="og:type" content="website"/><meta property="og:title" content="Testing"/>
+    <meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="index.html">
+      
+      
+      <strong>pychum</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <kbd>/</kbd>
+</form><div class="sy-head-socials"></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="Switch to light color mode"
+data-aria-light="Switch to dark color mode"
+data-aria-dark="Switch to auto color mode">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="0"><ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+</ul>
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>On this page</h3><ul>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#test-structure">Test Structure</a></li>
+<li><a class="reference internal" href="#running-tests">Running Tests</a></li>
+<li><a class="reference internal" href="#test-categories">Test Categories</a><ul>
+<li><a class="reference internal" href="#coordinate-tests-testcoord-py">Coordinate Tests (test<sub>coord.py</sub>)</a></li>
+<li><a class="reference internal" href="#neb-tests-testneb-py">NEB Tests (test<sub>neb.py</sub>)</a></li>
+<li><a class="reference internal" href="#geometry-scan-tests-testgeomscan-py">Geometry Scan Tests (test<sub>geom</sub><sub>scan.py</sub>)</a></li>
+<li><a class="reference internal" href="#extra-blocks-tests-testextra-py">Extra Blocks Tests (test<sub>extra.py</sub>)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#test-helpers">Test Helpers</a></li>
+<li><a class="reference internal" href="#ci-workflows">CI Workflows</a><ul>
+<li><a class="reference internal" href="#buildtest-yml">build<sub>test.yml</sub></a></li>
+<li><a class="reference internal" href="#citutorials-yml">ci<sub>tutorials.yml</sub></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#test-dependencies">Test Dependencies</a></li>
+<li><a class="reference internal" href="#related">Related</a></li>
+</ul>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="index.html"><span itemprop="name">pychum</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">Testing</strong>
+        <meta itemprop="position" content="2" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <article class="yue" role="main">
+          <section id="testing">
+<h1><a class="toc-backref" href="#id1" role="doc-backlink">Testing</a><a class="headerlink" href="#testing" title="Link to this heading">¶</a></h1>
+<blockquote>
+<div><dl class="field-list simple">
+<dt class="field-odd">Author<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://rgoswami.me">Rohit Goswami</a></p>
+</dd>
+</dl>
+</div></blockquote>
+<nav class="contents" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#testing" id="id1">Testing</a></p>
+<ul>
+<li><p><a class="reference internal" href="#overview" id="id2">Overview</a></p></li>
+<li><p><a class="reference internal" href="#test-structure" id="id3">Test Structure</a></p></li>
+<li><p><a class="reference internal" href="#running-tests" id="id4">Running Tests</a></p></li>
+<li><p><a class="reference internal" href="#test-categories" id="id5">Test Categories</a></p>
+<ul>
+<li><p><a class="reference internal" href="#coordinate-tests-testcoord-py" id="id6">Coordinate Tests (test<sub>coord.py</sub>)</a></p></li>
+<li><p><a class="reference internal" href="#neb-tests-testneb-py" id="id7">NEB Tests (test<sub>neb.py</sub>)</a></p></li>
+<li><p><a class="reference internal" href="#geometry-scan-tests-testgeomscan-py" id="id8">Geometry Scan Tests (test<sub>geom</sub><sub>scan.py</sub>)</a></p></li>
+<li><p><a class="reference internal" href="#extra-blocks-tests-testextra-py" id="id9">Extra Blocks Tests (test<sub>extra.py</sub>)</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#test-helpers" id="id10">Test Helpers</a></p></li>
+<li><p><a class="reference internal" href="#ci-workflows" id="id11">CI Workflows</a></p>
+<ul>
+<li><p><a class="reference internal" href="#buildtest-yml" id="id12">build<sub>test.yml</sub></a></p></li>
+<li><p><a class="reference internal" href="#citutorials-yml" id="id13">ci<sub>tutorials.yml</sub></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#test-dependencies" id="id14">Test Dependencies</a></p></li>
+<li><p><a class="reference internal" href="#related" id="id15">Related</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="overview">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Overview</a><a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
+<p>pychum uses pytest for testing. Tests live in <code class="docutils literal notranslate"><span class="pre">tests/</span></code> and focus on the ORCA
+engine’s rendering pipeline.</p>
+</section>
+<section id="test-structure">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Test Structure</a><a class="headerlink" href="#test-structure" title="Link to this heading">¶</a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><span data-line="1">tests/
+</span><span data-line="2">└── orca/
+</span><span data-line="3">    ├── test_coord.py       # Coordinate rendering (xyz, int, gzmt, file refs)
+</span><span data-line="4">    ├── test_neb.py         # NEB block rendering
+</span><span data-line="5">    ├── test_geom_scan.py   # Geometry scan block rendering
+</span><span data-line="6">    └── test_extra.py       # Extra blocks rendering (uses datadir)
+</span></pre></div>
+</div>
+</section>
+<section id="running-tests">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">Running Tests</a><a class="headerlink" href="#running-tests" title="Link to this heading">¶</a></h2>
+<p>Run the full suite:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">uv<span class="w"> </span>run<span class="w"> </span>pytest
+</span></pre></div>
+</div>
+<p>With coverage:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">uv<span class="w"> </span>run<span class="w"> </span>pytest<span class="w"> </span>--cov<span class="o">=</span>pychum<span class="w"> </span>tests
+</span></pre></div>
+</div>
+<p>Coverage configuration in <code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code> tracks <code class="docutils literal notranslate"><span class="pre">pychum</span></code> source, excludes
+<code class="docutils literal notranslate"><span class="pre">_version.py</span></code>, and ignores <code class="docutils literal notranslate"><span class="pre">TYPE_CHECKING</span></code> and <code class="docutils literal notranslate"><span class="pre">__main__</span></code> blocks.</p>
+</section>
+<section id="test-categories">
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">Test Categories</a><a class="headerlink" href="#test-categories" title="Link to this heading">¶</a></h2>
+<section id="coordinate-tests-testcoord-py">
+<h3><a class="toc-backref" href="#id6" role="doc-backlink">Coordinate Tests (test<sub>coord.py</sub>)</a><a class="headerlink" href="#coordinate-tests-testcoord-py" title="Link to this heading">¶</a></h3>
+<p>Tests all ORCA coordinate formats through the <code class="docutils literal notranslate"><span class="pre">render_config</span></code> helper, which
+builds a <code class="docutils literal notranslate"><span class="pre">Coords</span></code> and <code class="docutils literal notranslate"><span class="pre">OrcaConfig</span></code>, then renders <code class="docutils literal notranslate"><span class="pre">coord.jinja</span></code>.</p>
+<p>Covered scenarios:</p>
+<ul class="simple">
+<li><p>Standard atoms in xyz format</p></li>
+<li><p>Dummy atoms (<code class="docutils literal notranslate"><span class="pre">DA</span></code>)</p></li>
+<li><p>Ghost atoms (<code class="docutils literal notranslate"><span class="pre">:</span></code> suffix)</p></li>
+<li><p>Point charges (<code class="docutils literal notranslate"><span class="pre">Q</span></code> symbol)</p></li>
+<li><p>Atoms with isotope masses (<code class="docutils literal notranslate"><span class="pre">M</span> <span class="pre">=</span> <span class="pre">value</span></code>)</p></li>
+<li><p>Frozen coordinates (<code class="docutils literal notranslate"><span class="pre">$</span></code> suffix, per-axis and global)</p></li>
+<li><p>Embedding potentials (<code class="docutils literal notranslate"><span class="pre">&gt;</span></code> marker)</p></li>
+<li><p>Custom nuclear charges (<code class="docutils literal notranslate"><span class="pre">Z</span> <span class="pre">=</span> <span class="pre">value</span></code>)</p></li>
+<li><p>Fragment numbers (<code class="docutils literal notranslate"><span class="pre">(N)</span></code> syntax)</p></li>
+<li><p>Internal coordinates (Z-matrix format)</p></li>
+<li><p>Gaussian Z-matrix (incrementally built connectivity)</p></li>
+<li><p>External file references (<code class="docutils literal notranslate"><span class="pre">xyzfile</span></code>, <code class="docutils literal notranslate"><span class="pre">gzmtfile</span></code>)</p></li>
+</ul>
+</section>
+<section id="neb-tests-testneb-py">
+<h3><a class="toc-backref" href="#id7" role="doc-backlink">NEB Tests (test<sub>neb.py</sub>)</a><a class="headerlink" href="#neb-tests-testneb-py" title="Link to this heading">¶</a></h3>
+<p>Tests NEB block rendering through a helper that wraps <code class="docutils literal notranslate"><span class="pre">NebBlock</span></code> in a config
+dict and renders <code class="docutils literal notranslate"><span class="pre">neb.jinja</span></code>.</p>
+<p>Covered scenarios:</p>
+<ul class="simple">
+<li><p>Default NEB settings (all sub-blocks with default values)</p></li>
+<li><p>Custom IDPP settings</p></li>
+<li><p>Restart settings with <code class="docutils literal notranslate"><span class="pre">gbw_basename</span></code></p></li>
+<li><p>Restart settings with <code class="docutils literal notranslate"><span class="pre">allxyz</span></code></p></li>
+<li><p>Mutual exclusion of <code class="docutils literal notranslate"><span class="pre">gbw_basename</span></code> and <code class="docutils literal notranslate"><span class="pre">allxyz</span></code> (ValueError)</p></li>
+<li><p>RestartSettings with neither field set</p></li>
+</ul>
+</section>
+<section id="geometry-scan-tests-testgeomscan-py">
+<h3><a class="toc-backref" href="#id8" role="doc-backlink">Geometry Scan Tests (test<sub>geom</sub><sub>scan.py</sub>)</a><a class="headerlink" href="#geometry-scan-tests-testgeomscan-py" title="Link to this heading">¶</a></h3>
+<p>Tests geometry scan rendering through a helper that wraps <code class="docutils literal notranslate"><span class="pre">GeomBlock</span></code> in a
+config dict and renders <code class="docutils literal notranslate"><span class="pre">geom.jinja</span></code>.</p>
+<p>Covered scenarios:</p>
+<ul class="simple">
+<li><p>Single bond scan</p></li>
+<li><p>Single angle scan</p></li>
+<li><p>Single dihedral scan</p></li>
+<li><p>Combined scans (bond + angle + dihedral)</p></li>
+<li><p>Exceeding the 3-scan limit (error message)</p></li>
+</ul>
+</section>
+<section id="extra-blocks-tests-testextra-py">
+<h3><a class="toc-backref" href="#id9" role="doc-backlink">Extra Blocks Tests (test<sub>extra.py</sub>)</a><a class="headerlink" href="#extra-blocks-tests-testextra-py" title="Link to this heading">¶</a></h3>
+<p>Tests full pipeline rendering (<code class="docutils literal notranslate"><span class="pre">base.jinja</span></code>) with extra blocks using
+<code class="docutils literal notranslate"><span class="pre">pytest-datadir</span></code> for TOML fixture files. Loads a TOML file through
+<code class="docutils literal notranslate"><span class="pre">ConfigLoader</span></code>, renders through <code class="docutils literal notranslate"><span class="pre">OrcaInputRenderer</span></code>, and compares against
+expected output with whitespace normalization.</p>
+</section>
+</section>
+<section id="test-helpers">
+<h2><a class="toc-backref" href="#id10" role="doc-backlink">Test Helpers</a><a class="headerlink" href="#test-helpers" title="Link to this heading">¶</a></h2>
+<p>Each test module defines a render helper that constructs the minimal config
+needed for the template under test:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c1"># test_coord.py</span>
+</span><span data-line="2"><span class="k">def</span><span class="w"> </span><span class="nf">render_config</span><span class="p">(</span><span class="n">atoms</span><span class="p">,</span> <span class="n">coord_type</span><span class="o">=</span><span class="s2">&quot;xyz&quot;</span><span class="p">,</span> <span class="n">charge</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">multiplicity</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+</span><span data-line="3">    <span class="n">coords</span> <span class="o">=</span> <span class="n">Coords</span><span class="p">(</span><span class="n">charge</span><span class="o">=</span><span class="n">charge</span><span class="p">,</span> <span class="n">multiplicity</span><span class="o">=</span><span class="n">multiplicity</span><span class="p">,</span> <span class="n">atoms</span><span class="o">=</span><span class="n">atoms</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="n">coord_type</span><span class="p">)</span>
+</span><span data-line="4">    <span class="n">config</span> <span class="o">=</span> <span class="n">OrcaConfig</span><span class="p">(</span><span class="n">coords</span><span class="o">=</span><span class="n">coords</span><span class="p">,</span> <span class="n">kwlines</span><span class="o">=</span><span class="n">default_kwline</span><span class="p">)</span>
+</span><span data-line="5">    <span class="n">renderer</span> <span class="o">=</span> <span class="n">OrcaInputRenderer</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+</span><span data-line="6">    <span class="k">return</span> <span class="n">renderer</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="s2">&quot;coord.jinja&quot;</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<p>The NEB and geom<sub>scan</sub>tests pass raw dicts as configs rather than <code class="docutils literal notranslate"><span class="pre">OrcaConfig</span></code>
+instances, relying on Jinja2’s attribute access to read the dict values.</p>
+</section>
+<section id="ci-workflows">
+<h2><a class="toc-backref" href="#id11" role="doc-backlink">CI Workflows</a><a class="headerlink" href="#ci-workflows" title="Link to this heading">¶</a></h2>
+<section id="buildtest-yml">
+<h3><a class="toc-backref" href="#id12" role="doc-backlink">build<sub>test.yml</sub></a><a class="headerlink" href="#buildtest-yml" title="Link to this heading">¶</a></h3>
+<p>Runs on push to <code class="docutils literal notranslate"><span class="pre">main</span></code> and PRs targeting <code class="docutils literal notranslate"><span class="pre">main</span></code>. Tests against Python 3.10,
+3.11, and 3.12 using a matrix strategy:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="nt">strategy</span><span class="p">:</span>
+</span><span data-line="2"><span class="w">  </span><span class="nt">matrix</span><span class="p">:</span>
+</span><span data-line="3"><span class="w">    </span><span class="nt">python-version</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;3.10&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;3.11&quot;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;3.12&quot;</span><span class="p p-Indicator">]</span>
+</span></pre></div>
+</div>
+<p>Steps: checkout (with fetch-depth 0 for VCS versioning), install uv, install
+dependencies (<code class="docutils literal notranslate"><span class="pre">uv</span> <span class="pre">sync</span> <span class="pre">--all-extras</span></code>), run pytest with coverage.</p>
+</section>
+<section id="citutorials-yml">
+<h3><a class="toc-backref" href="#id13" role="doc-backlink">ci<sub>tutorials.yml</sub></a><a class="headerlink" href="#citutorials-yml" title="Link to this heading">¶</a></h3>
+<p>Runs on push to <code class="docutils literal notranslate"><span class="pre">main</span></code> and <code class="docutils literal notranslate"><span class="pre">docs/tutorial-improvements</span></code> branches. Tests that
+pychum modules compile (<code class="docutils literal notranslate"><span class="pre">py_compile</span></code>) and that the <code class="docutils literal notranslate"><span class="pre">ensure_import</span></code> lazy import
+pattern from rgpycrumbs works.</p>
+</section>
+</section>
+<section id="test-dependencies">
+<h2><a class="toc-backref" href="#id14" role="doc-backlink">Test Dependencies</a><a class="headerlink" href="#test-dependencies" title="Link to this heading">¶</a></h2>
+<p>Defined in <code class="docutils literal notranslate"><span class="pre">[project.optional-dependencies.test]</span></code>:</p>
+<div class="table-wrapper docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Package</p></th>
+<th class="head"><p>Purpose</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>pytest</p></td>
+<td><p>Test runner</p></td>
+</tr>
+<tr class="row-odd"><td><p>pytest-cov</p></td>
+<td><p>Coverage reporting</p></td>
+</tr>
+<tr class="row-even"><td><p>coverage</p></td>
+<td><p>Coverage measurement</p></td>
+</tr>
+<tr class="row-odd"><td><p>pytest-datadir</p></td>
+<td><p>Test fixture data directories</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Install with:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">uv<span class="w"> </span>sync<span class="w"> </span>--extra<span class="w"> </span><span class="nb">test</span>
+</span></pre></div>
+</div>
+</section>
+<section id="related">
+<h2><a class="toc-backref" href="#id15" role="doc-backlink">Related</a><a class="headerlink" href="#related" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="release.rst">Release Process</a> for CI and build configuration</p></li>
+<li><p><a class="reference external" href="dev/index.rst">Developer Documentation</a> for architecture</p></li>
+</ul>
+</section>
+</section>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>Back to top</span>
+</button><div class="navigation flex print:hidden"></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>2026, Rohit Goswami</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials"></div>
+    </div>
+  </div>
+</footer>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=f281be69"></script>
+      <script src="_static/shibuya.js?v=cac61aee"></script></body>
+</html>

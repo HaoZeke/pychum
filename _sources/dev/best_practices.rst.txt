@@ -1,0 +1,55 @@
+==============
+Best Practices
+==============
+
+    :Author: `Rohit Goswami <https://rgoswami.me>`_
+
+
+Best Practices for pychum
+-------------------------
+
+TOML Configuration
+~~~~~~~~~~~~~~~~~~
+
+Use clear, consistent TOML structure:
+
+.. code:: toml
+
+    [orca]
+    method = "B3LYP"
+    basis = "def2-SVP"
+
+    [geometry]
+    coordinates = "input.xyz"
+    charge = 0
+    multiplicity = 1
+
+Template Design
+~~~~~~~~~~~~~~~
+
+Keep Jinja2 templates simple:
+
+.. code:: jinja
+
+    !{{ method }} {{ basis }}
+    {{ block_content }}
+    *xyzfile {{ charge }} {{ multiplicity }} {{ coordinates }}
+
+Testing
+~~~~~~~
+
+Test with minimal examples:
+
+.. code:: python
+
+    def test_orca_renderer():
+        config = {"method": "B3LYP", "basis": "def2-SVP"}
+        renderer = ORCARenderer(config)
+        assert "B3LYP" in renderer.render()
+
+See Also
+~~~~~~~~
+
+- `Contributing Guidelines <contributing.rst>`_
+
+- `How-to Guides <../howto/index.rst>`_

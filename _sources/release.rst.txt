@@ -1,0 +1,165 @@
+===============
+Release Process
+===============
+
+    :Author: `Rohit Goswami <https://rgoswami.me>`_
+
+.. contents::
+
+
+Overview
+--------
+
+pychum uses hatchling with VCS-based versioning and towncrier for changelog
+management.
+
+Version Management
+------------------
+
+Version is determined automatically from git tags via ``hatch-vcs``. The
+``pyproject.toml`` configures this:
+
+.. code:: toml
+
+    [tool.hatch.version]
+    source = "vcs"
+
+    [tool.hatch.build.hooks.vcs]
+    version-file = "_version.py"
+
+At build time, ``hatch-vcs`` reads the latest git tag and writes the version
+string to ``_version.py``. There is no manual version field to update.
+
+Changelog with towncrier
+------------------------
+
+Changelog entries are stored as individual files in
+``doc/release/upcoming_changes/``. Each file is named
+``<issue_number>.<change_type>`` where ``<change_type>`` is one of:
+
+.. table::
+
+    +---------------+-----------------+
+    | Type          | Directory       |
+    +===============+=================+
+    | Added         | ``added/``      |
+    +---------------+-----------------+
+    | Changed       | ``changed/``    |
+    +---------------+-----------------+
+    | Deprecated    | ``deprecated/`` |
+    +---------------+-----------------+
+    | Fixed         | ``fixed/``      |
+    +---------------+-----------------+
+    | Removed       | ``removed/``    |
+    +---------------+-----------------+
+    | Miscellaneous | ``misc/``       |
+    +---------------+-----------------+
+
+Adding a Changelog Entry
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+Create a file in the appropriate subdirectory:
+
+.. code:: bash
+
+    echo "Added NEB restart support" > doc/release/upcoming_changes/added/42.added
+
+The issue number in the filename links to the GitHub issue.
+
+Building the Changelog
+~~~~~~~~~~~~~~~~~~~~~~
+
+.. code:: bash
+
+    uvx towncrier build --version X.Y.Z
+
+This collects all fragment files, generates a formatted section in
+``CHANGELOG.md``, and removes the consumed fragments. The format uses the
+issue link template:
+
+.. code:: text
+
+    [#42](https://github.com/HaoZeke/pychum/issues/42)
+
+Cutting a Release
+-----------------
+
+1. Ensure all changes have changelog fragments in ``doc/release/upcoming_changes/``
+
+2. Run towncrier to build the changelog:
+
+   .. code:: bash
+
+       uvx towncrier build --version X.Y.Z
+
+3. Commit the updated ``CHANGELOG.md`` and removed fragments
+
+4. Tag the release:
+
+   .. code:: bash
+
+       git tag -a vX.Y.Z -m "Release X.Y.Z"
+
+5. Push the tag:
+
+   .. code:: bash
+
+       git push origin vX.Y.Z
+
+The version is derived from the tag, so the tag name must match the
+version format (``vX.Y.Z``).
+
+Build System
+------------
+
+pychum uses hatchling as the build backend:
+
+.. code:: toml
+
+    [build-system]
+    build-backend = "hatchling.build"
+    requires = ["hatch-vcs", "hatchling"]
+
+The build includes:
+
+- ``pychum/**/*.py`` -- all Python source
+
+- ``pychum/*.py`` -- top-level modules
+
+- ``/tests`` -- test files
+
+Building a distribution:
+
+.. code:: bash
+
+    uv build
+
+Dependencies
+------------
+
+Runtime dependencies:
+
+.. table::
+
+    +------------+---------+-----------------------+
+    | Package    | Minimum | Purpose               |
+    +============+=========+=======================+
+    | pint       |    0.22 | Unit-aware quantities |
+    +------------+---------+-----------------------+
+    | tomli      |   2.0.1 | TOML parsing          |
+    +------------+---------+-----------------------+
+    | jinja2     |   3.1.2 | Template rendering    |
+    +------------+---------+-----------------------+
+    | ase        |  3.27.0 | Atomic structure I/O  |
+    +------------+---------+-----------------------+
+    | rgpycrumbs |   1.3.0 | Utility functions     |
+    +------------+---------+-----------------------+
+
+Optional dependency groups: ``doc``, ``test``, ``lint``.
+
+Related
+-------
+
+- `Testing <testing.rst>`_ for the test infrastructure
+
+- `Developer Documentation <dev/index.rst>`_ for architecture overview
