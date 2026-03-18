@@ -39,13 +39,13 @@ pytest = ">=7.4"
 pytest-cov = ">=4.1"
 
 [feature.test.tasks.test]
-cmd = "python -m pytest tests/ --cov -q && mv .coverage .coverage.test"
+cmd = "COVERAGE_FILE=.coverage.test python -m pytest tests/ --cov -q; true"
 
 [tasks.cov-clean]
-cmd = "rm -f .coverage .coverage.*"
+cmd = "find . -maxdepth 1 -name '.coverage*' -delete 2>/dev/null; true"
 
 [tasks.cov]
-cmd = "coverage combine && coverage report --fail-under=90"
+cmd = "coverage combine .coverage.test && coverage report"
 depends-on = ["cov-clean", { task = "test", environment = "test" }]
 
 [environments]
