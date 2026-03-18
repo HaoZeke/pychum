@@ -39,11 +39,14 @@ pytest = ">=7.4"
 pytest-cov = ">=4.1"
 
 [feature.test.tasks.test]
-cmd = "python -m pytest tests/ --cov -q"
+cmd = "python -m pytest tests/ --cov -q && mv .coverage .coverage.test"
+
+[tasks.cov-clean]
+cmd = "rm -f .coverage .coverage.*"
 
 [tasks.cov]
 cmd = "coverage combine && coverage report --fail-under=90"
-depends-on = [{ task = "test", environment = "test" }]
+depends-on = ["cov-clean", { task = "test", environment = "test" }]
 
 [environments]
 docs = { features = ["docs"] }
