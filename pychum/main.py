@@ -28,7 +28,7 @@ def render_nwchem(
     if real_atoms:
         nw_atoms = [
             NWChemAtom(symbol=atom.symbol, x=atom.x, y=atom.y, z=atom.z)
-            for i, atom in atoms
+            for atom in atoms
         ]
     else:
         nw_atoms = [
