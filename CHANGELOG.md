@@ -2,6 +2,22 @@
 
 <!-- towncrier release notes start -->
 
+## [1.4.1] - Unreleased
+
+### Added
+
+- Pixi test environment with multi-env coverage collection (`pixi run cov`).
+- 49 new tests in `test_coverage_boost.py` covering units, _base, main, eon/_renderer,
+  orca/config_loader, orca/_dataclasses (all validators).
+
+### Fixed
+
+- ASE Atoms iteration in `render_nwchem` (`for atom in atoms` instead of tuple unpacking).
+
+### Changed
+
+- Test coverage boosted from 68% to 99%.
+
 ## [1.4.0](https://github.com/HaoZeke/pychum/tree/1.4.0) - 2026-03-15
 
 ### Added
