@@ -7,7 +7,6 @@ and engine/orca/_dataclasses.py validator branches.
 
 import textwrap
 from pathlib import Path
-from unittest.mock import MagicMock, patch
 
 import pytest
 
@@ -17,7 +16,7 @@ import pytest
 
 
 def test_units_registry():
-    from pychum.units import Q_, ureg
+    from pychum.units import Q_
 
     # Custom kcal_mol unit exists
     val = Q_(1, "kcal_mol")
@@ -119,8 +118,8 @@ def test_nwchem_renderer_unix_mode():
     atoms = [NWChemAtom(symbol="O", x=1.0, y=2.0, z=3.0)]
     config = NWChemSocketConfig(
         atoms=atoms,
-        settings_path=Path("/tmp/nwchem.nwi"),
-        socket_address="/tmp/ipi_socket",
+        settings_path=Path("/tmp/nwchem.nwi"),  # noqa: S108
+        socket_address="/tmp/ipi_socket",  # noqa: S108
         unix_mode=True,
         mem_in_gb=2,
     )
@@ -214,7 +213,7 @@ def test_render_nwchem_unix_mode(tmp_path):
     result = render_nwchem(
         pos_file=xyz,
         settings_path=settings,
-        socket_address="/tmp/ipi",
+        socket_address="/tmp/ipi",  # noqa: S108
         unix_mode=True,
         mem_in_gb=4,
         real_atoms=False,
@@ -720,7 +719,7 @@ def test_orca_config_add_block():
     assert BlockType.GEOM in cfg.blocks
 
 
-def test_config_loader_full_neb_toml(tmp_path):
+def test_config_loader_full_neb_toml():
     """Load the neb.toml test fixture through ConfigLoader for full coverage."""
     from pychum.engine.orca.config_loader import ConfigLoader
 
@@ -736,7 +735,7 @@ def test_config_loader_full_neb_toml(tmp_path):
         assert cfg.blocks["neb"].spring_settings.spring_kind == "IMAGE"
 
 
-def test_config_loader_opt_scan_toml(tmp_path):
+def test_config_loader_opt_scan_toml():
     """Load the opt_scan.toml test fixture through ConfigLoader."""
     from pychum.engine.orca.config_loader import ConfigLoader
 
