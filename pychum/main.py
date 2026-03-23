@@ -27,8 +27,7 @@ def render_nwchem(
     atoms = ase_read(pos_file)
     if real_atoms:
         nw_atoms = [
-            NWChemAtom(symbol=atom.symbol, x=atom.x, y=atom.y, z=atom.z)
-            for atom in atoms
+            NWChemAtom(symbol=atom.symbol, x=atom.x, y=atom.y, z=atom.z) for atom in atoms
         ]
     else:
         nw_atoms = [
