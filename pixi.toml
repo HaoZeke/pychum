@@ -39,7 +39,7 @@ pytest = ">=7.4"
 pytest-cov = ">=4.1"
 
 [feature.test.tasks.test]
-cmd = "COVERAGE_FILE=.coverage.test python -m pytest tests/ --cov -q; true"
+cmd = "COVERAGE_FILE=.coverage.test python -m pytest tests/ --cov -q"
 
 [tasks.cov-clean]
 cmd = "find . -maxdepth 1 -name '.coverage*' -delete 2>/dev/null; true"

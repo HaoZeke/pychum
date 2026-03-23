@@ -221,6 +221,28 @@ def test_render_nwchem_unix_mode(tmp_path):
     assert "socket unix /tmp/ipi" in result
 
 
+def test_render_nwchem_real_atoms(tmp_path):
+    """Test render_nwchem with real_atoms=True to cover the ASE iteration fix."""
+    from pychum.main import render_nwchem
+
+    xyz = tmp_path / "test.xyz"
+    xyz.write_text("3\ncomment\nO 0.0 0.0 0.0\nH 0.96 0.0 0.0\nH 0.0 0.96 0.0\n")
+
+    settings = tmp_path / "settings.nwi"
+    settings.write_text("basis\n * library 6-31g\nend\n")
+
+    result = render_nwchem(
+        pos_file=xyz,
+        settings_path=settings,
+        socket_address="localhost:31415",
+        unix_mode=False,
+        mem_in_gb=2,
+        real_atoms=True,
+    )
+    assert "O" in result
+    assert "H" in result
+
+
 # ---------------------------------------------------------------------------
 # engine/orca/config_loader.py -- NEB sub-settings loading (was 27%)
 # ---------------------------------------------------------------------------
@@ -719,35 +741,35 @@ def test_orca_config_add_block():
     assert BlockType.GEOM in cfg.blocks
 
 
+_TEST_DIR = Path(__file__).parent
+
+
 def test_config_loader_full_neb_toml():
     """Load the neb.toml test fixture through ConfigLoader for full coverage."""
     from pychum.engine.orca.config_loader import ConfigLoader
 
-    # Use the existing test fixture
-    fixture = Path(
-        "/home/rgoswami/Git/Github/epfl/pixi_envs/python/rgpkgs/pychum/tests/test_orca/neb.toml"
-    )
-    if fixture.exists():
-        cfg = ConfigLoader(fixture).load_config()
-        assert "neb" in cfg.blocks
-        assert cfg.blocks["neb"].nimgs == 8
-        assert cfg.blocks["neb"].interpolation == "LINEAR"
-        assert cfg.blocks["neb"].spring_settings.spring_kind == "IMAGE"
+    fixture = _TEST_DIR / "test_orca" / "neb.toml"
+    if not fixture.exists():
+        pytest.skip(f"fixture not found: {fixture}")
+    cfg = ConfigLoader(fixture).load_config()
+    assert "neb" in cfg.blocks
+    assert cfg.blocks["neb"].nimgs == 8
+    assert cfg.blocks["neb"].interpolation == "LINEAR"
+    assert cfg.blocks["neb"].spring_settings.spring_kind == "IMAGE"
 
 
 def test_config_loader_opt_scan_toml():
     """Load the opt_scan.toml test fixture through ConfigLoader."""
     from pychum.engine.orca.config_loader import ConfigLoader
 
-    fixture = Path(
-        "/home/rgoswami/Git/Github/epfl/pixi_envs/python/rgpkgs/pychum/tests/test_orca/opt_scan.toml"
-    )
-    if fixture.exists():
-        cfg = ConfigLoader(fixture).load_config()
-        assert "geom" in cfg.blocks
-        assert len(cfg.blocks["geom"].bonds) == 1
-        assert len(cfg.blocks["geom"].angles) == 1
-        assert len(cfg.blocks["geom"].dihedrals) == 1
+    fixture = _TEST_DIR / "test_orca" / "opt_scan.toml"
+    if not fixture.exists():
+        pytest.skip(f"fixture not found: {fixture}")
+    cfg = ConfigLoader(fixture).load_config()
+    assert "geom" in cfg.blocks
+    assert len(cfg.blocks["geom"].bonds) == 1
+    assert len(cfg.blocks["geom"].angles) == 1
+    assert len(cfg.blocks["geom"].dihedrals) == 1
 
 
 # ---------------------------------------------------------------------------
