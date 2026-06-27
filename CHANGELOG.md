@@ -2,6 +2,18 @@
 
 <!-- towncrier release notes start -->
 
+## [1.4.2](https://github.com/HaoZeke/pychum/tree/1.4.2) - 2026-06-27
+
+### Changed
+
+- Documentation aligned with the rgpycrumbs / chemparseplot 1.8 ecosystem (install pins and tutorial links).
+- Topic branches collapsed onto `main`; release cut from the integrated line.
+
+### Fixed
+
+- README install/quickstart reflects current ORCA/eOn generators and companion package versions.
+
+
 ## [1.4.1](https://github.com/HaoZeke/pychum/tree/1.4.1) - 2026-03-23
 
 ### Added

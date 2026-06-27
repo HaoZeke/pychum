@@ -28,12 +28,14 @@ computational chemistry workflows. This means:
 
 -   Generating input structures for `jobflow` / Fireworks
     -   From unified `toml` inputs
+-   ORCA blocks (NEB, geometry scans, extras) and eOn renderers via Jinja templates
+-   Shared units and helpers with [`rgpycrumbs`](https://github.com/HaoZeke/rgpycrumbs) (`rgpycrumbs>=1.3`)
 
 This is a spin-off from `wailord` ([here](https://wailord.xyz)) which is meant to handle aggregated
 runs in a specific workflow, while `pychum` is meant to generate **single runs**.
-It is also a companion to `chemparseplot` ([here](https://github.com/haoZeke/chemparseplot)) which is meant to provide
+It is also a companion to [`chemparseplot`](https://github.com/HaoZeke/chemparseplot) (v1.8+ recommended) which provides
 uniform visualizations for the outputs of various computational chemistry
-programs.
+programs. Install with `pip install pychum` (Python ≥3.10); develop with `pixi run -e test test` or `uv sync --extra test`.
 
 
 <a id="org1ef5b99"></a>
