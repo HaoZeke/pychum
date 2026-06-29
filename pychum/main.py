@@ -1,14 +1,11 @@
 from pathlib import Path
 
-from ase.io import read as ase_read
-
-from pychum.engine.eon import NWChemAtom, NWChemRenderer, NWChemSocketConfig
-from pychum.engine.orca._renderer import OrcaInputRenderer
-from pychum.engine.orca.config_loader import ConfigLoader
-
 
 def render_orca(toml_path: Path) -> str:
     """Library function to render ORCA input from a TOML file."""
+    from pychum.engine.orca._renderer import OrcaInputRenderer
+    from pychum.engine.orca.config_loader import ConfigLoader
+
     config_loader = ConfigLoader(toml_path)
     config = config_loader.load_config()
     renderer = OrcaInputRenderer(config)
@@ -24,6 +21,10 @@ def render_nwchem(
     real_atoms: bool = False,  # noqa: FBT001, FBT002
 ) -> str:
     """Library function to render NWChem input."""
+    from ase.io import read as ase_read
+
+    from pychum.engine.eon import NWChemAtom, NWChemRenderer, NWChemSocketConfig
+
     atoms = ase_read(pos_file)
     if real_atoms:
         nw_atoms = [
