@@ -2,6 +2,13 @@
 
 <!-- towncrier release notes start -->
 
+## [1.4.3](https://github.com/HaoZeke/pychum/tree/v1.4.3) - 2026-07-09
+
+### Changed
+
+- Require ``rgpycrumbs>=1.9.16`` for suite config/locks (rgpkgs.toml /
+  ``~/.config/rgpkgs``). Document that pychum does not invent its own pin file.
+
 ## [1.4.2](https://github.com/HaoZeke/pychum/tree/1.4.2) - 2026-06-27
 
 ### Changed
