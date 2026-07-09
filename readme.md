@@ -31,11 +31,18 @@ computational chemistry workflows. This means:
 -   ORCA blocks (NEB, geometry scans, extras) and eOn renderers via Jinja templates
 -   Shared units and helpers with [`rgpycrumbs`](https://github.com/HaoZeke/rgpycrumbs) (`rgpycrumbs>=1.9.16`). Suite pins/config live in **rgpkgs** (`~/.config/rgpkgs/config.toml`, project `rgpkgs.toml`) — pychum does not define its own pin file
 
-This is a spin-off from `wailord` ([here](https://wailord.xyz)) which is meant to handle aggregated
-runs in a specific workflow, while `pychum` is meant to generate **single runs**.
-It is also a companion to [`chemparseplot`](https://github.com/HaoZeke/chemparseplot) (v1.8+ recommended) which provides
-uniform visualizations for the outputs of various computational chemistry
-programs. Install with `pip install pychum` (Python ≥3.10); develop with `pixi run -e test test` or `uv sync --extra test`.
+This is a spin-off from `wailord` ([here](https://wailord.xyz)). **Tool split:**
+
+- **`pychum`** — sole path for **single-run input generation** (ORCA Jinja/TOML,
+  NWChem socket for eOn). Prefer `pychum` over wailord `inpGenerator`.
+- **`chemparseplot`** — sole path for **parsing and plotting outputs** (including
+  ORCA NEB via a public API that may use OPI internally; do not depend on `opi`
+  directly).
+- **`wailord`** — optional **batch/experiment** orchestration only; should call
+  pychum + chemparseplot rather than reimplement ORCA I/O.
+
+It is a companion to [`chemparseplot`](https://github.com/HaoZeke/chemparseplot)
+(v1.8+ recommended) for uniform visualizations of computational chemistry outputs. Install with `pip install pychum` (Python ≥3.10); develop with `pixi run -e test test` or `uv sync --extra test`.
 
 
 <a id="org1ef5b99"></a>

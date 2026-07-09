@@ -11,7 +11,7 @@ computational chemistry workflows. This means:
   + From unified ~toml~ inputs
 
 This is a spin-off from ~wailord~ ([[https://wailord.xyz][here]]) which is meant to handle aggregated
-runs in a specific workflow, while ~pychum~ is meant to generate *single runs*.
+runs in a specific workflow, while ~pychum~ is the *sole* path for *single-run* input generation. Parsing/plotting: ~chemparseplot~ (OPI only as an internal backend). ~wailord~: optional batch/experiment shell via those packages.
 It is also a companion to ~chemparseplot~ ([[https://github.com/haoZeke/chemparseplot][here]]) which is meant to provide
 uniform visualizations for the outputs of various computational chemistry
 programs.
