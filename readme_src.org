@@ -17,7 +17,10 @@ uniform visualizations for the outputs of various computational chemistry
 programs.
 
 ** Ecosystem Overview
-   ~pychum~ is part of the ~rgpycrumbs~ suite of interlinked libraries.
+   ~pychum~ is part of the ~rgpkgs~ suite (hub: ~rgpycrumbs~).
+
+- CON/convel: [[https://github.com/lode-org/readcon-core][readcon-core]] (PyPI: ~readcon~)
+- Hub: [[https://github.com/HaoZeke/rgpycrumbs][rgpycrumbs]] · parse/plot: [[https://github.com/HaoZeke/chemparseplot][chemparseplot]] · engine: [[https://eondocs.org][eOn]]
 
 [[file:branding/logo/ecosystem.png]]
 

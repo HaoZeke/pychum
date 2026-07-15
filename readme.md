@@ -42,6 +42,11 @@ programs.
 
 `pychum` is part of the `rgpkgs` suite of interlinked libraries (hub: `rgpycrumbs`).
 
+- Hub / CLI: [`rgpycrumbs`](https://github.com/HaoZeke/rgpycrumbs)
+- Parse/plot: [`chemparseplot`](https://github.com/HaoZeke/chemparseplot)
+- CON/convel I/O: [`readcon-core`](https://github.com/lode-org/readcon-core) (PyPI: [`readcon`](https://pypi.org/project/readcon/))
+- Engine: [eOn](https://eondocs.org)
+
 ![img](branding/logo/ecosystem.png)
 
 

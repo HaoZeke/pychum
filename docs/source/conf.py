@@ -49,6 +49,37 @@ html_static_path = ["_static"]
 # Shibuya theme specific options
 html_theme_options = {
     "github_url": "https://github.com/HaoZeke/pychum",
+    "nav_links": [
+        {
+            "title": "Ecosystem",
+            "children": [
+                {
+                    "title": "rgpycrumbs",
+                    "url": "https://rgpycrumbs.rgoswami.me",
+                    "summary": "CLI suite hub, surfaces, eOn plot dispatch",
+                    "external": True,
+                },
+                {
+                    "title": "chemparseplot",
+                    "url": "https://chemparseplot.rgoswami.me",
+                    "summary": "Parse + plot (ORCA / eOn / CON)",
+                    "external": True,
+                },
+                {
+                    "title": "eOn",
+                    "url": "https://eondocs.org",
+                    "summary": "Long-timescale MD / NEB engine",
+                    "external": True,
+                },
+                {
+                    "title": "readcon-core",
+                    "url": "https://github.com/lode-org/readcon-core",
+                    "summary": "CON/convel I/O (Rust core; PyPI: readcon)",
+                    "external": True,
+                },
+            ],
+        },
+    ],
 }
 
 autoapi_dirs = ["../../pychum"]
