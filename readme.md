@@ -40,7 +40,7 @@ programs.
 
 ## Ecosystem Overview
 
-`pychum` is part of the `rgpycrumbs` suite of interlinked libraries.
+`pychum` is part of the `rgpkgs` suite of interlinked libraries (hub: `rgpycrumbs`).
 
 ![img](branding/logo/ecosystem.png)
 
@@ -51,8 +51,8 @@ programs.
 
 -   Jobflow support
     -   Along with Fireworks
--   Unit aware conversions
-    -   Via `pint`
+-   Single-run ORCA / NWChem **input** generation (TOML + dataclasses / Jinja)
+-   Physical unit conversion for *outputs* lives in `chemparseplot.units` (not here)
 
 
 <a id="org6e22848"></a>

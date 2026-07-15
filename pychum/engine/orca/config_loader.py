@@ -20,7 +20,6 @@ from pychum.engine.orca._dataclasses import (
     RestartSettings,
     SpringSettings,
     TSGuessSettings,
-    UnitConversion,
     ZoomSettings,
 )
 
@@ -34,12 +33,10 @@ class ConfigLoader:
         return NebBlock(**data)
 
     def load_config(self):
-        # Create instances of data classes based on the TOML data
-        self.data.get("engine", {}).get("name", "")
-        {
-            "distance": UnitConversion(**self.data.get("units", {}).get("distance", {})),
-            "energy": UnitConversion(**self.data.get("units", {}).get("energy", {})),
-        }
+        # Create instances of data classes based on the TOML data.
+        # Optional [units.*] tables in fixtures are documentation-only tags
+        # (inp/out strings); pychum does not own suite unit conversion —
+        # that lives in chemparseplot.units when needed.
         kwlines = self.data.get("orca").get("kwlines")
         filedat = self.data.get("coords", {}).get("filedat", None)
         atoms = [Atom(**atom) for atom in self.data.get("coords", {}).get("atoms", [])]
@@ -56,11 +53,6 @@ class ConfigLoader:
         # Dictionary to store loaded blocks
         blocks = {}
 
-        # Iterate through the TOML data and load each block
-        # for block_type, block_data in self.data.items():
-        #     if block_type in BlockType.__members__:
-        #         load_method = getattr(self, f"load_{block_type.lower()}_block")
-        #         blocks[block_type] = load_method(block_data)
         if "orca" in self.data and "geom" in self.data["orca"]:
             geom_data = self.data["orca"]["geom"]
             bonds = [GeomScan(**bond) for bond in geom_data.get("bonds", [])]
@@ -120,10 +112,3 @@ class ConfigLoader:
         return OrcaConfig(
             kwlines=kwlines, coords=coords, blocks=blocks, extra_blocks=extra_blocks
         )
-
-        # # Create the final OrcaConfig instance
-        # if engine == 'orca':
-        #     return OrcaConfig(coords=coords,
-        #                       orca_geom=orca_geom)
-        # else:
-        #     raise(ValueError("Only Orca is supported for now"))
