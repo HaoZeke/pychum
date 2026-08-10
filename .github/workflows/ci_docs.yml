@@ -9,9 +9,8 @@ on:
     branches: [main]
     tags: ["*"]
   pull_request:
-    # Check all PR
   schedule:
-    - cron: "0 8 * * 1" # run every Monday at 8am UTC
+    - cron: "0 8 * * 1"
 
 jobs:
   build_docs:
@@ -25,18 +24,26 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: prefix-dev/setup-pixi@v0.8.10
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
         with:
-          cache: true
-          cache-write: ${{ github.event_name == 'push' && github.ref_name == 'main' }}
-          activate-environment: true
-          environments: >-
-            docs
+          enable-cache: true
 
-      - name: Generate Docs
-        shell: pixi run bash -e {0}
-        run: |
-          pixi r docbld
+      - name: Set up Python
+        run: uv python install 3.12
+
+      - name: Install dependencies
+        run: uv sync --extra doc
+
+      - name: Install Emacs
+        run: sudo apt-get update && sudo apt-get install -y -qq emacs-nox
+
+      - name: Export org to RST
+        run: emacs --batch --load export.el
+        working-directory: docs
+
+      - name: Build docs
+        run: uv run sphinx-build docs/source/ docs/build
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
