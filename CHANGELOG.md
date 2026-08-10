@@ -2,6 +2,15 @@
 
 <!-- towncrier release notes start -->
 
+## Unreleased
+
+### Changed
+
+- Documentation uses the full Shibuya theme shared with rgpycrumbs and
+  chemparseplot: Ecosystem nav, intersphinx, autoapi, sphinx-design,
+  mermaid, copybutton, org-mode RST export, and TurtleTech extra-head /
+  site-foot partials.
+
 ## [1.4.3](https://github.com/HaoZeke/pychum/tree/v1.4.3) - 2026-07-09
 
 ### Changed

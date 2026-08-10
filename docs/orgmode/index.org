@@ -2,8 +2,10 @@
 #+AUTHOR: Rohit Goswami
 
 * Ecosystem Overview
-  ~pychum~ is a library within the ~rgpycrumbs~ ecosystem that generates
-  input files for simulation engines.
+  ~pychum~ generates simulation input files. It sits next to
+  [[https://rgpycrumbs.rgoswami.me][rgpycrumbs]] (core + CLI) and
+  [[https://chemparseplot.rgoswami.me][chemparseplot]] (parse + plot).
+  ~pychum~ writes inputs; ~chemparseplot~ reads the outputs.
 
 #+begin_src dot :file ecosystem.svg :exports results
 digraph G {
@@ -79,8 +81,63 @@ Step-by-step guides for common workflows:
 #+BEGIN_EXPORT rst
 .. toctree::
    :maxdepth: 2
+   :caption: Tutorials
 
    tutorial
+#+END_EXPORT
+
+* How-to
+
+#+BEGIN_EXPORT rst
+.. toctree::
+   :maxdepth: 1
+   :caption: How-to
+
+   howto/install
+   howto/faq
+   howto/troubleshooting
+#+END_EXPORT
+
+* Reference
+
+#+BEGIN_EXPORT rst
+.. toctree::
+   :maxdepth: 2
+   :caption: Reference
+
+   autoapi/index
+   reference/glossary
+   used_by
+#+END_EXPORT
+
+* Explanation
+
+#+BEGIN_EXPORT rst
+.. toctree::
+   :maxdepth: 1
+   :caption: Explanation
+
+   explanation/citation
+   testing
+   release
+#+END_EXPORT
+
+* Development
+
+#+BEGIN_EXPORT rst
+.. toctree::
+   :maxdepth: 2
+   :caption: Development
+
+   dev/index
+   dev/contributing
+   dev/input_generation
+   dev/template_system
+   dev/validators
+   dev/dataclasses
+   dev/orca_blocks
+   dev/lazy_imports
+   dev/best_practices
 #+END_EXPORT
 
 * Library API
