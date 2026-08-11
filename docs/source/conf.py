@@ -59,7 +59,7 @@ html_context = {
     "source_user": "HaoZeke",
     "source_repo": "pychum",
     "source_version": "main",
-    "source_docs_path": "/docs/source/",
+    "source_docs_path": "/docs/orgmode/",
 }
 
 html_sidebars = {
