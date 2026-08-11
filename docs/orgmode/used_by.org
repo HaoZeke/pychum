@@ -6,7 +6,10 @@ The following projects use ~pychum~ as a dependency or tool.
 
 * Libraries
 
-- [[https://github.com/HaoZeke/rgpycrumbs][rgpycrumbs]] :: A dispatcher-based analytical and computational suite for chemical physics. Uses ~pychum~ as a library for NWChem and ORCA input generation.
+- [[https://rgpycrumbs.rgoswami.me][rgpycrumbs]] :: Dispatcher and core types for chemical physics. Uses
+  ~pychum~ for NWChem and ORCA input generation.
+- [[https://chemparseplot.rgoswami.me][chemparseplot]] :: Parsers and plots for the same engines. Companion
+  library: ~pychum~ writes inputs, ~chemparseplot~ reads outputs.
 
 * Academic Work
 
