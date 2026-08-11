@@ -28,7 +28,6 @@ classifiers = [
 ]
 dynamic = ["version"]
 dependencies = [
-  "pint>=0.22",
   "tomli>=2.0.1",
   "jinja2>=3.1.2",
   "ase>=3.27.0",
@@ -128,6 +127,7 @@ lint.unfixable = [
 
 [tool.ruff.lint.per-file-ignores]
 "tests/**" = ["PLC0415", "PLR2004", "S101", "S108", "TID252"]
+"pychum/main.py" = ["PLC0415"]
 "docs/source/conf.py" = ["A001"]
 "scripts/**/*" = ["PLC0415", "PLR2004", "S101", "S603", "T201"]
 "__init__.py" = ["F401"]

@@ -143,7 +143,9 @@ Each settings class has defaults and is created with =field(default_factory=...)
 | =inp= | =str= |
 | =out= | =str= |
 
-Used for distance and energy unit conversion definitions in TOML.
+Schema for optional =[units.*]= TOML tables. ConfigLoader does not
+construct these objects; the tables are documentation-only tags.
+Suite unit conversion lives in ~chemparseplot.units~.
 
 * eOn/NWChem Dataclasses
 

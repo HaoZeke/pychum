@@ -171,11 +171,12 @@ jobflow.run_locally(flow)
 
 * Unit-Aware Conversions
 
-~pychum~ uses ~pint~ for unit conversions:
+~pychum~ does not own physical unit conversion. Use
+~chemparseplot.units~ (~ureg~, ~Q_~) for output quantities:
 
 #+begin_src python
-# SKIP-DOCTEST -- requires TOML config files
-from pychum.units import ureg
+# SKIP-DOCTEST -- chemparseplot is the suite units owner
+from chemparseplot.units import ureg
 
 # Convert bond length
 distance = 1.5 * ureg.angstrom
@@ -185,6 +186,9 @@ print(distance.to(ureg.bohr))
 energy = -76.0 * ureg.hartree
 print(energy.to(ureg.kJ))
 #+end_src
+
+~pychum.units~ is a deprecation stub and no longer constructs a
+~UnitRegistry~.
 
 * Next Steps
 

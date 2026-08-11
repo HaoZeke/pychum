@@ -16,26 +16,17 @@ import pytest
 
 
 def test_units_registry():
-    from pychum.units import Q_
+    import pychum.units as u
 
-    # Custom kcal_mol unit exists
-    val = Q_(1, "kcal_mol")
-    assert val.magnitude == 1
-    # Alias
-    val2 = Q_(1, "kcm")
-    assert val2.units == val.units
-    # Standard pint usage
-    dist = Q_(1, "angstrom")
-    assert dist.to("nm").magnitude == pytest.approx(0.1)
+    assert u.ureg is None
+    assert u.Q_ is None
 
 
 def test_units_quantity_array():
     from pychum.units import Q_
 
-    # Q_([]) was called at import time to silence NEP 18 warning;
-    # verify it works without raising
-    q = Q_([1.0, 2.0], "eV")
-    assert len(q) == 2
+    # The stub no longer constructs a UnitRegistry.
+    assert Q_ is None
 
 
 # ---------------------------------------------------------------------------

@@ -41,7 +41,7 @@ Use =ensure_import= when:
 
 Do not use =ensure_import= for:
 
-- Required dependencies listed in =pyproject.toml= (tomli, jinja2, pint, ase)
+- Required dependencies listed in =pyproject.toml= (tomli, jinja2, ase, rgpycrumbs)
 - Standard library modules
 - Internal pychum modules
 

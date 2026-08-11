@@ -14,9 +14,12 @@ pip install pychum
 ** Requirements
 
 - Python 3.10, 3.11, or 3.12
-- pint (unit handling)
 - jinja2 (template rendering)
 - tomli (TOML parsing)
+- ase (atomic structure I/O)
+- rgpycrumbs (shared helpers)
+
+Suite unit conversion for outputs lives in ~chemparseplot.units~, not here.
 
 ** Platform Notes
 

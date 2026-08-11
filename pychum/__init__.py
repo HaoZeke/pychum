@@ -15,4 +15,5 @@ def __getattr__(name: str) -> Any:
     if name in ("render_orca", "render_nwchem"):
         main = importlib.import_module("pychum.main")
         return getattr(main, name)
-    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
+    msg = f"module {__name__!r} has no attribute {name!r}"
+    raise AttributeError(msg)

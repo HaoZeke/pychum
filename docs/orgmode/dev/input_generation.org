@@ -45,7 +45,7 @@ The loader maps TOML sections to dataclass constructors:
 | =[orca.geom]= | =GeomBlock= | Geometry scan specification |
 | =[orca.neb]= | =NebBlock= | NEB calculation settings |
 | =[orca.extra_blocks]= | =dict[str, str]= | Arbitrary ORCA blocks as raw text |
-| =[units]= | =UnitConversion= | Distance/energy unit pairs |
+| =[units]= | documentation tag | Distance/energy =inp=/=out= strings; not consumed |
 
 ** NEB Sub-block Loading
 
