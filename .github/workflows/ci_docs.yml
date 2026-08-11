@@ -1,7 +1,7 @@
 name: Build and Deploy Documentation
 
 concurrency:
-  group: "pages"
+  group: pychum-docs
   cancel-in-progress: true
 
 on:
@@ -9,6 +9,7 @@ on:
     branches: [main]
     tags: ["*"]
   pull_request:
+  workflow_dispatch:
   schedule:
     - cron: "0 8 * * 1"
 
@@ -54,7 +55,7 @@ jobs:
           path: docs/build
 
       - name: Deploy to Cloudflare Pages
-        if: github.event_name == 'push' && github.repository == 'HaoZeke/pychum'
+        if: github.event_name != 'pull_request' && github.repository == 'HaoZeke/pychum'
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
