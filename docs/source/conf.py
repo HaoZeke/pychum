@@ -52,6 +52,7 @@ mermaid_init_js = "mermaid.initialize({startOnLoad:true, theme:'neutral'});"
 
 html_theme = "shibuya"
 html_static_path = ["_static"]
+html_extra_path = ["llms.txt"]
 html_baseurl = "https://pychum.rgoswami.me/"
 
 html_context = {

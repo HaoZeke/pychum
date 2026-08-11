@@ -1,4 +1,23 @@
 {
+  "$schema": "https://context7.com/schema/context7.json",
   "url": "https://context7.com/haozeke/pychum",
-  "public_key": "pk_AJ7U5Y56IXKa8IgfEfaSl"
+  "public_key": "pk_AJ7U5Y56IXKa8IgfEfaSl",
+  "projectTitle": "pychum",
+  "description": "Pure-Python input file generator for computational chemistry workflows. ORCA and eOn engines, TOML-driven templates, dataclass validators. Sibling of rgpycrumbs and chemparseplot.",
+  "excludeFolders": [
+    "tests",
+    "branding",
+    "scripts",
+    "nb"
+  ],
+  "excludeFiles": [
+    "CHANGELOG.md",
+    "CODE_OF_CONDUCT.md"
+  ],
+  "rules": [
+    "Generate inputs via pychum.engine.orca and pychum.engine.eon. Do not hand-edit engine _blocks jinja unless extending the engine.",
+    "TOML is the user-facing config. Dataclasses validate before render.",
+    "Sibling packages: rgpycrumbs (CLI / viz) and chemparseplot (parse / plot).",
+    "Docs live at https://pychum.rgoswami.me/ . Org source is under docs/orgmode/."
+  ]
 }

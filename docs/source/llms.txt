@@ -1,0 +1,31 @@
+# pychum
+
+> Pure-Python input file generator for computational chemistry workflows (ORCA and eOn). TOML in, validated dataclasses, rendered engine input out.
+
+Docs: https://pychum.rgoswami.me/
+Repo: https://github.com/HaoZeke/pychum
+PyPI / conda-forge: pychum
+Context7: /haozeke/pychum
+
+Use `pychum.engine.orca` and `pychum.engine.eon`. Do not import private `_` modules.
+
+## Docs
+
+- [Tutorial](https://pychum.rgoswami.me/tutorial.html)
+- [Install](https://pychum.rgoswami.me/howto/install.html)
+- [FAQ](https://pychum.rgoswami.me/howto/faq.html)
+- [ORCA blocks](https://pychum.rgoswami.me/dev/orca_blocks.html)
+- [Template system](https://pychum.rgoswami.me/dev/template_system.html)
+
+## Siblings
+
+- [rgpycrumbs](https://rgpycrumbs.rgoswami.me/): CLI, surfaces, viz dispatch
+- [chemparseplot](https://chemparseplot.rgoswami.me/): parse and plot chemistry outputs
+
+## Install
+
+```sh
+uv add pychum
+# or
+pip install pychum
+```
