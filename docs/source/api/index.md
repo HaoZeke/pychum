@@ -71,8 +71,11 @@ nwchem_input = renderer.render("nwchem_socket.jinja")
 
 ### Units
 
+pychum does not own physical unit conversion. Use
+`chemparseplot.units` for output quantities:
+
 ```python
-from pychum.units import ureg
+from chemparseplot.units import ureg
 
 # Convert distance
 distance = 1.5 * ureg.angstrom
@@ -82,3 +85,5 @@ print(distance.to(ureg.bohr))  # 2.8346 bohr
 energy = -76.0 * ureg.hartree
 print(energy.to(ureg.kcal / ureg.mol))  # -47690.7 kcal/mol
 ```
+
+`pychum.units` is a deprecation stub and no longer constructs a `UnitRegistry`.

@@ -18,6 +18,7 @@ digraph G {
     rgpycrumbs [label="rgpycrumbs\n(Core Utilities & Dispatcher)", fillcolor="#F1DB4B"];
     pychum [label="pychum\n(Input Generation)", fillcolor="#FF655D", fontcolor="white", penwidth=3];
     chemparseplot [label="chemparseplot\n(Parsers & Plotting)"];
+    readcon [label="readcon-core\n(CON / convel I/O)", URL="https://github.com/lode-org/readcon-core"];
 
     eon [label="eOn"];
     orca [label="ORCA"];
@@ -27,12 +28,14 @@ digraph G {
 
     chemparseplot -> rgpycrumbs [label="imports from"];
     pychum -> rgpycrumbs [label="imports from"];
+    chemparseplot -> readcon [label="CON frames"];
 
     pychum -> eon [label="generates input for", style=dashed];
     pychum -> orca [label="generates input for", style=dashed];
 
     chemparseplot -> eon [label="parses output from", style=dashed];
     chemparseplot -> orca [label="parses output from", style=dashed];
+    eon -> readcon [label="writes CON", style=dashed];
 
     rgpycrumbs -> eon [label="manages / visualizes"];
 }
@@ -163,7 +166,7 @@ Step-by-step guides for common workflows:
 
 ~pychum~ is designed with the following principles:
 
-1. *Unit-aware*: All physical quantities use ~pint~ for automatic unit conversion
+1. *Inputs only*: pychum writes engine inputs; suite unit conversion lives in ~chemparseplot.units~
 2. *Template-based*: Jinja2 templates for flexible input generation
 3. *Type-safe*: Full type hints with mypy validation
 4. *Workflow-ready*: Integration with jobflow and Fireworks
@@ -174,7 +177,7 @@ Step-by-step guides for common workflows:
 pychum/
 ├── main.py          # Public API (render_orca, render_nwchem)
 ├── _base.py         # Abstract base class
-├── units.py         # pint unit registry
+├── units.py         # deprecation stub; use chemparseplot.units
 └── engine/          # Engine-specific generators
     ├── orca/        # ORCA input generation
     │   ├── config_loader.py   # TOML loading
