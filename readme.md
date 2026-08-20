@@ -29,7 +29,7 @@ computational chemistry workflows. This means:
 -   Generating input structures for `jobflow` / Fireworks
     -   From unified `toml` inputs
 -   ORCA blocks (NEB, geometry scans, extras) and eOn renderers via Jinja templates
--   Shared units and helpers with [`rgpycrumbs`](https://github.com/HaoZeke/rgpycrumbs) (`rgpycrumbs>=1.9.16`). Suite pins/config live in **rgpkgs** (`~/.config/rgpkgs/config.toml`, project `rgpkgs.toml`) — pychum does not define its own pin file
+-   Shared units and helpers with [`rgpycrumbs`](https://github.com/HaoZeke/rgpycrumbs) (`rgpycrumbs>=1.10.4`). Suite pins/config live in **rgpkgs** (`~/.config/rgpkgs/config.toml`, project `rgpkgs.toml`) — pychum does not define its own pin file
 
 This is a spin-off from `wailord` ([here](https://wailord.xyz)). **Tool split:**
 
