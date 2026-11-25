@@ -1,21 +1,20 @@
+Generates input files for single computational chemistry runs from unified TOML inputs, including jobflow and Fireworks workflows.
+
 
 # Table of Contents
 
--   [About](#orgf82c3d6)
-    -   [Ecosystem Overview](#org1ef5b99)
-    -   [Features](#orgd7f6835)
-        -   [Supported Engines](#org6e22848)
-    -   [Rationale](#org5ac5dff)
--   [Usage](#orgde48b7e)
--   [Development](#org60cabf4)
-    -   [Adding ORCA blocks](#org4153b25)
-    -   [Documentation](#org721896a)
-        -   [Readme](#orga426038)
--   [License](#org33508b4)
+-   [About](#org2e7287d)
+    -   [Ecosystem Overview](#org408bcb3)
+    -   [Features](#orgaa2c716)
+    -   [Rationale](#org8edc525)
+-   [Usage](#org6e90d5c)
+-   [Development](#org326bcbc)
+    -   [Adding ORCA blocks](#org2f7b52f)
+    -   [Documentation](#org30955ec)
+-   [License](#org24b59f5)
 
 
-
-<a id="orgf82c3d6"></a>
+<a id="org2e7287d"></a>
 
 # About
 
@@ -33,19 +32,19 @@ computational chemistry workflows. This means:
 
 This is a spin-off from `wailord` ([here](https://wailord.xyz)). **Tool split:**
 
-- **`pychum`** — sole path for **single-run input generation** (ORCA Jinja/TOML,
-  NWChem socket for eOn). Prefer `pychum` over wailord `inpGenerator`.
-- **`chemparseplot`** — sole path for **parsing and plotting outputs** (including
-  ORCA NEB via a public API that may use OPI internally; do not depend on `opi`
-  directly).
-- **`wailord`** — optional **batch/experiment** orchestration only; should call
-  pychum + chemparseplot rather than reimplement ORCA I/O.
+-   **`pychum`** — sole path for **single-run input generation** (ORCA Jinja/TOML,
+    NWChem socket for eOn). Prefer `pychum` over wailord `inpGenerator`.
+-   **`chemparseplot`** — sole path for **parsing and plotting outputs** (including
+    ORCA NEB via a public API that may use OPI internally; do not depend on `opi`
+    directly).
+-   **`wailord`** — optional **batch/experiment** orchestration only; should call
+    pychum + chemparseplot rather than reimplement ORCA I/O.
 
 It is a companion to [`chemparseplot`](https://github.com/HaoZeke/chemparseplot)
 (v1.8+ recommended) for uniform visualizations of computational chemistry outputs. Install with `pip install pychum` (Python ≥3.10); develop with `pixi run -e test test` or `uv sync --extra test`.
 
 
-<a id="org1ef5b99"></a>
+<a id="org408bcb3"></a>
 
 ## Ecosystem Overview
 
@@ -54,7 +53,7 @@ It is a companion to [`chemparseplot`](https://github.com/HaoZeke/chemparseplot)
 ![img](branding/logo/ecosystem.png)
 
 
-<a id="orgd7f6835"></a>
+<a id="orgaa2c716"></a>
 
 ## Features
 
@@ -63,8 +62,6 @@ It is a companion to [`chemparseplot`](https://github.com/HaoZeke/chemparseplot)
 -   Unit aware conversions
     -   Via `pint`
 
-
-<a id="org6e22848"></a>
 
 ### Supported Engines
 
@@ -76,7 +73,7 @@ It is a companion to [`chemparseplot`](https://github.com/HaoZeke/chemparseplot)
     -   EON
 
 
-<a id="org5ac5dff"></a>
+<a id="org8edc525"></a>
 
 ## Rationale
 
@@ -93,7 +90,7 @@ Along with other minor inconveniences which make for enough friction over time
 to necessitate this library.
 
 
-<a id="orgde48b7e"></a>
+<a id="org6e90d5c"></a>
 
 # Usage
 
@@ -104,7 +101,7 @@ The simplest usage is via the CLI:
     python -m pychum.cli --help
 
 
-<a id="org60cabf4"></a>
+<a id="org326bcbc"></a>
 
 # Development
 
@@ -119,7 +116,7 @@ development environment including the notebook server.
 Then go through the `nb` folder notebooks.
 
 
-<a id="org4153b25"></a>
+<a id="org2f7b52f"></a>
 
 ## Adding ORCA blocks
 
@@ -134,12 +131,10 @@ While working on this, it may be instructive to use the `nb` folder notebooks.
 Also all PRs must include a full test suite for the new blocks.
 
 
-<a id="org721896a"></a>
+<a id="org30955ec"></a>
 
 ## Documentation
 
-
-<a id="orga426038"></a>
 
 ### Readme
 
@@ -148,7 +143,7 @@ The `readme` can be constructed via:
     ./scripts/org_to_md.sh readme_src.org readme.md
 
 
-<a id="org33508b4"></a>
+<a id="org24b59f5"></a>
 
 # License
 
