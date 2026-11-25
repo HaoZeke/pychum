@@ -41,6 +41,7 @@ fi
 # Emacs command to export Org file to Markdown
 emacs --batch "$EXPORT_FILE" \
     --eval "(require 'ox-md nil t)" \
+    --eval "(add-hook 'org-export-filter-final-output-functions (lambda (s _b _i) (concat (string-trim-right s) \"\n\")))" \
     --eval "(org-md-export-to-markdown)" \
     --kill
 
